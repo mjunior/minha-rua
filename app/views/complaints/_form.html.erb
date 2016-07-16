@@ -1,0 +1,48 @@
+<%= form_for(@complaint) do |f| %>
+  <% if @complaint.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@complaint.errors.count, "error") %> prohibited this complaint from being saved:</h2>
+
+      <ul>
+      <% @complaint.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.hidden_field :latitude %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :longitude %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :city ,"Digita a cidade da reclamação" %><br>
+    <%= f.text_field :city %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address, "Endereço da reclamação" %><br>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+     <%= f.label :category_id, "Escolha uma categoria para sua reclamação" %><br>
+    <%= f.collection_select(:category_id, Category.all, :id, :title, prompt: true) %>
+  </div>
+  <div class="field">
+    <%= f.label :title, "Titulo da reclamação" %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :body,"Descreva detalhadamento o acontecimento" %><br>
+    <%= f.text_area :body, cols: 40, rows: 3 %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :complaints
   get 'home/index'
   
   # The priority is based upon order of creation: first created -> highest priority.
@@ -12,8 +13,6 @@ Rails.application.routes.draw do
 
   match 'home' => 'home#index', via: 'get'
   match 'inicio' => 'home#index', via: 'get'
-
-  resources :claims
 
   devise_for :users, controllers: {registrations:"registrations"}
 

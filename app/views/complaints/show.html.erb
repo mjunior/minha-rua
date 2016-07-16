@@ -1,0 +1,72 @@
+<p id="notice"><%= notice %></p>
+
+
+<h1><%= @complaint.title %></h1>
+
+<p> <%= @complaint.body %> </p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @complaint.address %> - <%= @complaint.city %>
+</p>
+
+<p>
+  <strong>Categoria:</strong>
+  <%= @complaint.category.title %>
+</p>
+
+<p>
+  <strong>Reclamado por:</strong>
+  <%= @complaint.user.first_name %>
+</p>
+
+<p>
+  <strong>Likes:</strong>
+  <%= @complaint.likes %>
+</p>
+
+<div id="map" style="height:400px;width:400px;"></div>
+<script type="text/javascript">
+    var complaint = <%=raw @complaint.to_json%>
+    var map;
+
+
+    function initMap() {
+      var myLatlng = new google.maps.LatLng(complaint.latitude,complaint.longitude);
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: myLatlng,
+        zoom: 16
+      });
+
+      var marker = new google.maps.Marker({
+          position: myLatlng,
+          title:"Hello World!"
+      });
+
+      var contentString = '<div id="content">'+
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">'+complaint.title+'</h1>'+
+          '<div id="bodyContent">'+
+          '<p>'+complaint.body+'</p>'+
+          '</div>'+
+          '</div>';
+
+      //cria a janela
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+      //quando clicar abre
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+      // To add the marker to the map, call setMap();
+      marker.setMap(map);
+
+    }
+</script>
+
+
+
+<%= link_to 'Edit', edit_complaint_path(@complaint) %> |
+<%= link_to 'Back', complaints_path %>

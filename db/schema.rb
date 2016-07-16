@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160624230315) do
+ActiveRecord::Schema.define(version: 20160716003624) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "title",      limit: 255, null: false
@@ -19,22 +19,27 @@ ActiveRecord::Schema.define(version: 20160624230315) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "claims", force: :cascade do |t|
-    t.decimal  "lat",                       precision: 10, scale: 6, null: false
-    t.decimal  "lng",                       precision: 10, scale: 6, null: false
-    t.text     "body",        limit: 65535,                          null: false
-    t.integer  "category_id", limit: 4
-    t.integer  "user_id",     limit: 4
-    t.string   "city",        limit: 255
+  create_table "complaints", force: :cascade do |t|
+    t.string   "People",      limit: 255
+    t.float    "latitude",    limit: 24
+    t.float    "longitude",   limit: 24
+    t.text     "body",        limit: 65535
     t.string   "address",     limit: 255
+    t.string   "title",       limit: 255
+    t.string   "city",        limit: 255
     t.integer  "likes",       limit: 4
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "user_id",     limit: 4
+    t.integer  "category_id", limit: 4
   end
+
+  add_index "complaints", ["category_id"], name: "index_complaints_on_category_id", using: :btree
+  add_index "complaints", ["user_id"], name: "index_complaints_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255,              null: false
-    t.string   "first_name",             limit: 255
+    t.string   "first_name",             limit: 255,              null: false
     t.string   "last_name",              limit: 255
     t.string   "bio",                    limit: 255
     t.string   "facebook_url",           limit: 255
@@ -56,4 +61,6 @@ ActiveRecord::Schema.define(version: 20160624230315) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "complaints", "categories"
+  add_foreign_key "complaints", "users"
 end
