@@ -1,0 +1,47 @@
+a:hover{background-color:transparent;}
+
+.navbar-default{
+	background-color:#0072BB;
+	margin:0;
+	color:#fff;
+	border:none;
+	border-radius:0;
+	.navbar-nav{
+		>li{
+			>a{
+				color:#fff;
+				&:hover{
+					font-weight:600;
+					color:#fff;
+				}
+			}
+		}
+	}
+
+	.navbar-brand{
+		color:#fff;
+	} 
+}
+
+
+.page-title{
+	font-size:24px;
+	&.center{
+		text-align:center;
+	}
+}
+
+.field{
+	input{
+		border:1px solid #ddd;
+		outline:none;
+		padding:3px 10px;
+		font-size:22px;
+	}
+
+	&.w100{	
+		input{
+			width:100%;
+		}	
+	}
+}
