@@ -2,8 +2,7 @@
 <script type="text/javascript">
     var complaintList = <%=raw @complaintList.to_json%>
     var map;
-
-
+    var arrMarkers = []
     function initMap() {
       var myLatlng = new google.maps.LatLng(-14.235004,-51.92528);
       map = new google.maps.Map(document.getElementById('map'), {
@@ -30,48 +29,70 @@
         handleLocationError(false, infoWindow, map.getCenter());
       }
 
-
-
-
-      var marker
-      for(i in complaintList){
-
-        console.log(complaintList[i].title);
-        var marketLatLng = new google.maps.LatLng(complaintList[i].latitude,complaintList[i].longitude);
+      // var marker
+      // for(i in complaintList){
+      //   var marketLatLng = new google.maps.LatLng(complaintList[i].latitude,complaintList[i].longitude);
        
-        marker = new google.maps.Marker({
-            position: marketLatLng,
-              animation: google.maps.Animation.DROP,
-            title:complaintList[i].title
-        });
+      //   marker = new google.maps.Marker({
+      //       position: marketLatLng,
+      //         animation: google.maps.Animation.DROP,
+      //       title:complaintList[i].title
+      //   });
+ 
 
-        var contentString = '<div id="content">'+
-          '<h1 id="firstHeading" class="firstHeading">'+complaintList[i].title+'</h1>'+
-          '<div id="bodyContent">'+
-          '<p>'+complaintList[i].body+'</p>'+
-          '</div>'+
-          '</div>';
+      //   var contentString = '<div id="content">'+
+      //     '<h1 id="firstHeading" class="firstHeading">'+complaintList[i].title+'</h1>'+
+      //     '<div id="bodyContent">'+
+      //     '<p>'+complaintList[i].body+'</p>'+
+      //     '</div>'+
+      //     '</div>';
+      //   console.log(contentString);
+      //   var infowindow = new google.maps.InfoWindow(), marker;
+      //       infowindow.setContent(contentString);
+      //   google.maps.event.addListener(marker, 'click', (function(marker, i) {
+      //       return function() {
+      //           infowindow.setContent(contentString);
+      //           infowindow.open(map, marker);
+      //       }
+      //   })(marker))
+      //   // To add the marker to the map, call setMap();
+      //   marker.setMap(map);
 
-        //cria a janela
-        var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
-
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
-        // To add the marker to the map, call setMap();
-        marker.setMap(map);
-        console.log(infowindow)
-
-      }
+      // }
+      carregarPontos();
+       var markerCluster = new MarkerClusterer(map, arrMarkers);
+    }
       
+  function carregarPontos() {
+    console.log('AE')
+    console.log(complaintList);
+        $.each(complaintList, function(index, ponto) {
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(ponto.latitude, ponto.longitude),
+                title: "Meu ponto personalizado! :-D",
+                map: map
+            });
 
+            var contentString = '<div id="content">'+
+              '<h1 id="firstHeading" class="firstHeading">'+ponto.title+'</h1>'+
+              '<div id="bodyContent">'+
+              '<p>'+ponto.body+'</p>'+
+              '</div>'+
+              '</div>';
 
-      
-          
+            var infowindow = new google.maps.InfoWindow(), marker;
+                infowindow.setContent(contentString);
+
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                    infowindow.setContent(contentString);
+                    infowindow.open(map, marker);
+                }
+            })(marker))
+
+            arrMarkers.push(marker);
+        });
+  }
       
      
-
-    }
 </script>
