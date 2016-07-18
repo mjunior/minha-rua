@@ -9,22 +9,16 @@
         <%= devise_error_messages! %>
 
         <div class="field">
-          <%= f.label :first_name %><br />
+          <%= f.label :first_name,"Seu nome" %><br />
           <%= f.text_field :first_name, autofocus: true %>
         </div>
-
         <div class="field">
-          <%= f.label :bio %><br />
-          <%= f.text_field :bio, autofocus: true %>
-        </div>
-
-        <div class="field">
-          <%= f.label :email %><br />
+          <%= f.label :email,"E-mail" %><br />
           <%= f.email_field :email %>
         </div>
 
         <div class="field">
-          <%= f.label :password %>
+          <%= f.label :password,"Senha" %>
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %><br />
@@ -32,12 +26,12 @@
         </div>
 
         <div class="field">
-          <%= f.label :password_confirmation %><br />
+          <%= f.label :password_confirmation,"Confirmação de senha" %><br />
           <%= f.password_field :password_confirmation, autocomplete: "off" %>
         </div>
 
         <div class="actions">
-          <%= f.submit "Sign up", :class => 'btn btn-primary' %>
+          <%= f.submit "Cadastrar", :class => 'btn btn-primary' %>
         </div>
       <% end %>
     </div>

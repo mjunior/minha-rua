@@ -1,4 +1,25 @@
 <div id="map"></div>
+<div class="container">
+<div class="row">
+  <div class="col-md-4">
+    <h1>Últimas Reclamações</h1>
+    <ul>
+      <% @lastest.each do |item| %>
+        <li><%= item.title%></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <h1>Mais populares</h1>
+    
+    <% @topList.each do |item| %>
+      <li><%= item.title%> - <%= item.likes%> Curtiram</li>
+    <% end %>
+
+  </div>
+  <div class="col-md-4"></div>
+</div>
+</div>
 <script type="text/javascript">
     var complaintList = <%=raw @complaintList.to_json%>
     var map;
@@ -29,36 +50,7 @@
         handleLocationError(false, infoWindow, map.getCenter());
       }
 
-      // var marker
-      // for(i in complaintList){
-      //   var marketLatLng = new google.maps.LatLng(complaintList[i].latitude,complaintList[i].longitude);
-       
-      //   marker = new google.maps.Marker({
-      //       position: marketLatLng,
-      //         animation: google.maps.Animation.DROP,
-      //       title:complaintList[i].title
-      //   });
- 
-
-      //   var contentString = '<div id="content">'+
-      //     '<h1 id="firstHeading" class="firstHeading">'+complaintList[i].title+'</h1>'+
-      //     '<div id="bodyContent">'+
-      //     '<p>'+complaintList[i].body+'</p>'+
-      //     '</div>'+
-      //     '</div>';
-      //   console.log(contentString);
-      //   var infowindow = new google.maps.InfoWindow(), marker;
-      //       infowindow.setContent(contentString);
-      //   google.maps.event.addListener(marker, 'click', (function(marker, i) {
-      //       return function() {
-      //           infowindow.setContent(contentString);
-      //           infowindow.open(map, marker);
-      //       }
-      //   })(marker))
-      //   // To add the marker to the map, call setMap();
-      //   marker.setMap(map);
-
-      // }
+     
       carregarPontos();
        var markerCluster = new MarkerClusterer(map, arrMarkers);
     }
@@ -84,7 +76,11 @@
                 infowindow.setContent(contentString);
 
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
+               if (infowindow) {
+                    infowindow.close();
+                }
                 return function() {
+
                     infowindow.setContent(contentString);
                     infowindow.open(map, marker);
                 }

@@ -1,10 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-
-<h1><%= @complaint.title %></h1>
-
-<p> <%= @complaint.body %> </p>
-
+<div id="map"></div>
 <p>
   <strong>Address:</strong>
   <%= @complaint.address %> - <%= @complaint.city %>
@@ -25,7 +21,6 @@
   <%= @complaint.likes %>
 </p>
 
-<div id="map" style="height:400px;width:400px;"></div>
 <script type="text/javascript">
     var complaint = <%=raw @complaint.to_json%>
     var map;
@@ -55,7 +50,7 @@
       //cria a janela
       var infowindow = new google.maps.InfoWindow({
         content: contentString
-      });
+      });infowindow.open(map, marker);
       //quando clicar abre
       marker.addListener('click', function() {
         infowindow.open(map, marker);

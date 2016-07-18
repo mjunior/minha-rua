@@ -25,7 +25,7 @@
 	        	<li> <%= link_to('Início', root_path)  %>  </li>
 				<% if user_signed_in? %>
 					<li> <%= link_to('Minhas Reclamações', complaints_path)  %>  </li>
-					<li> <%= link_to('Criar Reclamação', new_complaint_path)  %>  </li>
+					
 				<% end %>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
@@ -34,6 +34,7 @@
 				<li> <%= link_to('Cadastre-se', new_user_registration_path)  %>  </li>
 			<% end %>
 			<% if user_signed_in? %>
+				<li class="menu-add"> <%= link_to('Criar Reclamação', new_complaint_path)  %>  </li>
 				<li> <%= link_to('Sair', destroy_user_session_path, :method => :delete) %>     </li>
 			<% end %>
 	      </ul>
