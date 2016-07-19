@@ -1,7 +1,5 @@
 <h1>Criando sua reclamação</h1>
 
-<%= link_to 'Back', complaints_path %>
-
 <%= form_for(@complaint) do |f| %>
   <% if @complaint.errors.any? %>
     <div id="error_explanation">
@@ -73,33 +71,22 @@
 
        geocoder = new google.maps.Geocoder();
  
-    	 marker = new google.maps.Marker({
-      	  map: map,
-      	  draggable: true,
-      	  animation: google.maps.Animation.DROP
- 		   });
 
-      // Try HTML5 geolocation.
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
 
-  		   marker.setPosition(pos);
-	        
-          map.setCenter(pos);	
-          map.setZoom(15);
-          marker.setMap(map);
-          console.log('123 zoom')
-        }, function() {
-          handleLocationError(true, infoWindow, map.getCenter());
-        });
-      } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-      }
+        checkMap();
+       marker = new google.maps.Marker({
+          map: map,
+          draggable: true,
+          animation: google.maps.Animation.DROP
+       });
+
+
+
+      var pos = {
+        lat: localStorage.latitude,
+        lng: localStorage.longitude
+      };
+      marker.setPosition(pos);
 
 	  	google.maps.event.addListener(marker, 'drag', function () {
 	  		console.log('drag')
@@ -116,6 +103,7 @@
 	        });
 	    });
 
+    
 
 	    $('#complaint_address').autocomplete({
         source: function (request, response) {
@@ -148,8 +136,8 @@
     }
 
 
-    function carregarNoMapa(endereco) {
-        geocoder.geocode({ 'address': endereco + ', Brasil', 'region': 'BR' }, function (results, status) {
+    function loadOnMap(address) {
+        geocoder.geocode({ 'address': address + ', Brasil', 'region': 'BR' }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 if (results[0]) {
                     var latitude = results[0].geometry.location.lat();
@@ -183,13 +171,13 @@
 
     $('#buscar').click(function(){
     	var end = $('#complaint_address').val();
-    	carregarNoMapa(end);
+    	loadOnMap(end);
     	return false;
     });
 
     $('#complaint_address').blur(function() {
         if($(this).val() != "")
-            carregarNoMapa($(this).val());
+            loadOnMap($(this).val());
     })
 
 </script>

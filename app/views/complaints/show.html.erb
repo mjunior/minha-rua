@@ -1,25 +1,26 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p>
+ -->
+<div id="map" ></div>
 
-<div id="map"></div>
-<p>
-  <strong>Address:</strong>
-  <%= @complaint.address %> - <%= @complaint.city %>
-</p>
+<div class="container">
+  <div class="row">
+    <p>
+      <strong>Localidade:</strong>
+      <%= @complaint.address %> - <%= @complaint.city %>
+    </p>
 
-<p>
-  <strong>Categoria:</strong>
-  <%= @complaint.category.title %>
-</p>
+    <p>
+      <strong>Categoria:</strong>
+      <%= @complaint.category.title %>
+    </p>
 
-<p>
-  <strong>Reclamado por:</strong>
-  <%= @complaint.user.first_name %>
-</p>
+    <p>
+      <strong>Likes:</strong>
+      <%= @complaint.likes %>
+    </p>
+  </div>
+</div>
 
-<p>
-  <strong>Likes:</strong>
-  <%= @complaint.likes %>
-</p>
 
 <script type="text/javascript">
     var complaint = <%=raw @complaint.to_json%>
@@ -28,6 +29,7 @@
 
     function initMap() {
       var myLatlng = new google.maps.LatLng(complaint.latitude,complaint.longitude);
+      console.log(complaint)
       map = new google.maps.Map(document.getElementById('map'), {
         center: myLatlng,
         zoom: 16
@@ -61,7 +63,3 @@
     }
 </script>
 
-
-
-<%= link_to 'Edit', edit_complaint_path(@complaint) %> |
-<%= link_to 'Back', complaints_path %>

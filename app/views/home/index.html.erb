@@ -1,74 +1,101 @@
-<div id="map"></div>
-<div class="container">
-<div class="row">
-  <div class="col-md-4">
-    <h1>Últimas Reclamações</h1>
-    <ul>
-      <% @lastest.each do |item| %>
-        <li><%= item.title%></li>
-      <% end %>
-    </ul>
+<div id="home">
+  <div id="question-city">
+    <div class="box">
+      <div class="field">
+        <input type="text" id="city-input" placeholder="Digita sua cidade...">
+      </div>
+      <div class="go">
+        <button id="my-place">Minha localização</button>
+      </div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
-  <div class="col-md-4">
-    <h1>Mais populares</h1>
-    
-    <% @topList.each do |item| %>
-      <li><%= item.title%> - <%= item.likes%> Curtiram</li>
-    <% end %>
 
+  <div id="map"></div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h1>Últimas Reclamações</h1>
+        <ul>
+          <% @lastest.each do |item| %>
+            <li><%= item.title%></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h1>Mais populares</h1>
+        
+        <% @topList.each do |item| %>
+          <li><%= item.title%> - <%= item.likes%> Curtiram</li>
+        <% end %>
+
+      </div>
+      <div class="col-md-4"></div>
+    </div>
   </div>
-  <div class="col-md-4"></div>
 </div>
-</div>
+
 <script type="text/javascript">
-    var complaintList = <%=raw @complaintList.to_json%>
-    var map;
-    var arrMarkers = []
-    function initMap() {
+  var cities = []
+  var complaintList = <%=raw @complaintList.to_json%>
+  var map;
+  var arrMarkers = []
+  var geocoder;
+
+
+  /*Carrega todas as cidades Brasileiras */
+  $.get('/json/brazil-cities-states.json').success(function(data){
+      $.each(data.estados,function(i,value){
+        var sigla = value.sigla;
+        $.each(value.cidades,function(k,val){
+          cities.push(val+" - "+sigla)
+        })
+      });
+      $( "#city-input" ).autocomplete({
+        source: cities,
+        appendTo: "#home",
+        select:function(event,ui){
+          console.log(ui)
+          console.log(ui.item.value)
+          loadOnMap(ui.item.value);
+        }
+      });
+  })
+
+
+  function initMap() {
       var myLatlng = new google.maps.LatLng(-14.235004,-51.92528);
+      geocoder = new google.maps.Geocoder();
+      console.log('geocoder ok!');
+
       map = new google.maps.Map(document.getElementById('map'), {
         center: myLatlng,
         zoom: 4
       });
 
-      // Try HTML5 geolocation.
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
+      loadingComplaints();
+      var markerCluster = new MarkerClusterer(map, arrMarkers);
 
-          map.setCenter(pos);
-          map.setZoom(14);
-          console.log('123 zoom')
-        }, function() {
-          handleLocationError(true, infoWindow, map.getCenter());
-        });
-      } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-      }
+      checkMap();
 
-     
-      carregarPontos();
-       var markerCluster = new MarkerClusterer(map, arrMarkers);
-    }
+  }
       
-  function carregarPontos() {
-    console.log('AE')
-    console.log(complaintList);
-        $.each(complaintList, function(index, ponto) {
+  function loadingComplaints() {
+        $.each(complaintList, function(i, complaint) {
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(ponto.latitude, ponto.longitude),
-                title: "Meu ponto personalizado! :-D",
+                position: new google.maps.LatLng(complaint.latitude, complaint.longitude),
+                title: "Meu complaint personalizado! :-D",
                 map: map
             });
 
             var contentString = '<div id="content">'+
-              '<h1 id="firstHeading" class="firstHeading">'+ponto.title+'</h1>'+
+              '<h1 id="firstHeading" class="firstHeading">'+complaint.title+'</h1>'+
               '<div id="bodyContent">'+
-              '<p>'+ponto.body+'</p>'+
+              '<p>'+complaint.body+'</p>'+
+              '<p> Likes:'+complaint.likes+'</p>'+
+              '<p>  <a href="/reclamacao/'+complaint.id+'"> +detalhes </a></p>'+
               '</div>'+
               '</div>';
 
@@ -76,19 +103,56 @@
                 infowindow.setContent(contentString);
 
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
-               if (infowindow) {
-                    infowindow.close();
-                }
                 return function() {
-
                     infowindow.setContent(contentString);
                     infowindow.open(map, marker);
                 }
             })(marker))
-
             arrMarkers.push(marker);
         });
   }
+
+    function loadOnMap(address) {
+
+        geocoder.geocode({ 'address': address + ', Brasil', 'region': 'BR' }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                  console.log(results[0]);
+                    var latitude = results[0].geometry.location.lat();
+                    var longitude = results[0].geometry.location.lng();
+                    localStorage.setItem("latitude", results[0].geometry.location.lat());
+                    localStorage.setItem("longitude", results[0].geometry.location.lng());
+                    var location = new google.maps.LatLng(latitude, longitude);
+                    map.setCenter(location);
+                    map.setZoom(13);
+                    setTimeout(function(){$('#question-city').css('top','100%');},500)
+                }
+            }
+        });
+    }
+
+    $('#my-place').click(function(){
+      if (navigator.geolocation) {
+        //coloca mapa na localização da pessoa
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            map.setCenter(pos);
+            map.setZoom(14);
+
+          setTimeout(function(){$('#question-city').css('top','100%');},200)
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+    })
+
+
       
      
 </script>

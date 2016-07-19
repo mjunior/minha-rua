@@ -1,7 +1,21 @@
-a:hover{background-color:transparent;}
+@import 'variables-style';
+#map{
+	height:500px;
+	width:100%;
+}
+
+
+.menu-add{
+	a{
+	    background: $primary-featured;
+		&:hover{
+			background:$primary-featured !important;
+		}
+	}
+}
 
 .navbar-default{
-	background-color:#0072BB;
+	background-color:$secondary-featured;
 	margin:0;
 	color:#fff;
 	border:none;
@@ -11,7 +25,7 @@ a:hover{background-color:transparent;}
 			>a{
 				color:#fff;
 				&:hover{
-					font-weight:600;
+					background:none;
 					color:#fff;
 				}
 			}

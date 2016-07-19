@@ -32,14 +32,9 @@
         <td><%= complaint.user_id %></td>
         <td><%= complaint.city %></td>
         <td><%= complaint.likes %></td>
-        <td><%= link_to 'Show', complaint %></td>
-        <td><%= link_to 'Edit', edit_complaint_path(complaint) %></td>
-        <td><%= link_to 'Destroy', complaint, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Complaint', new_complaint_path %>

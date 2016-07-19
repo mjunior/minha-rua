@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :complaints
+  # resources :complaints
   get 'home/index'
-  
+  #resources :complaints
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -13,6 +13,10 @@ Rails.application.routes.draw do
 
   match 'home' => 'home#index', via: 'get'
   match 'inicio' => 'home#index', via: 'get'
+
+  get 'reclamacao/nova' => 'complaints#new'
+  get 'reclamacao/:id' => 'complaints#show'
+  post 'complaints' => 'complaints#create'
 
   devise_for :users, controllers: {registrations:"registrations"}
 

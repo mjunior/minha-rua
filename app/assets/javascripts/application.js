@@ -18,3 +18,14 @@
 //= require markerclusterer.min
 //= require_tree .
 
+function checkMap(){
+  	if(localStorage.latitude && localStorage.longitude){
+        $('#question-city').css('top','100%')
+        var latitude = localStorage.latitude
+        var longitude = localStorage.longitude
+        var location = new google.maps.LatLng(latitude, longitude);
+        map.setCenter(location);
+        map.setZoom(14)
+        console.log(map)
+    }
+}

@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>MinhaRua</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -22,21 +23,10 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-	        	<li> <%= link_to('Início', root_path)  %>  </li>
-				<% if user_signed_in? %>
-					<li> <%= link_to('Minhas Reclamações', complaints_path)  %>  </li>
-					
-				<% end %>
+	        <li> <%= link_to('Início', root_path)  %>  </li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	      	<% if !user_signed_in? %>
-				<li> <%= link_to('Efetuar Login', new_user_session_path)  %>  </li>
-				<li> <%= link_to('Cadastre-se', new_user_registration_path)  %>  </li>
-			<% end %>
-			<% if user_signed_in? %>
-				<li class="menu-add"> <%= link_to('Criar Reclamação', new_complaint_path)  %>  </li>
-				<li> <%= link_to('Sair', destroy_user_session_path, :method => :delete) %>     </li>
-			<% end %>
+			<li class="menu-add"> <%= link_to('Criar Reclamação', reclamacao_nova_path)  %>  </li>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
