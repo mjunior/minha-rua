@@ -4,16 +4,32 @@
 	width:100%;
 }
 
-
+a{
+	&:hover{
+		background:none;
+	}
+}
 .menu-add{
 	a{
-	    background: $primary-featured;
+	    background: #000;
+	    padding: 10px 35px !important;
+   		border-radius: 5px !important;
 		&:hover{
-			background:$primary-featured !important;
+			background:#000!important;
 		}
 	}
 }
 
+#city-input-nav{
+	color: #000;
+    font-size: 25px;
+    margin-left: 16px;
+    padding: 2px 10px;}
+
+.navbar{
+	min-height:70px;
+	padding-top:10px;
+}
 .navbar-default{
 	background-color:$secondary-featured;
 	margin:0;

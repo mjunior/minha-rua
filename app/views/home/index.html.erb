@@ -14,7 +14,28 @@
 
   <div id="map"></div>
 
-  <div class="container">
+  <section class="categories">
+    <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="button-icons">
+          <ul>
+              <li>
+                <a href="#!" class="filter-category" data-tag="all"><img src="/assets/images/categories/asd.png" alt=""></a>
+              </li>
+            <% @categories.each do |category| %>
+              <li>
+                <a href="#!" class="filter-category" data-tag="<%=raw "#{category.tag}"%>"><img src="/assets/images/categories/<%=raw "#{category.tag}"%>.png" alt=""></a>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+<!--   <div class="container">
     <div class="row">
       <div class="col-md-4">
         <h1>Últimas Reclamações</h1>
@@ -35,100 +56,97 @@
       <div class="col-md-4"></div>
     </div>
   </div>
-</div>
+</div> -->
+<!-- Autocomplete das cidades na tela de abertura -->
+<div id="home-big"></div>
 
 <script type="text/javascript">
-  var cities = []
-  var complaintList = <%=raw @complaintList.to_json%>
-  var map;
-  var arrMarkers = []
-  var geocoder;
+    var cities = []
+    var complaintList = <%=raw @complaintList.to_json(:include => [:category])%>
+    var map;
+    var arrMarkers = []
+    var markerCluster
+    var geocoder;
 
-
-  /*Carrega todas as cidades Brasileiras */
-  $.get('/json/brazil-cities-states.json').success(function(data){
-      $.each(data.estados,function(i,value){
-        var sigla = value.sigla;
-        $.each(value.cidades,function(k,val){
-          cities.push(val+" - "+sigla)
-        })
-      });
-      $( "#city-input" ).autocomplete({
-        source: cities,
-        appendTo: "#home",
-        select:function(event,ui){
-          console.log(ui)
-          console.log(ui.item.value)
-          loadOnMap(ui.item.value);
-        }
-      });
-  })
-
-
-  function initMap() {
-      var myLatlng = new google.maps.LatLng(-14.235004,-51.92528);
-      geocoder = new google.maps.Geocoder();
-      console.log('geocoder ok!');
-
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: myLatlng,
-        zoom: 4
-      });
-
-      loadingComplaints();
-      var markerCluster = new MarkerClusterer(map, arrMarkers);
-
-      checkMap();
-
-  }
-      
-  function loadingComplaints() {
-        $.each(complaintList, function(i, complaint) {
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(complaint.latitude, complaint.longitude),
-                title: "Meu complaint personalizado! :-D",
-                map: map
-            });
-
-            var contentString = '<div id="content">'+
-              '<h1 id="firstHeading" class="firstHeading">'+complaint.title+'</h1>'+
-              '<div id="bodyContent">'+
-              '<p>'+complaint.body+'</p>'+
-              '<p> Likes:'+complaint.likes+'</p>'+
-              '<p>  <a href="/reclamacao/'+complaint.id+'"> +detalhes </a></p>'+
-              '</div>'+
-              '</div>';
-
-            var infowindow = new google.maps.InfoWindow(), marker;
-                infowindow.setContent(contentString);
-
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
-                    infowindow.setContent(contentString);
-                    infowindow.open(map, marker);
-                }
-            })(marker))
-            arrMarkers.push(marker);
+    function initMap() {
+        var myLatlng = new google.maps.LatLng(-14.235004,-51.92528);
+        geocoder = new google.maps.Geocoder();
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: myLatlng,
+          zoom: 4
         });
-  }
+
+        loadingComplaints();
+        checkMap();
+    }
+      
+    function loadingComplaints() {
+      $.each(complaintList, function(i, complaint) {
+          var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(complaint.latitude, complaint.longitude),
+              icon: '/assets/images/pin-lixo.png',
+              animation: google.maps.Animation.DROP,
+              map: null
+          });
+          marker.category = complaint.category.tag;
+
+          var contentString = '<div id="content">'+
+            '<h1 id="firstHeading" class="firstHeading">'+complaint.title+'</h1>'+
+            '<div id="bodyContent">'+
+            '<p>'+complaint.body+'</p>'+
+            '<p> Cateoria:'+complaint.category.title+'</p>'+
+            '<p>  <a href="/reclamacao/'+complaint.id+'"> +detalhes </a></p>'+
+            '</div>'+
+            '</div>';
+
+          var infowindow = new google.maps.InfoWindow(), marker;
+              infowindow.setContent(contentString);
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+              return function() {
+                  infowindow.setContent(contentString);
+                  infowindow.open(map, marker);
+              }
+          })(marker))
+          arrMarkers.push(marker);
+      });
+      markerCluster = new MarkerClusterer(map, arrMarkers);
+      setMapOnAll(map,arrMarkers,'all');
+    }
+
+
+    function setMapOnAll(map,markers,filter) {
+      if(filter == 'all'){
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+        }
+      }else{
+        for (var i = 0; i < markers.length; i++) {
+          if(markers[i].category == filter){
+            markers[i].setMap(map);
+          }else{
+            markers[i].setMap(null);
+          }
+        }
+      }
+    }
 
     function loadOnMap(address) {
-
-        geocoder.geocode({ 'address': address + ', Brasil', 'region': 'BR' }, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                if (results[0]) {
-                  console.log(results[0]);
-                    var latitude = results[0].geometry.location.lat();
-                    var longitude = results[0].geometry.location.lng();
-                    localStorage.setItem("latitude", results[0].geometry.location.lat());
-                    localStorage.setItem("longitude", results[0].geometry.location.lng());
-                    var location = new google.maps.LatLng(latitude, longitude);
-                    map.setCenter(location);
-                    map.setZoom(13);
-                    setTimeout(function(){$('#question-city').css('top','100%');},500)
-                }
-            }
-        });
+      geocoder.geocode({ 'address': address + ', Brasil', 'region': 'BR' }, function (results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+              if (results[0]) {
+                console.log(results[0]);
+                  var latitude = results[0].geometry.location.lat();
+                  var longitude = results[0].geometry.location.lng();
+                  localStorage.setItem("latitude", results[0].geometry.location.lat());
+                  localStorage.setItem("longitude", results[0].geometry.location.lng());
+                  var location = new google.maps.LatLng(latitude, longitude);
+                  map.setCenter(location);
+                  map.setZoom(13);
+                  setTimeout(function(){$('#question-city').css('top','100%');},500)
+              }
+          }
+      });
     }
 
     $('#my-place').click(function(){
@@ -153,6 +171,14 @@
     })
 
 
-      
-     
+    $('.filter-category').click(function(){
+      var filter = $(this).attr('data-tag');
+      if(filter == 'all'){
+        markerCluster.setMap(map);
+      }else{
+        markerCluster.setMap(null);
+        setMapOnAll(map,arrMarkers,filter);
+      }
+    })
+
 </script>

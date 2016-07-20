@@ -29,3 +29,34 @@ function checkMap(){
         console.log(map)
     }
 }
+
+  /*Carrega todas as cidades Brasileiras */
+  var cities = []
+  $.get('/json/brazil-cities-states.json').success(function(data){
+  	console.log('cities')
+      $.each(data.estados,function(i,value){
+        var sigla = value.sigla;
+        $.each(value.cidades,function(k,val){
+          cities.push(val+" - "+sigla)
+        })
+      });
+      $( "#city-input" ).autocomplete({
+        source: cities,
+        appendTo: "#home-big",
+        select:function(event,ui){
+          console.log(ui)
+          console.log(ui.item.value)
+          loadOnMap(ui.item.value);
+        }
+      });
+
+      $( "#city-input-nav" ).autocomplete({
+        source: cities,
+        appendTo: "#home",
+        select:function(event,ui){
+          console.log(ui)
+          console.log(ui.item.value)
+          loadOnMap(ui.item.value);
+        }
+      });
+  })

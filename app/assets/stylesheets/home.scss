@@ -6,7 +6,7 @@
 
 	#map{
 		width:100%;
-		height: 80vh;
+		height: calc(100vh - 100px);
 	}
 
 	#question-city{
@@ -60,8 +60,29 @@
 
 		}
 	}
+	.categories{
+		position: fixed;
+		bottom:0;
+		height:70px;
+		background:rgba(0,0,0,0.5);
+		width:100%;
+		padding:10px 0;
+		ul{
+			li{
+				display:inline-block;
+				width:60px;
+				img{
+					width:35px;
+					height: 35px;
+				}
+			}
+		}
+	}
 
 
+}
+
+#home-big{
 	.ui-autocomplete {
 	    border: none;
 	    background: transparent;

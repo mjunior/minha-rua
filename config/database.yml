@@ -50,5 +50,4 @@ test:
 production:
   <<: *default
   database: minha-rua_production
-  username: minha-rua
-  password: <%= ENV['MINHA-RUA_DATABASE_PASSWORD'] %>
+  password: minharua@123!
