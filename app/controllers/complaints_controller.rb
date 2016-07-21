@@ -11,6 +11,7 @@ class ComplaintsController < ApplicationController
   # GET /complaints/1
   # GET /complaints/1.json
   def show
+    @categories = Category.all  
   end
 
   # GET /complaints/new

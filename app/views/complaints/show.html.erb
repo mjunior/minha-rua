@@ -23,10 +23,8 @@
 
 
 <script type="text/javascript">
-    var complaint = <%=raw @complaint.to_json%>
+    var complaint = <%=raw @complaint.to_json(:include => [:category])%>
     var map;
-
-
     function initMap() {
       var myLatlng = new google.maps.LatLng(complaint.latitude,complaint.longitude);
       console.log(complaint)
@@ -35,24 +33,52 @@
         zoom: 16
       });
 
-      var marker = new google.maps.Marker({
-          position: myLatlng,
-          title:"Hello World!"
+       var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(complaint.latitude, complaint.longitude),
+              icon: '/assets/images/pins/pin-'+complaint.category.tag+'.png',
+              animation: google.maps.Animation.DROP,
+              map: null
+          });
+          marker.category = complaint.category.tag;
+
+      marker.category = complaint.category.tag;
+
+      var contentString = '<div id="infobox">' +
+                '<div class="title"><a href="/reclamacao/'+complaint.id+'"> '+complaint.title+' </a></div>' +
+                '<div class="content">' +
+                  '<p>'+complaint.body+'</p>' +
+                  
+                '</div>' +
+              '</div>';
+
+      var infowindow = new google.maps.InfoWindow({
+          content: contentString,
+           maxWidth: 265
       });
 
-      var contentString = '<div id="content">'+
-          '<div id="siteNotice">'+
-          '</div>'+
-          '<h1 id="firstHeading" class="firstHeading">'+complaint.title+'</h1>'+
-          '<div id="bodyContent">'+
-          '<p>'+complaint.body+'</p>'+
-          '</div>'+
-          '</div>';
+      // INICIO DA PERSONALIZAÇÃO DA INFOWINDOW.
+      // O evento google.maps.event.addListener() espera pela
+      // criação da estrutura HTML da infowindow 'domready'
+      // e antes da abertura da infowindow serão aplicados
+      // os estilos definidos
+      // *
+      google.maps.event.addListener(infowindow, 'domready', function() {
+        // Referência ao DIV que agrupa o fundo da infowindow
+        var iwOuter = $('.gm-style-iw');
 
-      //cria a janela
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });infowindow.open(map, marker);
+        var iwBackground = iwOuter.prev();
+        // Remover o div da sombra do fundo
+        iwBackground.children(':nth-child(2)').css({'background' : 'rgba(78, 3, 10, 0.9)','border-radius':'15px','position':'relative'});
+
+        // Remover o div de fundo branco
+        iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+        // Altera a cor desejada para a sombra da cauda
+        iwBackground.children(':nth-child(3)').find('div').children().css({'background': 'rgba(78, 3, 10, 0.9)','top':'4px', 'z-index' : '1'});
+      });
+
+
+
+      infowindow.open(map, marker);
       //quando clicar abre
       marker.addListener('click', function() {
         infowindow.open(map, marker);

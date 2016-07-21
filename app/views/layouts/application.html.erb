@@ -18,16 +18,19 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
+	      <a class="navbar-brand" href="/#!"><a href="/#!" style="padding:0 !important;"><img src="/assets/images/minha-rua-logo.png" alt=""></a>
 	    </div>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav">
-	        <li> <a href="/#!" style="padding:0 !important;"><img src="/assets/images/minha-rua-logo.png" alt=""> </a></li>
-	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 			<li class="menu-add"> <%= link_to('Criar Reclamação', reclamacao_nova_path)  %>  </li>
 			<li><input type="text" id="city-input-nav" placeholder="Digita sua cidade..."></li>
+			   <% @categories.each do |category| %>
+              <li class="visible-xs">
+                <a href="#!" class="filter-category <%=raw "#{category.tag}"%>"  data-tag="<%=raw "#{category.tag}"%>"> <%= category.title %></a>
+              </li>
+            <% end %>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->

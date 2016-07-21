@@ -18,6 +18,12 @@
 //= require markerclusterer.min
 //= require_tree .
 
+$(document).ready(function(){
+  $('.nav a').on('click', function(){
+      $('.navbar-toggle').click() //bootstrap 3.x by Richard
+  });
+})
+
 function checkMap(){
   	if(localStorage.latitude && localStorage.longitude){
         $('#question-city').css('top','100%')
@@ -28,6 +34,8 @@ function checkMap(){
         map.setZoom(14)
         console.log(map)
     }
+
+    
 }
 
   /*Carrega todas as cidades Brasileiras */

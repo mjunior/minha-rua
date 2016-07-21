@@ -74,19 +74,15 @@
 
 
         checkMap();
-       marker = new google.maps.Marker({
-          map: map,
-          draggable: true,
-          animation: google.maps.Animation.DROP
-       });
-
-
-
-      var pos = {
-        lat: localStorage.latitude,
-        lng: localStorage.longitude
-      };
-      marker.setPosition(pos);
+         marker = new google.maps.Marker({
+            map: map,
+            draggable: true,
+            animation: google.maps.Animation.DROP
+         });
+        var latitude = localStorage.latitude
+        var longitude = localStorage.longitude
+        var location = new google.maps.LatLng(latitude, longitude);
+      marker.setPosition(location);
 
 	  	google.maps.event.addListener(marker, 'drag', function () {
 	  		console.log('drag')
