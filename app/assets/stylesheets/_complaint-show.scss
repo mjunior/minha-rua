@@ -1,0 +1,30 @@
+@import 'variables-style';
+.complaints{
+	&.show{
+		#map{
+			height:300px;
+		}
+		h1{
+			font-weight:700;
+			margin-top:20px;
+			&:first-letter{
+				text-transform:uppercase;
+			}
+		}
+		p{
+			font-size:16px;
+			line-height:18px;
+			&.body{
+				margin:20px 0px;
+			}
+		}
+		.divider{
+			padding-bottom:2px;
+			margin:20px 0;
+			color:$secondary-featured;
+			font-weight:600;
+			font-size:18px;
+			border-bottom:1px dashed #aaa;
+		}
+	}
+}

@@ -1,24 +1,47 @@
 <!-- <p id="notice"><%= notice %></p>
  -->
-<div id="map" ></div>
+<div id="map"></div>
 
-<div class="container">
+<div class="container max-960">
   <div class="row">
-    <p>
-      <strong>Localidade:</strong>
-      <%= @complaint.address %> - <%= @complaint.city %>
-    </p>
+    <div class="col-md-8">
+      <h1>  <%= @complaint.title %> </h1>
+      <small><%= @complaint.created_at.strftime("Criado em: %d/%m/%Y");  %></small>
+      <p class="body"><%= @complaint.body %></p>
+      <div class="divider"><i class="fa fa-share-square"></i> Ajude! Compartilhe em suas redes sociais</div>
+      <p><%= social_share_button_tag(@complaint.title) %></p>
+      <div class="divider"><i class="fa fa-comment"></i> Comente sobre esta reclamação!</div>
+      <div class="facebook-comments">
+        <div class="fb-comments" data-href="<%=raw url_for(:only_path => false) %>" data-numposts="20"></div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- MinhaRua-show -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-test="on"
+           data-ad-client="ca-pub-2454689000684524"
+           data-ad-slot="1635927491"
+           
+           data-ad-format="auto"></ins>
+      <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    <hr>
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- MInhaRua-show-dois -->
+      <ins class="adsbygoogle"
+           style="display:inline-block;width:336px;height:280px"
+           data-ad-test="on"
+           data-ad-client="ca-pub-2454689000684524"
 
-    <p>
-      <strong>Categoria:</strong>
-      <%= @complaint.category.title %>
-    </p>
-
-    <p>
-      <strong>Likes:</strong>
-      <%= @complaint.likes %>
-    </p>
-  </div>
+           data-ad-slot="7542860292"></ins>
+      <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+    </div>
 </div>
 
 
@@ -47,7 +70,6 @@
                 '<div class="title"><a href="/reclamacao/'+complaint.id+'"> '+complaint.title+' </a></div>' +
                 '<div class="content">' +
                   '<p>'+complaint.body+'</p>' +
-                  
                 '</div>' +
               '</div>';
 
@@ -78,7 +100,7 @@
 
 
 
-      infowindow.open(map, marker);
+      // infowindow.open(map, marker);
       //quando clicar abre
       marker.addListener('click', function() {
         infowindow.open(map, marker);

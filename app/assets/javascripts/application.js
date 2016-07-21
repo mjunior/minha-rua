@@ -16,6 +16,7 @@
 //= require bootstrap-sprockets
 //= require jquery-ui
 //= require markerclusterer.min
+//= require social-share-button
 //= require_tree .
 
 $(document).ready(function(){

@@ -14,8 +14,10 @@
  *= require_tree .
  *= require_self
  */
-
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,300);
 @import "bootstrap-sprockets";
 @import "bootstrap-custom";
+@import "font-awesome";
+@import "social-share-button";
 @import "variables-style";
 @import "app-style";

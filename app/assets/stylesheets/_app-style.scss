@@ -1,4 +1,7 @@
 @import 'variables-style';
+*,body{
+	font-family: 'Raleway', sans-serif;
+}
 #map{
 	height:500px;
 	width:100%;
@@ -87,4 +90,55 @@ a{
     color: #fff;
     text-transform: uppercase;
     display: inline-block;
+}
+
+#infobox{
+	color:#fff;
+	width:265px;
+	.title{
+		a{
+		    font-size: 20px;
+		    line-height: 21px;
+		    display:block;
+		    font-weight: 500;
+		    margin-bottom: 25px;
+		    color:#fff;
+		    &:first-letter{
+	    	text-transform:uppercase;
+	    }
+	    }
+
+	}
+	.content{
+		p{
+			font-size:16px;
+			text-align:left;
+		}
+		.more {
+		    background: #6F1715;
+		    color: #fff;
+		    padding: 8px 10px;
+		    width: 53%;
+		    display: block;
+		    margin: 0 auto;
+		    text-align: center;
+		    font-size: 17px;
+		    border-radius: 6px;
+		    margin-top: 30px;
+		}
+	}
+}
+
+.max-960{
+	max-width:960px;
+}
+
+
+$size: 30px;
+.social-share-button {
+  .ssb-icon {
+    background-size: $size $size;
+    height: $size;
+    width: $size;
+  }
 }
