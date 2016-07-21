@@ -1,13 +1,14 @@
 <!-- <p id="notice"><%= notice %></p>
  -->
 <div id="map"></div>
-
 <div class="container max-960">
   <div class="row">
     <div class="col-md-8">
+       <p class="info"><a href="#!"> Reportar Abuso</a> | <a href="#!">Sou responsável por esta cidade!</a></p>
       <h1>  <%= @complaint.title %> </h1>
-      <small><%= @complaint.created_at.strftime("Criado em: %d/%m/%Y");  %></small>
-      <p class="body"><%= @complaint.body %></p>
+      <p class="date"><%= @complaint.created_at.strftime("Criado em: %d/%m/%Y"); %></a></p>
+      <p class="body"><i class="fa fa-quote-left" aria-hidden="true"></i> <%= @complaint.body %></p>
+
       <div class="divider"><i class="fa fa-share-square"></i> Ajude! Compartilhe em suas redes sociais</div>
       <p><%= social_share_button_tag(@complaint.title) %></p>
       <div class="divider"><i class="fa fa-comment"></i> Comente sobre esta reclamação!</div>
@@ -16,9 +17,11 @@
       </div>
     </div>
     <div class="col-md-4">
+      <div class="ads">
+    <!--   <div style="height:200px;">
       <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <!-- MinhaRua-show -->
-      <ins class="adsbygoogle"
+    <!--   <ins class="adsbygoogle"
            style="display:block"
            data-ad-test="on"
            data-ad-client="ca-pub-2454689000684524"
@@ -28,7 +31,8 @@
       <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
-    <hr>
+      </div> -->
+
       <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <!-- MInhaRua-show-dois -->
       <ins class="adsbygoogle"
@@ -40,7 +44,9 @@
       <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
-    </div>
+     
+      </div>
+     </div>
     </div>
 </div>
 
@@ -69,7 +75,8 @@
       var contentString = '<div id="infobox">' +
                 '<div class="title"><a href="/reclamacao/'+complaint.id+'"> '+complaint.title+' </a></div>' +
                 '<div class="content">' +
-                  '<p>'+complaint.body+'</p>' +
+                  '<p><i class="fa fa-quote-left" aria-hidden="true"></i> '+complaint.body+'</p>' +
+                  '<p class="address"><i class="fa fa-map-marker" aria-hidden="true"></i> '+complaint.address+'</p>' +
                 '</div>' +
               '</div>';
 
@@ -77,7 +84,7 @@
           content: contentString,
            maxWidth: 265
       });
-
+      marker.setAnimation(google.maps.Animation.BOUNCE);
       // INICIO DA PERSONALIZAÇÃO DA INFOWINDOW.
       // O evento google.maps.event.addListener() espera pela
       // criação da estrutura HTML da infowindow 'domready'
@@ -100,14 +107,13 @@
 
 
 
-      // infowindow.open(map, marker);
+      
       //quando clicar abre
       marker.addListener('click', function() {
         infowindow.open(map, marker);
       });
       // To add the marker to the map, call setMap();
       marker.setMap(map);
-
     }
 </script>
 

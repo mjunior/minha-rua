@@ -1,0 +1,19 @@
+.complaints {
+	&.new{
+		.field{
+			input{
+				border:1px solid #ddd;
+				outline:none;
+				padding:3px 10px;
+				font-size:22px;
+				width:100%;
+			}
+
+			&.w100{	
+				input{
+					width:100%;
+				}	
+			}
+		}
+	}
+}

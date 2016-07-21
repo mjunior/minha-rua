@@ -6,10 +6,27 @@
 		}
 		h1{
 			font-weight:700;
-			margin-top:20px;
+			margin:0px;
 			&:first-letter{
 				text-transform:uppercase;
 			}
+		}
+		.date{
+			font-size:14px;
+		}
+		.info{
+			font-size:12px;
+		    margin-top: 10px;
+			a{
+			color:$text-featured;
+			}
+		}
+		.reply{
+			font-size: 12px;
+		    text-align: left;
+		    border-top: 1px dashed #aaa;
+		    padding-left: 5px;
+		    padding-top: 8px;
 		}
 		p{
 			font-size:16px;
@@ -20,11 +37,15 @@
 		}
 		.divider{
 			padding-bottom:2px;
-			margin:20px 0;
-			color:$secondary-featured;
+			margin:40px 0 0 0 ;
+			color:$text-featured;
 			font-weight:600;
 			font-size:18px;
 			border-bottom:1px dashed #aaa;
+		}
+
+		.ads{
+			margin-top:20px;
 		}
 	}
 }

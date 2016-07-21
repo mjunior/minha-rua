@@ -1,7 +1,51 @@
 @import 'variables-style';
-*,body{
-	font-family: 'Raleway', sans-serif;
+/** Ultra Light */
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 100;
+  src: url("//applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.woff");
 }
+
+/** Thin */
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 200;
+  src: url("//applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.woff");
+}
+
+/** Regular */
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 400;
+  src: url("//applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+}
+
+/** Medium */
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 500;
+  src: url("//applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff");
+}
+
+/** Semi Bold */
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 600;
+  src: url("//applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-semibold-webfont.woff");
+}
+
+/** Bold */ 
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 700;
+  src: url("//applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
+}
+
+
+*,body{
+	 font-family: "San Francisco";
+}
+
 #map{
 	height:500px;
 	width:100%;
@@ -14,11 +58,12 @@ a{
 }
 .menu-add{
 	a{
-	    background: #000;
+		font-weight:500;
+		background:$accent-color !important;
 	    padding: 10px 35px !important;
    		border-radius: 5px !important;
 		&:hover{
-			background:#000!important;
+			background:$accent-color !important;
 		}
 	}
 }
@@ -64,20 +109,7 @@ a{
 	}
 }
 
-.field{
-	input{
-		border:1px solid #ddd;
-		outline:none;
-		padding:3px 10px;
-		font-size:22px;
-	}
 
-	&.w100{	
-		input{
-			width:100%;
-		}	
-	}
-}
 
 
 #reclamar{
@@ -125,6 +157,10 @@ a{
 		    font-size: 17px;
 		    border-radius: 6px;
 		    margin-top: 30px;
+		}
+		.address{
+			font-size:12px;
+			font-weight:600;
 		}
 	}
 }

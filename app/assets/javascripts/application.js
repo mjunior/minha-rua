@@ -26,18 +26,26 @@ $(document).ready(function(){
 })
 
 function checkMap(){
-  	if(localStorage.latitude && localStorage.longitude){
-        $('#question-city').css('top','100%')
+  	if(!localStorage.latitude && !localStorage.longitude){
+        $('#question-city').css('top','0%')
+    }else{
         var latitude = localStorage.latitude
         var longitude = localStorage.longitude
         var location = new google.maps.LatLng(latitude, longitude);
         map.setCenter(location);
         map.setZoom(14)
-        console.log(map)
     }
-
-    
 }
+function FormatForUrl(str) {
+    return str.replace(/_/g, '-')
+        .replace(/ /g, '-')
+        .replace(/:/g, '-')
+        .replace(/\\/g, '-')
+        .replace(/\//g, '-')
+        .replace(/[^a-zA-Z0-9\-]+/g, '')
+        .replace(/-{2,}/g, '-')
+        .toLowerCase();
+};
 
   /*Carrega todas as cidades Brasileiras */
   var cities = []

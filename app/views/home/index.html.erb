@@ -92,12 +92,13 @@
               map: null
           });
           marker.category = complaint.category.tag;
-
+          var url = '/reclamacao/'+FormatForUrl(complaint.id+'-'+complaint.title)
+          console.log(url);
           var contentString = '<div id="infobox">' +
-                    '<div class="title"><a href="/reclamacao/'+complaint.id+'"> '+complaint.title+' </a></div>' +
+                    '<div class="title"><a href="'+url+'"> '+complaint.title+' </a></div>' +
                     '<div class="content">' +
                       '<p>'+complaint.body+'</p>' +
-                      '<p><a href="/reclamacao/'+complaint.id+'" class="more">+ detalhes</p>' +
+                      '<p><a href="'+url+'" class="more">+ detalhes</p>' +
                     '</div>' +
                   '</div>';
 
@@ -167,6 +168,7 @@
                   var location = new google.maps.LatLng(latitude, longitude);
                   map.setCenter(location);
                   map.setZoom(13);
+
                   setTimeout(function(){$('#question-city').css('top','100%');},500)
               }
           }
