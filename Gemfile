@@ -39,9 +39,6 @@ gem 'devise'
 #bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
 
-#para geolocalização
-gem 'geocoder'
-
 #botoes de compartilhamento
 gem 'social-share-button'
 

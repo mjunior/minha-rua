@@ -8,10 +8,12 @@
 <% end %>
 <div class="container max-960">
   <div class="row">
-  <%= form_for @complaint,validate: true do |f| %>
     <div class="col-xs-12">
       <h1>Criando sua reclamação</h1>
     </div>
+  </div>
+
+  <div class="row">
       <% if @complaint.errors.any? %>
         <div class="col-xs-12" id="error_explanation">
           <ul>
@@ -21,17 +23,20 @@
           </ul>
         </div>
       <% end %>
+  </div>
+  <div class="row">
+  <%= form_for(@complaint) do |f| %>
       <div class="col-xs-12">
         <div class="field">
             <%= f.label :address, "Endereço da reclamação"%><br>
-            <%= f.text_field :address,validate: false %>
+            <%= f.text_field :address %>
         </div>
       </div>
-    </div>
-    <div class="row">
+
       <div class="col-sm-8 col-sm-push-4">
         <div id="map" style="height:400px;width:100%;"></div>
       </div>
+
       <div class="col-sm-4 col-sm-pull-8">
           <div class="field">
             <%= f.hidden_field :latitude %>
@@ -61,7 +66,6 @@
           </div>
        </div>
     <% end %>
-
   </div>
 </div>
 
@@ -82,25 +86,24 @@
         center: myLatlng,
         zoom: 4
       });
+      
+      geocoder = new google.maps.Geocoder();
+      
+      checkMap();
+      
+      marker = new google.maps.Marker({
+          map: map,
+          draggable: true,
+          animation: google.maps.Animation.DROP
+      });
+      var latitude = localStorage.latitude
+      var longitude = localStorage.longitude
 
-       geocoder = new google.maps.Geocoder();
- 
+      $('#complaint_latitude').val(latitude);
+      $('#complaint_longitude').val(longitude);
 
-
-        checkMap();
-         marker = new google.maps.Marker({
-            map: map,
-            draggable: true,
-            animation: google.maps.Animation.DROP
-         });
-        var latitude = localStorage.latitude
-        var longitude = localStorage.longitude
-
-        $('#complaint_latitude').val(latitude);
-        $('#complaint_longitude').val(longitude);
-
-        var location = new google.maps.LatLng(latitude, longitude);
-        marker.setPosition(location);
+      var location = new google.maps.LatLng(latitude, longitude);
+      marker.setPosition(location);
 
 	  	google.maps.event.addListener(marker, 'drag', function () {
 	  		console.log('drag')
