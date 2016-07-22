@@ -170,6 +170,49 @@ a{
 }
 
 
+.mobile-tools{
+	position:fixed;
+	bottom:0;
+	height:60px;
+	width:100%;
+	text-align:center;
+	a{
+		color:#fff;
+		display:block;
+		font-weight:600;
+		font-size:18px;
+		margin-top:20px;
+	}
+	.search{
+		height:60px;
+		background:$secondary-featured;
+	}
+	.new{
+		height:60px;
+		background:$accent-color;
+	}
+}
+.input-search-mobile{
+	position: fixed;
+    bottom: -100%;
+    background: #121F25;
+    height: 60px;
+    transition:all 0.5s;
+    border-bottom: 2px solid #255F71;
+    width: 100%;
+}
+
+#city-input-mobile{
+    background: transparent;
+    border: none;
+    width: 100%;
+    margin:0px 11px;
+    color: #B9CED8;
+    font-size: 19px;
+    outline:none;
+    height:60px;
+}
+
 $size: 30px;
 .social-share-button {
   .ssb-icon {
@@ -177,4 +220,8 @@ $size: 30px;
     height: $size;
     width: $size;
   }
+}
+
+footer{
+	height:80px;
 }

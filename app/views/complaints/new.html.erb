@@ -21,36 +21,39 @@
             <%= f.text_field :address %>
         </div>
       </div>
-
-      <div class="col-md-4">
+      <div class="col-sm-8 col-sm-push-4">
+        <div id="map" style="height:400px;width:100%;"></div>
+      </div>
+      <div class="col-sm-4 col-sm-pull-8">
           <div class="field">
             <%= f.hidden_field :latitude %>
           </div>
+
           <div class="field">
             <%= f.hidden_field :longitude %>
           </div>
+
            <div class="field">
              <%= f.label :category_id, "Escolha uma categoria para sua reclamação" %><br>
             <%= f.collection_select(:category_id, Category.all, :id, :title, prompt: true) %>
           </div>
+
           <div class="field">
             <%= f.label :title, "Titulo da reclamação" %><br>
             <%= f.text_field :title %>
           </div>
+
           <div class="field">
             <%= f.label :body,"Descreva detalhadamento o acontecimento" %><br>
             <%= f.text_area :body, cols: 40, rows: 3 %>
           </div>
 
-
-          <div class="actions">
-            <%= f.submit %>
+          <div class="field actions">
+            <%= f.submit "Criar reclamação"%>
           </div>
        </div>
     <% end %>
-    <div class="col-md-8">
-      <div id="map" style="height:400px;width:100%;"></div>
-    </div>
+
   </div>
 </div>
 

@@ -23,7 +23,7 @@
 				border-bottom:1px solid rgba(255,255,255,0.7);
 				background:$secondary-featured;
 				.field{
-					width:calc(70% - 15px);
+					width:100%;
 					float:left;
 					input{
 						background:transparent;
@@ -33,6 +33,11 @@
 						font-size:46px;
 						padding:10px 3px;
 						outline:none;
+						@media screen and (max-width: 600px) {
+						    font-size:26px;
+					  	}
+
+
 						&::-webkit-input-placeholder {
 							  color: rgba(255,255,255,0.3);
 						}
@@ -99,5 +104,9 @@
 	    font-size: 46px;
 	    line-height: 55px;
 	    color: #fff;
+
+	    @media screen and (max-width: 600px) {
+		    font-size:26px;
+	  	}
 	}
 }

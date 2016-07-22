@@ -1,5 +1,13 @@
 <!-- <p id="notice"><%= notice %></p>
  -->
+
+<% content_for :opg do%>
+  <meta property="og:title" content="<%=raw @complaint.title%>" />
+  <meta property="og:type" content="video.movie" />
+  <meta property="og:url" content="<%=raw url_for(:only_path => false) %>" />
+  <meta property="og:image" content="/assets/images/denuncia.jpg" />
+<% end %>
+
 <div id="map"></div>
 <div class="container max-960">
   <div class="row">
@@ -10,7 +18,10 @@
       <p class="body"><i class="fa fa-quote-left" aria-hidden="true"></i> <%= @complaint.body %></p>
 
       <div class="divider"><i class="fa fa-share-square"></i> Ajude! Compartilhe em suas redes sociais</div>
-      <p><%= social_share_button_tag(@complaint.title) %></p>
+       <p> <%= social_share_button_tag(@complaint.title, :url => url_for(:only_path => false), :image => "/assets/images/denuncia.jpg", desc: @complaint.body, via: "Minha Rua Tem Problema") %></p>
+      
+
+
       <div class="divider"><i class="fa fa-comment"></i> Comente sobre esta reclamação!</div>
       <div class="facebook-comments">
         <div class="fb-comments" data-href="<%=raw url_for(:only_path => false) %>" data-numposts="20"></div>
@@ -18,33 +29,17 @@
     </div>
     <div class="col-md-4">
       <div class="ads">
-    <!--   <div style="height:200px;">
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <!-- MinhaRua-show -->
-    <!--   <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-test="on"
-           data-ad-client="ca-pub-2454689000684524"
-           data-ad-slot="1635927491"
-           
-           data-ad-format="auto"></ins>
-      <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-      </div> -->
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- MInhaRua-show-dois -->
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:336px;height:280px"
+             data-ad-test="on"
+             data-ad-client="ca-pub-2454689000684524"
 
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <!-- MInhaRua-show-dois -->
-      <ins class="adsbygoogle"
-           style="display:inline-block;width:336px;height:280px"
-           data-ad-test="on"
-           data-ad-client="ca-pub-2454689000684524"
-
-           data-ad-slot="7542860292"></ins>
-      <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-     
+             data-ad-slot="7542860292"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
       </div>
      </div>
     </div>
@@ -56,29 +51,33 @@
     var map;
     function initMap() {
       var myLatlng = new google.maps.LatLng(complaint.latitude,complaint.longitude);
-      console.log(complaint)
+     
       map = new google.maps.Map(document.getElementById('map'), {
         center: myLatlng,
-        zoom: 16
+        zoom: 16,
+        scrollwheel: false,
+        navigationControl: false,
+        zoomControl: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        draggable: false,
       });
 
-       var marker = new google.maps.Marker({
-              position: new google.maps.LatLng(complaint.latitude, complaint.longitude),
-              icon: '/assets/images/pins/pin-'+complaint.category.tag+'.png',
-              animation: google.maps.Animation.DROP,
-              map: null
-          });
-          marker.category = complaint.category.tag;
-
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(complaint.latitude, complaint.longitude),
+        icon: '/assets/images/pins/pin-'+complaint.category.tag+'.png',
+        animation: google.maps.Animation.DROP,
+        map: null
+      });
       marker.category = complaint.category.tag;
 
       var contentString = '<div id="infobox">' +
-                '<div class="title"><a href="/reclamacao/'+complaint.id+'"> '+complaint.title+' </a></div>' +
-                '<div class="content">' +
-                  '<p><i class="fa fa-quote-left" aria-hidden="true"></i> '+complaint.body+'</p>' +
-                  '<p class="address"><i class="fa fa-map-marker" aria-hidden="true"></i> '+complaint.address+'</p>' +
-                '</div>' +
-              '</div>';
+                            '<div class="title"><a href="/reclamacao/'+complaint.id+'"> '+complaint.title+' </a></div>' +
+                            '<div class="content">' +
+                              '<p><i class="fa fa-quote-left" aria-hidden="true"></i> '+complaint.body+'</p>' +
+                              '<p class="address"><i class="fa fa-map-marker" aria-hidden="true"></i> '+complaint.address+'</p>' +
+                            '</div>' +
+                          '</div>';
 
       var infowindow = new google.maps.InfoWindow({
           content: contentString,

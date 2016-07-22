@@ -4,9 +4,9 @@
       <div class="field">
         <input type="text" id="city-input" placeholder="Digita sua cidade...">
       </div>
-      <div class="go">
+<!--       <div class="go">
         <button id="my-place">Minha localização</button>
-      </div>
+      </div> -->
       
       <div class="clearfix"></div>
     </div>
@@ -35,29 +35,6 @@
     </div>
   </section>
 
-<!--   <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <h1>Últimas Reclamações</h1>
-        <ul>
-          <% @lastest.each do |item| %>
-            <li><%= item.title%></li>
-          <% end %>
-        </ul>
-      </div>
-      <div class="col-md-4">
-        <h1>Mais populares</h1>
-        
-        <% @topList.each do |item| %>
-          <li><%= item.title%> - <%= item.likes%> Curtiram</li>
-        <% end %>
-
-      </div>
-      <div class="col-md-4"></div>
-    </div>
-  </div>
-</div> -->
-<!-- Autocomplete das cidades na tela de abertura -->
 <div id="home-big"></div>
 
 <script type="text/javascript">
@@ -67,6 +44,7 @@
     var arrMarkers = []
     var markerCluster
     var geocoder;
+     var openedInfoWindow = null
       $( function() {
          $( document ).tooltip();
       });
@@ -76,7 +54,16 @@
         geocoder = new google.maps.Geocoder();
         map = new google.maps.Map(document.getElementById('map'), {
           center: myLatlng,
-          zoom: 4
+          zoom: 4,
+          mapTypeControl: false,
+          zoomControl: true,
+          zoomControlOptions: {
+              position: google.maps.ControlPosition.RIGHT_CENTER
+          },
+
+          scaleControl: false,
+          streetViewControl: false,
+          
         });
 
         loadingComplaints();
@@ -93,7 +80,6 @@
           });
           marker.category = complaint.category.tag;
           var url = '/reclamacao/'+FormatForUrl(complaint.id+'-'+complaint.title)
-          console.log(url);
           var contentString = '<div id="infobox">' +
                     '<div class="title"><a href="'+url+'"> '+complaint.title+' </a></div>' +
                     '<div class="content">' +
@@ -126,11 +112,20 @@
             // Altera a cor desejada para a sombra da cauda
             iwBackground.children(':nth-child(3)').find('div').children().css({'background': 'rgba(78, 3, 10, 0.9)','top':'4px', 'z-index' : '1'});
           });
-
+         
           google.maps.event.addListener(marker, 'click', (function(marker, i) {
+
               return function() {
+                  if (openedInfoWindow != null){
+                  console.log('fechei a outra')
+                  openedInfoWindow.close();
+              }else{
+                console.log('nao fechei nada')
+              }
+                  infowindow.close();
                   infowindow.setContent(contentString);
                   infowindow.open(map, marker);
+                  openedInfoWindow = infowindow;
               }
           })(marker))
           arrMarkers.push(marker);
@@ -157,6 +152,7 @@
     }
 
     function loadOnMap(address) {
+      console.log('Bus: '+address);
       geocoder.geocode({ 'address': address + ', Brasil', 'region': 'BR' }, function (results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
               if (results[0]) {
@@ -167,7 +163,7 @@
                   localStorage.setItem("longitude", results[0].geometry.location.lng());
                   var location = new google.maps.LatLng(latitude, longitude);
                   map.setCenter(location);
-                  map.setZoom(13);
+                  map.setZoom(14);
 
                   setTimeout(function(){$('#question-city').css('top','100%');},500)
               }

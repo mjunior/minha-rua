@@ -3,21 +3,12 @@
 <head>
   <title>MinhaRua</title>
  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ <%= yield :opg %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.7&appId=854091804689087";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-
 	<nav class="navbar navbar-default">
 	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -30,12 +21,11 @@
 	      </button>
 	      <a class="navbar-brand" href="/#!" style="padding-top:7px;"><img src="/assets/images/minha-rua-logo.png" alt=""></a>
 	    </div>
-
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav navbar-right">
-			<li class="menu-add"> <%= link_to('Criar Reclamação', reclamacao_nova_path)  %>  </li>
-			<li><input type="text" id="city-input-nav" placeholder="Digita sua cidade..."></li>
+			<li class="menu-add hidden-xs"> <%= link_to('Criar Reclamação', reclamacao_nova_path)  %>  </li>
+			<li><input type="text" id="city-input-nav" class="hidden-xs" placeholder="Digite sua cidade..."></li>
 			   <% @categories.each do |category| %>
               <li class="visible-xs">
                 <a href="#!" class="filter-category <%=raw "#{category.tag}"%>"  data-tag="<%=raw "#{category.tag}"%>"> <%= category.title %></a>
@@ -49,6 +39,22 @@
 		<%= yield %>
 	</main>
 
+	<div class="mobile-tools visible-xs">
+		<div class="row">
+			<div class="col-xs-6 search">
+				<a id="search-mobile">BUSCAR</a>
+			</div>
+			<div class="col-xs-6 new">
+				<a href="#!"><%= link_to('RECLAMAR', reclamacao_nova_path)  %></a>
+			</div>
+		</div>
+	</div>
+
+	<div class="input-search-mobile">
+	<form id="form-searc-mobile">
+		<input type="text" id="city-input-mobile"  placeholder="Digite sua cidade..."></form>
+	</div>
+	<footer></footer>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCORWu-uTguiEdLaTvsFu74TPvmYE2fNrA&callback=initMap">
     </script>
 </body>
