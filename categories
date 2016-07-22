@@ -1,0 +1,17 @@
+﻿INSERT INTO categories (id, title, created_at, updated_at, tag) VALUES
+(24, 'Buraco', now(), now(), 'buraco'),
+(25, 'Transporte público', now(), now(), 'transporte_publico'),
+(26, 'Saúde', now(), now(), 'saude'),
+(27, 'Poluição Sonora', now(), now(), 'poluicao_sonora'),
+(28, 'Árvores', now(), now(), 'arvore'),
+(29, 'Segurança', now(), now(), 'seguranca'),
+(30, 'Outros', now(), now(), 'outros'),
+(31, 'Impostos e Taxas', now(), now(), 'impostos_taxas'),
+(32, 'Iluminação Pública', now(), now(), 'iluminacao_publica'),
+(33, 'Trânsito', now(), now(), 'transito'),
+(34, 'Obras Públicas', now(), now(), 'obras_publicas'),
+(35, 'Meio Ambiente', now(), now(), 'meio_ambiente'),
+(36, 'Lixo e Poluição', now(), now(), 'lixo_poluicao'),
+(37, 'Terreno baldio', now(), now(), 'terreno_baldio'),
+(38, 'Acessibilidade', now(), now(), 'acessibilidade'),
+(39, 'Saneamento Básico', now(), now(), 'saneamento_basico');
