@@ -1,6 +1,6 @@
 @import 'variables-style';
 .complaints {
-	&.new{
+	&.new,&.create{
 		.field{
 			input{
 				border:1px solid #ddd;

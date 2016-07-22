@@ -2,7 +2,9 @@
  -->
 
 <% content_for :opg do%>
+  <title><%=raw @complaint.title%> | Minha Rua Tem Problema</title>
   <meta property="og:title" content="<%=raw @complaint.title%>" />
+  <meta property="og:description" content="<%=raw @complaint.title%>" />
   <meta property="og:type" content="video.movie" />
   <meta property="og:url" content="<%=raw url_for(:only_path => false) %>" />
   <meta property="og:image" content="/assets/images/denuncia.jpg" />
@@ -33,9 +35,7 @@
         <!-- MInhaRua-show-dois -->
         <ins class="adsbygoogle"
              style="display:inline-block;width:336px;height:280px"
-             data-ad-test="on"
              data-ad-client="ca-pub-2454689000684524"
-
              data-ad-slot="7542860292"></ins>
         <script>
         (adsbygoogle = window.adsbygoogle || []).push({});

@@ -1,26 +1,34 @@
+<% content_for :opg do%>
+  <title>Nova Reclamação| Minha Rua Tem Problema</title>
+  <meta property="og:title" content="Crie sua reclamação | Minha Rua Tem Problema" />
+  <meta property="og:description" content="Criei uma reclamação de sua cidade" />
+  <meta property="og:type" content="video.movie" />
+  <meta property="og:url" content="<%=raw url_for(:only_path => false) %>" />
+  <meta property="og:image" content="/assets/images/denuncia.jpg" />
+<% end %>
 <div class="container max-960">
   <div class="row">
+  <%= form_for @complaint,validate: true do |f| %>
     <div class="col-xs-12">
       <h1>Criando sua reclamação</h1>
     </div>
-     <%= form_for(@complaint) do |f| %>
       <% if @complaint.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@complaint.errors.count, "error") %> prohibited this complaint from being saved:</h2>
-
+        <div class="col-xs-12" id="error_explanation">
           <ul>
           <% @complaint.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
+            <li><%= message.split('#!')[1] %></li>
           <% end %>
           </ul>
         </div>
       <% end %>
       <div class="col-xs-12">
         <div class="field">
-            <%= f.label :address, "Endereço da reclamação" %><br>
-            <%= f.text_field :address %>
+            <%= f.label :address, "Endereço da reclamação"%><br>
+            <%= f.text_field :address,validate: false %>
         </div>
       </div>
+    </div>
+    <div class="row">
       <div class="col-sm-8 col-sm-push-4">
         <div id="map" style="height:400px;width:100%;"></div>
       </div>
@@ -34,17 +42,17 @@
           </div>
 
            <div class="field">
-             <%= f.label :category_id, "Escolha uma categoria para sua reclamação" %><br>
+             <%= f.label :category_id, "Categoria" %><br>
             <%= f.collection_select(:category_id, Category.all, :id, :title, prompt: true) %>
           </div>
 
           <div class="field">
-            <%= f.label :title, "Titulo da reclamação" %><br>
+            <%= f.label :title, "Titulo" %><br>
             <%= f.text_field :title %>
           </div>
 
           <div class="field">
-            <%= f.label :body,"Descreva detalhadamento o acontecimento" %><br>
+            <%= f.label :body,"Descreva detalhadamente o acontecimento" %><br>
             <%= f.text_area :body, cols: 40, rows: 3 %>
           </div>
 
@@ -87,16 +95,19 @@
          });
         var latitude = localStorage.latitude
         var longitude = localStorage.longitude
+
+        $('#complaint_latitude').val(latitude);
+        $('#complaint_longitude').val(longitude);
+
         var location = new google.maps.LatLng(latitude, longitude);
-      marker.setPosition(location);
+        marker.setPosition(location);
 
 	  	google.maps.event.addListener(marker, 'drag', function () {
 	  		console.log('drag')
 	        geocoder.geocode({ 'latLng': marker.getPosition() }, function (results, status) {
 	            if (status == google.maps.GeocoderStatus.OK) {
 	                    if (results[0]) { 
-	                    	console.log(results[0])
-	                    $('#complaint_city').val(obterCidade(results[0].address_components))	
+	                   	                    	
 	                    $('#complaint_address').val(results[0].formatted_address);
 	                    $('#complaint_latitude').val(marker.getPosition().lat());
 	                    $('#complaint_longitude').val(marker.getPosition().lng());

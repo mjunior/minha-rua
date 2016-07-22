@@ -28,6 +28,7 @@ class ComplaintsController < ApplicationController
   # POST /complaints
   # POST /complaints.json
   def create
+    @categories = Category.all
     @complaint = Complaint.new(complaint_params)
     if user_signed_in?
       @complaint.user = current_user
