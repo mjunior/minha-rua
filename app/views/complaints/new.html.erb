@@ -12,7 +12,6 @@
       <h1>Criando sua reclamação</h1>
     </div>
   </div>
-
   <div class="row">
       <% if @complaint.errors.any? %>
         <div class="col-xs-12" id="error_explanation">
@@ -24,14 +23,17 @@
         </div>
       <% end %>
   </div>
-  <div class="row">
+  
   <%= form_for(@complaint) do |f| %>
+  <div class="row">
       <div class="col-xs-12">
         <div class="field">
             <%= f.label :address, "Endereço da reclamação"%><br>
             <%= f.text_field :address %>
         </div>
       </div>
+  </div>
+  <div class="row">
 
       <div class="col-sm-8 col-sm-push-4">
         <div id="map" style="height:400px;width:100%;"></div>

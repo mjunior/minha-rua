@@ -4,6 +4,8 @@
 @import "variables-style";
 .home{
 	&.index{
+		height: calc(100vh - 90px);
+    	overflow: hidden;
 		#map{
 			width:100%;
 			height: calc(100vh - 100px);

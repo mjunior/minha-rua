@@ -40,22 +40,6 @@
 		<%= yield %>
 	</main>
 
-	<div class="mobile-tools visible-xs">
-		<div class="row">
-			<div class="col-xs-6 search">
-				<a id="search-mobile">BUSCAR</a>
-			</div>
-			<div class="col-xs-6 new">
-				<a href="#!"><%= link_to('RECLAMAR', reclamacao_nova_path)  %></a>
-			</div>
-		</div>
-	</div>
-
-	<div class="input-search-mobile">
-	<form id="form-searc-mobile">
-		<input type="text" id="city-input-mobile"  placeholder="Digite sua cidade..."></form>
-	</div>
-	<footer></footer>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCORWu-uTguiEdLaTvsFu74TPvmYE2fNrA&callback=initMap">
     </script>
 </body>

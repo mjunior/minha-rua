@@ -24,25 +24,40 @@
 
   <section class="categories hidden-xs">
     <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="button-icons">
-          <ul>
-              <li>
-                <a href="#!" class="filter-category" title="Limpar filtros" data-tag="all"><img src="/assets/images/categories/clear.png" alt=""></a>
-              </li>
-            <% @categories.each do |category| %>
-              <li>
-                <a href="#!" class="filter-category <%=raw "#{category.tag}"%>" title="<%=raw "#{category.title}" %>" data-tag="<%=raw "#{category.tag}"%>"><img src="/assets/images/categories/<%=raw "#{category.tag}"%>.png" alt=""></a>
-              </li>
-            <% end %>
-          </ul>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="button-icons">
+            <ul>
+                <li>
+                  <a href="#!" class="filter-category" title="Limpar filtros" data-tag="all"><img src="/assets/images/categories/clear.png" alt=""></a>
+                </li>
+              <% @categories.each do |category| %>
+                <li>
+                  <a href="#!" class="filter-category <%=raw "#{category.tag}"%>" title="<%=raw "#{category.title}" %>" data-tag="<%=raw "#{category.tag}"%>"><img src="/assets/images/categories/<%=raw "#{category.tag}"%>.png" alt=""></a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-    </div>
   </section>
+  <div class="mobile-tools visible-xs">
+    <div class="row">
+      <div class="col-xs-6 search">
+        <a id="search-mobile">BUSCAR</a>
+      </div>
+      <div class="col-xs-6 new">
+        <a href="#!"><%= link_to('RECLAMAR', reclamacao_nova_path)  %></a>
+      </div>
+    </div>
+  </div>
 
+  <div class="input-search-mobile visible-xs">
+    <form id="form-searc-mobile">
+      <input type="text" id="city-input-mobile"  placeholder="Digite sua cidade...">
+    </form>
+  </div>
 <div id="home-big"></div>
 
 <script type="text/javascript">
