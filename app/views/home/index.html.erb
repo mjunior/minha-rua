@@ -87,11 +87,14 @@
               map: null
           });
           marker.category = complaint.category.tag;
+          if (complaint.title.length > 30){
+            complaint.title = complaint.title.substr(0,30)+"..."
+          }
           var url = '/reclamacao/'+FormatForUrl(complaint.id+'-'+complaint.title)
           var contentString = '<div id="infobox">' +
                     '<div class="title"><a href="'+url+'"> '+complaint.title+' </a></div>' +
                     '<div class="content">' +
-                      '<p>'+complaint.body+'</p>' +
+                      '<p>'+complaint.body.substr(0,120)+'...</p>' +
                       '<p><a href="'+url+'" class="more">+ detalhes</p>' +
                     '</div>' +
                   '</div>';
