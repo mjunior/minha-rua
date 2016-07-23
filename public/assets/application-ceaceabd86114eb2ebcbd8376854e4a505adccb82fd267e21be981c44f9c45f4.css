@@ -10574,7 +10574,18 @@ button.close {
 }
 @charset "UTF-8";
 /*Variaveis de cores do tema da aplicação */
-/* line 5, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
+/* line 4, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
+.complaints.new h1, .complaints.create h1 {
+  text-align: center;
+  margin: 50px 0;
+}
+@media screen and (max-width: 600px) {
+  /* line 4, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
+  .complaints.new h1, .complaints.create h1 {
+    font-size: 26px;
+  }
+}
+/* line 12, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
 .complaints.new .field input, .complaints.create .field input {
   border: 1px solid #ddd;
   outline: none;
@@ -10582,11 +10593,11 @@ button.close {
   font-size: 22px;
   width: 100%;
 }
-/* line 14, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
+/* line 20, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
 .complaints.new .field.w100 input, .complaints.create .field.w100 input {
   width: 100%;
 }
-/* line 21, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
+/* line 27, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
 .complaints.new select#complaint_category_id, .complaints.create select#complaint_category_id {
   background: #fff;
   padding: 5px;
@@ -10594,11 +10605,11 @@ button.close {
   width: 100%;
   border: 1px solid #ddd;
 }
-/* line 29, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
+/* line 35, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
 .complaints.new textarea, .complaints.create textarea {
   width: 100%;
 }
-/* line 32, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
+/* line 38, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
 .complaints.new input[type="submit"], .complaints.create input[type="submit"] {
   background: #008AB5;
   color: #fff;
@@ -10723,7 +10734,18 @@ button.close {
 }
 
 /*Variaveis de cores do tema da aplicação */
-/* line 5, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
+/* line 4, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
+.complaints.new h1, .complaints.create h1 {
+  text-align: center;
+  margin: 50px 0;
+}
+@media screen and (max-width: 600px) {
+  /* line 4, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
+  .complaints.new h1, .complaints.create h1 {
+    font-size: 26px;
+  }
+}
+/* line 12, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
 .complaints.new .field input, .complaints.create .field input {
   border: 1px solid #ddd;
   outline: none;
@@ -10731,11 +10753,11 @@ button.close {
   font-size: 22px;
   width: 100%;
 }
-/* line 14, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
+/* line 20, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
 .complaints.new .field.w100 input, .complaints.create .field.w100 input {
   width: 100%;
 }
-/* line 21, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
+/* line 27, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
 .complaints.new select#complaint_category_id, .complaints.create select#complaint_category_id {
   background: #fff;
   padding: 5px;
@@ -10743,23 +10765,28 @@ button.close {
   width: 100%;
   border: 1px solid #ddd;
 }
-/* line 29, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
+/* line 35, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
 .complaints.new textarea, .complaints.create textarea {
   width: 100%;
 }
-/* line 32, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
+/* line 38, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/_complaint-new.scss */
 .complaints.new input[type="submit"], .complaints.create input[type="submit"] {
   background: #008AB5;
   color: #fff;
 }
 @charset "UTF-8";
 /*Variaveis de cores do tema da aplicação */
-/* line 7, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 6, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+.home.index {
+  height: calc(100vh - 90px);
+  overflow: hidden;
+}
+/* line 9, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 .home.index #map {
   width: 100%;
   height: calc(100vh - 100px);
 }
-/* line 11, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 13, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 .home.index #question-city {
   height: 100vh;
   width: 100%;
@@ -10770,18 +10797,18 @@ button.close {
   background: #121F25;
   transition: all 0.5s;
 }
-/* line 21, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 23, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 .home.index #question-city .box {
   margin: 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
   background: #121F25;
 }
-/* line 25, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 27, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 .home.index #question-city .box .field {
   width: 100%;
   float: left;
 }
-/* line 28, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 30, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 .home.index #question-city .box .field input {
   background: transparent;
   border: none;
@@ -10792,16 +10819,16 @@ button.close {
   outline: none;
 }
 @media screen and (max-width: 600px) {
-  /* line 28, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+  /* line 30, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
   .home.index #question-city .box .field input {
     font-size: 26px;
   }
 }
-/* line 41, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 43, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 .home.index #question-city .box .field input::-webkit-input-placeholder {
   color: rgba(255, 255, 255, 0.3);
 }
-/* line 47, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 49, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 .home.index #question-city .box .go {
   float: left;
   border-left: 1px solid #fff;
@@ -10809,7 +10836,7 @@ button.close {
   height: 70px;
   font-size: 28px;
 }
-/* line 53, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 55, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 .home.index #question-city .box .go button {
   background: transparent;
   border: none;
@@ -10820,7 +10847,7 @@ button.close {
   margin-top: 15px;
   outline: none;
 }
-/* line 67, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 69, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 .home.index .categories {
   position: fixed;
   bottom: 0;
@@ -10828,33 +10855,33 @@ button.close {
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
 }
-/* line 74, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 76, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 .home.index .categories ul li {
   margin-top: 10px;
   display: inline-block;
   width: 60px;
 }
-/* line 78, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 80, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 .home.index .categories ul li a {
   display: block;
   text-align: center;
   opacity: .5;
 }
-/* line 82, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 84, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 .home.index .categories ul li a img {
   width: 35px;
   height: 35px;
 }
-/* line 87, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 89, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 .home.index .categories ul li a:hover {
   opacity: 1;
 }
-/* line 90, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 92, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 .home.index .categories ul li a.active {
   opacity: 1;
 }
 
-/* line 100, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+/* line 102, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
 #home-big .ui-autocomplete {
   border: none;
   background: transparent;
@@ -10864,7 +10891,7 @@ button.close {
   color: #fff;
 }
 @media screen and (max-width: 600px) {
-  /* line 100, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
+  /* line 102, /home/mjunior/REPOSITORIOS/minha-rua/app/assets/stylesheets/home.scss */
   #home-big .ui-autocomplete {
     font-size: 26px;
   }
