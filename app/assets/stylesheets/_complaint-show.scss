@@ -3,6 +3,7 @@
 	&.show{
 		#map{
 			height:300px;
+			margin-bottom:40px;
 		}
 		h1{
 			font-weight:700;
@@ -12,13 +13,13 @@
 			}
 		}
 		.date{
-			font-size:14px;
+			font-size:12px;
 		}
 		.info{
-			font-size:12px;
-		    margin-top: 10px;
+			font-size:14px;
+		    margin-top: 3px;
 			a{
-			color:$text-featured;
+				color:$accent-color;
 			}
 		}
 		.reply{

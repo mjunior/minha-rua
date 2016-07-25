@@ -36,6 +36,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #tela de login
 gem 'devise'
 
+gem 'simple_captcha2', require: 'simple_captcha'
+
 #bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
 

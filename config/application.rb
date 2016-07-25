@@ -31,8 +31,8 @@ module MinhaRua
       address:              'smtp.gmail.com',
       port:                 587,
       domain:               'mail.google.com',
-      user_name:            'minharuatemproblema@gmail.com',
-      password:             'nossarua1047',
+      user_name:            ENV["MINHA_RUA_GMAIL_EMAIL"],
+      password:             ENV["MINHA_RUA_GMAIL_PASSWORD"],
       authentication:       'plain',
       enable_starttls_auto: true  
     }

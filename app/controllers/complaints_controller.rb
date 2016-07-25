@@ -20,6 +20,21 @@ class ComplaintsController < ApplicationController
     @categories = Category.all
   end
 
+  def abuse
+    if simple_captcha_valid?
+      ComplaintMailer.new_abuse(params[:url],params[:text]).deliver_later
+      respond_to do |format|
+        flash[:success] = "Denúncia enviada. Verifique seu e-mail nos próximos dias!"
+        format.html { redirect_to action: "show", id: params[:complaint_id]}  
+      end
+    else
+      respond_to do |format|
+       flash[:danger] = "Verificação invalida! Denúncia não realizada!"
+       format.html { redirect_to action: "show", id: params[:complaint_id]} 
+      end 
+    end
+  end
+
   # # GET /complaints/1/edit
   # def edit
   #   @categories = Category.all

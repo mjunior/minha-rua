@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   get 'reclamacao/:id' => 'complaints#show'
   post 'complaints' => 'complaints#create'
 
+  #cria nova reclamação de abuso
+  post 'complaints/abuse' => 'complaints#abuse'
+
   devise_for :users, controllers: {registrations:"registrations"}
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

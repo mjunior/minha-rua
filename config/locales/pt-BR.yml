@@ -19,12 +19,10 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
+pt-BR:
   simple_captcha:
-    placeholder: "Repita os valores da imagem"
-    label: "Repita os valores da imagem"
+    placeholder: "Insera os valores da imagem"
+    label: "Insera os valores da imagem"
     message:
-      default: "O texto digitado é diferente da imagem"
-      user: "O texto digitado é diferente da imagem"
-
-
+      default: "Secret Code did not match with the Image"
+      user: "The secret Image and code were different"
