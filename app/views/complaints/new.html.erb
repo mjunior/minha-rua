@@ -1,14 +1,10 @@
 <% content_for :opg do%>
-  <title>Nova Reclamação| Minha Rua Tem Problema</title>
-   <%
-    url = url_for(:only_path => false) 
-    url = url.gsub(url_for(:only_path => true),"")
-  %>
+  <title>Nova Reclamação | Minha Rua Tem Problema</title>
   <meta property="og:title" content="Crie sua reclamação | Minha Rua Tem Problema" />
   <meta property="og:description" content="Criei uma reclamação de sua cidade" />
-  <meta property="og:type" content="video.movie" />
-  <meta property="og:url" content="<%=raw url_for(:only_path => false) %>" />
-    <meta property="og:image" content="<%=raw url %>/assets/images/denuncia.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://www.minharuatemproblema.com.br/<%=raw url_for(:only_path => true) %>" />
+  <meta property="og:image" content="http://www.minharuatemproblema.com.br/assets/images/denuncia.jpg" />
 <% end %>
 <div class="container max-960">
   <div class="row">
