@@ -5,9 +5,9 @@
     url = url.gsub(url_for(:only_path => true),"")
   %>
   <meta property="og:title" content="<%=raw @complaint.title%>" />
-  <meta property="og:description" content="<%=raw @complaint.title%>" />
+  <meta property="og:description" content="<%=raw @complaint.description%>" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="<%=raw url_for(:only_path => false) %>" />
+  <meta property="og:url" content="<%=raw url %>" />
   <meta property="og:image" content="<%=raw url %>/assets/images/denuncia.jpg" />
 <% end %>
 
