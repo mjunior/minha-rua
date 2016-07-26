@@ -1,10 +1,14 @@
 <% content_for :opg do%>
   <title><%=raw @complaint.title%> | Minha Rua Tem Problema</title>
+  <%
+    url = url_for(:only_path => false) 
+    url = url.gsub(url_for(:only_path => true),"")
+  %>
   <meta property="og:title" content="<%=raw @complaint.title%>" />
   <meta property="og:description" content="<%=raw @complaint.title%>" />
-  <meta property="og:type" content="video.movie" />
+  <meta property="og:type" content="website" />
   <meta property="og:url" content="<%=raw url_for(:only_path => false) %>" />
-  <meta property="og:image" content="/assets/images/denuncia.jpg" />
+  <meta property="og:image" content="<%=raw url %>/assets/images/denuncia.jpg" />
 <% end %>
 
 <div id="map"></div>
@@ -19,8 +23,6 @@
             <% end %>
         </div>
         <div class="col-md-8">
-            
-
             <h1>  <%= @complaint.title %> </h1>
             <p class="info">
                <a data-toggle="modal" data-target="#modalAbuse"> Denunciar Abuso</a> | 
@@ -57,25 +59,8 @@
 <%= render 'abuse_form' %>
 
 
-<!-- Modal reply complaint-->
-<div class="modal fade" id="modalReply" tabindex="-1" role="dialog" aria-labelledby="Janela de resposta ">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Direito de resposta</h4>
-        <p>Se você é responsavel por esta cidade preencha o formulário abaixo com suas informações e entraremos em contato para lhe conceder o direito de resposta a esta reclamação.</p>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- Modal REPLY ABUSE -->
+<%= render 'reply_form'%>
 
 <script type="text/javascript">
     var complaint = <%=raw @complaint.to_json(:include => [:category])%>

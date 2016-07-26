@@ -1,10 +1,14 @@
 <% content_for :opg do%>
+ <%
+    url = url_for(:only_path => false) 
+    url = url.gsub(url_for(:only_path => true),"")
+  %>
   <title>Minha Rua Tem Problema</title>
   <meta property="og:title" content="Minha rua tem problema - Deixe sua reclamação" />
   <meta property="og:description" content="Está insatisfeito com as condições de sua rua ? Acesse e deixe sua reclamação!" />
   <meta property="og:type" content="video.movie" />
   <meta property="og:url" content="<%=raw url_for(:only_path => false) %>" />
-  <meta property="og:image" content="/assets/images/denuncia.jpg" />
+  <meta property="og:image" content="<%=raw url %>/assets/images/denuncia.jpg" />
 <% end %>
 <div id="home">
   <div id="question-city">

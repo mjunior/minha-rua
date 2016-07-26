@@ -20,6 +20,9 @@
 		    margin-top: 3px;
 			a{
 				color:$accent-color;
+				&:hover{
+					cursor:pointer;
+				}
 			}
 		}
 		.reply{

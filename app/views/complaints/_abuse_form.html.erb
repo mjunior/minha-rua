@@ -13,15 +13,16 @@
 			  <%= hidden_field_tag "complaint_id",  @complaint.id %>
 
 			  <div class="form-group">
-			  	<%= radio_button_tag(:reason, "denuncia_false") %>
-				<%= label_tag(:reason_denuncia_false, "Parece uma denúncia falsa") %>
+			  	<%= radio_button_tag(:reason, "Parece uma denúncia falsa") %>
+				<%= label_tag("reason_Parece uma denúncia falsa", "Parece uma denúncia falsa") %>
 			  </div>
 
 			  <div class="form-group">
-			  	<%= radio_button_tag(:reason, "inapropriado") %>
-				<%= label_tag(:reason_inapropriado, "Conteúdo inapropriado.") %>
+			  	<%= radio_button_tag(:reason,"Conteúdo inapropriado.") %>
+				<%= label_tag("reason_Conteúdo inapropriado.", "Conteúdo inapropriado.") %>
 			  </div>
 				<div class="form-group">
+				<small>(opcional)</small>
 			  	<%= email_field_tag "email", "",:class => "form-control",:placeholder=>"Digite seu e-mail." %>
 			  </div>
 			  <div class="form-group">

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   #cria nova reclamação de abuso
   post 'complaints/abuse' => 'complaints#abuse'
+  post 'complaints/reply' => 'complaints#reply'
 
   devise_for :users, controllers: {registrations:"registrations"}
 

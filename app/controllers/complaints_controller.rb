@@ -22,7 +22,7 @@ class ComplaintsController < ApplicationController
 
   def abuse
     if simple_captcha_valid?
-      ComplaintMailer.new_abuse(params[:url],params[:text]).deliver_later
+      ComplaintMailer.new_abuse(params[:url],params[:email],params[:text],params[:reason]).deliver_later
       respond_to do |format|
         flash[:success] = "Denúncia enviada. Verifique seu e-mail nos próximos dias!"
         format.html { redirect_to action: "show", id: params[:complaint_id]}  
@@ -30,6 +30,21 @@ class ComplaintsController < ApplicationController
     else
       respond_to do |format|
        flash[:danger] = "Verificação invalida! Denúncia não realizada!"
+       format.html { redirect_to action: "show", id: params[:complaint_id]} 
+      end 
+    end
+  end
+
+  def reply
+    if simple_captcha_valid?
+      ComplaintMailer.reply(params[:url],params[:email],params[:text],params[:name]).deliver_later
+      respond_to do |format|
+        flash[:success] = "Solicitação enviada. Verifique seu e-mail nos próximos dias!"
+        format.html { redirect_to action: "show", id: params[:complaint_id]}  
+      end
+    else
+      respond_to do |format|
+       flash[:danger] = "Verificação invalida! Solicitação não realizada!"
        format.html { redirect_to action: "show", id: params[:complaint_id]} 
       end 
     end
