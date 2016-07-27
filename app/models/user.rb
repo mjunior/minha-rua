@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 	  	logger.debug "## USUARIO CADASTRO FACEBOOK ##"
 	  	logger.debug auth.info.email
 	  	logger.debug auth.info.name 
+	  	logger.debug auth
 	  	logger.debug Devise.friendly_token[0,20]
 
 	    user.email = auth.info.email
