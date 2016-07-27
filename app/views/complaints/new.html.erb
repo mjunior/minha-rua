@@ -48,6 +48,11 @@
             <%= f.hidden_field :longitude %>
           </div>
 
+          <div class="field">
+          <%= f.label :city, "Cidade" %><br>
+            <%= f.text_field :city %>
+          </div>
+
            <div class="field">
              <%= f.label :category_id, "Categoria" %><br>
             <%= f.collection_select(:category_id, Category.all, :id, :title, prompt: true) %>
@@ -108,11 +113,9 @@
       marker.setPosition(location);
 
 	  	google.maps.event.addListener(marker, 'drag', function () {
-	  		console.log('drag')
 	        geocoder.geocode({ 'latLng': marker.getPosition() }, function (results, status) {
 	            if (status == google.maps.GeocoderStatus.OK) {
-	                    if (results[0]) { 
-	                   	                    	
+	                    if (results[0]) {                 	
 	                    $('#complaint_address').val(results[0].formatted_address);
 	                    $('#complaint_latitude').val(marker.getPosition().lat());
 	                    $('#complaint_longitude').val(marker.getPosition().lng());
@@ -140,7 +143,6 @@
             $("#complaint_latitude").val(ui.item.latitude);
             $("#complaint_longitude").val(ui.item.longitude);
             var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
-            console.log(ui)
             marker.setPosition(location);
             map.setCenter(location);
             map.setZoom(16);
@@ -160,7 +162,12 @@
                     var longitude = results[0].geometry.location.lng();
  
                     $('#complaint_address').val(results[0].formatted_address);
-                    $('#complaint_city').val(obterCidade(results[0].address_components))
+
+                    var city = $.grep(results[0].address_components, function(x){
+                       return $.inArray('locality', x.types) != -1;
+                    })[0].short_name;
+
+                    console.log("NOVA: "+city)
                     $('#complaint_latitude').val(latitude);
                     $('#complaint_longitude').val(longitude);
  
@@ -174,14 +181,12 @@
     }
 
     function obterCidade(arrAddress){
-    	var cidade = ''
-    	$.each(arrAddress, function (i, address_component) {
-		    if (address_component.types[0] == "locality" || address_component.types[0] == "political"){
-		        console.log("Cidade: "+address_component.long_name);
-		        cidade = address_component.long_name;
-		    }
-		});
-		return cidade;
+    	var cidade = 	$.grep(arrAddress, function(x){
+                 return $.inArray('locality', x.types) != -1;
+              })[0].short_name;
+      $('#complaint_city').val(cidade);
+      console.log('Cidade obtida: '+cidade);
+		  return cidade;
     }
 
 

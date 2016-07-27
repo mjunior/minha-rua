@@ -28,11 +28,13 @@
 	      <ul class="nav navbar-nav navbar-right">
 			<li class="menu-add hidden-xs"> <%= link_to('Criar Reclamação', reclamacao_nova_path)  %>  </li>
 			<li><input type="text" id="city-input-nav" class="hidden-xs" placeholder="Digite sua cidade..."></li>
-			   <% @categories.each do |category| %>
-              <li class="visible-xs">
-                <a href="#!" class="filter-category <%=raw "#{category.tag}"%>"  data-tag="<%=raw "#{category.tag}"%>"> <%= category.title %></a>
-              </li>
-            <% end %>
+			<% if controller.controller_name == 'home' %>
+			  	<% @categories.each do |category| %>
+	              <li class="visible-xs">
+	                <a href="#!" class="filter-category <%=raw "#{category.tag}"%>"  data-tag="<%=raw "#{category.tag}"%>"> <%= category.title %></a>
+	              </li>
+	            <% end %>
+			<% end %>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->

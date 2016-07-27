@@ -15,9 +15,14 @@ class ComplaintsController < ApplicationController
   end
 
   # GET /complaints/new
-  def new
-    @complaint = Complaint.new
-    @categories = Category.all
+   def new
+      if user_signed_in?
+         @complaint = Complaint.new
+         @categories = Category.all
+      else
+         flash[:danger] = "Para criar uma reclamação você deve efetuar login ou criar uma conta"
+         redirect_to new_user_session_path
+      end
   end
 
   def abuse

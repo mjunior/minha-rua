@@ -41,9 +41,11 @@
   src: url("//applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
 }
 
-
-*,body{
-	 font-family: "San Francisco";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900);
+*,body,p{
+	font-family: 'Lato', sans-serif;
 }
 
 #map{
@@ -224,4 +226,96 @@ $size: 30px;
 
 footer{
 	height:80px;
+}
+
+
+
+.sessions{
+	&.new{
+		.field{
+			input[type="text"],input[type="email"],input[type="password"]{
+				width:100%;
+				background:transparent;
+				border:1px solid #ddd;
+				padding:3px 10px;
+				font-size:18px;
+			}
+		}
+		
+
+		.form-control{
+			padding: 19px 12px;
+			font-size: 16px;
+		}
+
+		.form-control:focus {
+		    outline: 0;
+		  	box-shadow: none;
+		    border: 2px solid #09A7D8;
+		}
+
+	}
+	.links {
+	    text-align: center;
+	    font-size: 17px;
+		a{
+			display:inline-block;
+			padding-right:15px;
+			border-right:1px solid #aaa;
+			&:nth-child(2){
+				padding-left:15px;
+				border-right:none;
+			}
+		}
+	}
+}
+
+.registrations{
+	&.new{
+		.sub-title{
+			text-align:center;
+		}
+		.divider{
+			height:1px;
+			background:#ddd;
+			width:40%;
+			margin:30px auto;
+		}
+	}
+}
+
+.title{
+	text-align:center;
+}
+
+a{
+	&.btn-primary{
+		color:#fff;
+	}
+}
+.btn-primary {
+    color: #fff;
+    width: 100%;
+    background-color: #0C66B3;
+    border: none;
+    box-shadow: inset 0px -4px 0px 0px #0B406D;
+    font-size: 22px;
+    font-weight: 500;
+    padding: 9px;
+    text-shadow: 0px 1px 1px #000;
+    &.green{
+	    background-color: #12B94F;
+	    border: none;
+	    box-shadow: inset 0px -4px 0px 0px #0C8438;
+	    &:hover{
+	    	color: #fff;
+	   		background-color: #139C45;
+	   		border-color: none;
+	    }
+    }
+    &:hover {
+	    color: #fff;
+	    background-color: #286090;
+	    border-color: none;
+	}
 }

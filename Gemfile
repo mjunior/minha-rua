@@ -36,6 +36,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #tela de login
 gem 'devise'
 
+gem 'omniauth-facebook'
+
 gem 'simple_captcha2', require: 'simple_captcha'
 
 #bootstrap
