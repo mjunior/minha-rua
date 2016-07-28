@@ -10,4 +10,17 @@ class Complaint < ActiveRecord::Base
 
 	belongs_to :category
 	belongs_to :user
+	has_many :interaction
+
+	def addInteraction(interaction)
+		if interaction.interaction_type.tag == 'LIKE'
+			self.likes += 1
+		else
+			if interaction.interaction_type.tag == 'DISLIKE'
+				logger.debug "DISLIKE DISLIKE"
+			end
+		end
+		self.save
+		interaction.save
+	end
 end

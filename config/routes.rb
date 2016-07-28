@@ -14,15 +14,24 @@ Rails.application.routes.draw do
   match 'home' => 'home#index', via: 'get'
   match 'inicio' => 'home#index', via: 'get'
 
+  resources :complaints do
+     get 'liked' => 'complaints#liked' , on: :collection
+  end
+  
   get 'reclamacao/nova' => 'complaints#new'
   get 'reclamacao/:id' => 'complaints#show'
-  post 'complaints' => 'complaints#create'
+
+  #add like 
+  post '/complaint/like' => 'complaints#like'
 
   #cria nova reclamação de abuso
   post 'complaints/abuse' => 'complaints#abuse'
   post 'complaints/reply' => 'complaints#reply'
 
   devise_for :users, controllers: {registrations:"registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
+  devise_scope :user do
+    get 'sign_out', :to => 'devise/sessions#destroy', :as => :logout_user
+  end
   # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160727004005) do
+ActiveRecord::Schema.define(version: 20160727211929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,15 +30,34 @@ ActiveRecord::Schema.define(version: 20160727004005) do
     t.string   "address"
     t.string   "title"
     t.string   "city"
-    t.integer  "likes"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "likes",       default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "user_id"
     t.integer  "category_id"
   end
 
   add_index "complaints", ["category_id"], name: "index_complaints_on_category_id", using: :btree
   add_index "complaints", ["user_id"], name: "index_complaints_on_user_id", using: :btree
+
+  create_table "interaction_types", force: :cascade do |t|
+    t.string   "title"
+    t.string   "tag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "interactions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "interaction_type_id"
+    t.integer  "complaint_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "interactions", ["complaint_id"], name: "index_interactions_on_complaint_id", using: :btree
+  add_index "interactions", ["interaction_type_id"], name: "index_interactions_on_interaction_type_id", using: :btree
+  add_index "interactions", ["user_id"], name: "index_interactions_on_user_id", using: :btree
 
   create_table "simple_captcha_data", force: :cascade do |t|
     t.string   "key",        limit: 40
@@ -77,4 +96,7 @@ ActiveRecord::Schema.define(version: 20160727004005) do
 
   add_foreign_key "complaints", "categories"
   add_foreign_key "complaints", "users"
+  add_foreign_key "interactions", "complaints"
+  add_foreign_key "interactions", "interaction_types"
+  add_foreign_key "interactions", "users"
 end

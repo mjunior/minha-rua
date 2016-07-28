@@ -42,6 +42,16 @@ var accentMap = {'ẚ':'a','Á':'a','á':'a','À':'a','à':'a','Ă':'a','ă':'a'
       }
   }
 
+function getUrlParam(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
 function FormatForUrl(str) {
     return str.replace(/_/g, '-')
         .replace(/ /g, '-')
@@ -73,7 +83,7 @@ ready = function() {
     return false;
   })
 
-  $('.nav a').on('click',function(){
+  $('.nav a.hide-nav').on('click',function(){
     $('.navbar-toggle').click() //bootstrap 3.x by Richard
   });
 

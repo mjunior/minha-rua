@@ -95,6 +95,7 @@ a{
 					color:#fff;
 				}
 			}
+			margin-left:15px;
 		}
 	}
 
@@ -294,28 +295,51 @@ a{
 	}
 }
 .btn-primary {
-    color: #fff;
-    width: 100%;
-    background-color: #0C66B3;
-    border: none;
-    box-shadow: inset 0px -4px 0px 0px #0B406D;
-    font-size: 22px;
-    font-weight: 500;
-    padding: 9px;
-    text-shadow: 0px 1px 1px #000;
-    &.green{
-	    background-color: #12B94F;
-	    border: none;
-	    box-shadow: inset 0px -4px 0px 0px #0C8438;
-	    &:hover{
-	    	color: #fff;
-	   		background-color: #139C45;
-	   		border-color: none;
-	    }
-    }
-    &:hover {
+	&.new{
 	    color: #fff;
-	    background-color: #286090;
-	    border-color: none;
+	    width: 100%;
+	    background-color: #0C66B3;
+	    border: none;
+	    box-shadow: inset 0px -4px 0px 0px #0B406D;
+	    font-size: 22px;
+	    font-weight: 500;
+	    padding: 9px;
+	    text-shadow: 0px 1px 1px #000;
+	    &.green{
+		    background-color: #12B94F;
+		    border: none;
+		    box-shadow: inset 0px -4px 0px 0px #0C8438;
+		    &:hover{
+		    	color: #fff;
+		   		background-color: #139C45;
+		   		border-color: none;
+		    }
+	    }
+	    &:hover {
+		    color: #fff;
+		    background-color: #286090;
+		    border-color: none;
+		}
 	}
 }
+
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+    color:$text-featured;
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 87px;
+}
+
