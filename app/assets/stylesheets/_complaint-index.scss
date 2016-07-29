@@ -1,0 +1,29 @@
+.complaints{
+	&.index,&.liked{
+		.complaint-item{
+			padding:10px;
+			border:1px solid #ddd;
+			margin-bottom:15px;
+			.title{
+				font-size:18px;
+				a{
+					color:#000
+				}
+			}
+			p{
+				color:#555;
+				text-align:justify;
+			}
+
+			small{
+				display:inline-block;
+				margin-bottom:30px;
+			}
+
+			.btn-primary{
+				display:block;
+				width:100%;
+			}
+		}
+	}
+}

@@ -1,22 +1,12 @@
-<table class="table table-striped custab">
-	<thead>
-	<a href="<%=raw new_complaint_path %>" class="btn btn-primary btn-xs pull-right"><b>+</b> Criar reclamação </a>
-	    <tr>
-	        <th>Título</th>
-	        <th>Endereço</th>
-	        <th>Categoria</th>
-	        <th class="text-center">Visualizar</th>
-	    </tr>
-	</thead>
-  <% @complaints.each do |complaint| %>
-  <tr>
-      <td><%= complaint.title %></td>
-      <td><%= complaint.address %></td>
-      <td><%= complaint.category.title %></td>
-      <td class="text-center">
-        <a href="#"><%= link_to "Acessar", complaint%></a>
-        <!-- <a class='btn btn-info btn-xs' href="<%=raw complaint_path(complaint.id) %>"><span class="glyphicon glyphicon-edit"></span>Acessar</a>  -->
-        <!-- <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a> --></td>
-  </tr>
-  <% end %>
-</table>
+<div class="row">
+<% @complaints.each do |complaint| %>
+  <div class="col-xs-12 col-sm-4">
+    <div class="complaint-item">
+      <h1 class="title"><%= link_to complaint.title, complaint %></h1>
+      <p><%= complaint.body.at(0..150) %>...</p>
+      <small><%= complaint.category.title %> - <%= complaint.created_at.strftime("%d/%m/%Y"); %></small>
+      <%= link_to "Visualizar", complaint ,:class=>"btn btn-primary"%>
+    </div>
+  </div>
+<% end %>
+</div>
