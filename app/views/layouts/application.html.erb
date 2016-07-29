@@ -27,48 +27,49 @@
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav navbar-right">
 	        <li><input type="text" id="city-input-nav" class="hidden-xs" placeholder="Digite sua cidade..."></li>
-			<li class="menu-add hidden-xs"> <%= link_to('Criar Reclamação', reclamacao_nova_path)  %>  </li>
-			<% if controller.controller_name == 'home' %>
-			  	<% @categories.each do |category| %>
-	              <li class="visible-xs">
-	                <a href="#!" class="hide-nav filter-category <%=raw "#{category.tag}"%>"  data-tag="<%=raw "#{category.tag}"%>"> <%= category.title %></a>
-	              </li>
-	            <% end %>
-			<% end %>
+			<li class="menu-add hidden-xs"> <%= link_to('Criar Reclamação', new_complaint_path)  %>  </li>
+			
             <li class="dropdown">
                 <a <%= current_user ? 'href=# class=dropdown-toggle data-toggle=dropdown' : 'href=/users/sign_in' %> >
                     <span class="glyphicon glyphicon-user"></span>
                     <strong> <%= current_user ? current_user.first_name : "Login" %></strong>
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu user-menu">
                     <li>
                         <div class="navbar-login">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <p class="text-center">
                                         <span class="glyphicon glyphicon-user icon-size"></span>
                                     </p>
                                 </div>
-                                <div class="col-lg-8">
-                                    <p class="text-left"><strong><%= current_user ? current_user.first_name : "Login" %></strong></p>
-                                    <p class="text-left small"><%= current_user ? current_user.email : "Login" %></p>
-                                    <p class="text-left">
+                                <div class="col-xs-12 col-lg-8">
+                                    <p class="text-center"><strong><%= current_user ? current_user.first_name : "Login" %></strong></p>
+                                    <p class="text-center small"><%= current_user ? current_user.email : "Login" %></p>
+                                   <!--  <p class="text-left">
                                         <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
-                                    </p>
+                                    </p> -->
                                 </div>
                             </div>
                         </div>
                     </li>
                     <li class="divider navbar-login-session-bg"></li>
-			            <li><a href="<%=raw complaints_path %>">Minhas reclamações <span class="fa fa-bullhorn pull-right"></span></a></li>
-			            <li class="divider"></li>
-			            <li><a href="<%=raw liked_complaints_path %>">Reclamações apoiadas <span class="glyphicon glyphicon-heart pull-right"></span></a></li>
-			            <li class="divider"></li>
-			            <li><a href="<%=raw logout_user_path %>">Sair <span class="glyphicon glyphicon-log-out pull-right"></span></a>
-			        </li>
+		            <li><a href="<%=raw complaints_path %>">Minhas reclamações <span class="fa fa-bullhorn pull-right"></span></a></li>
+		            <li class="divider"></li>
+		            <li><a href="<%=raw liked_complaints_path %>">Reclamações apoiadas <span class="glyphicon glyphicon-heart pull-right"></span></a></li>
+		            <li class="divider"></li>
+		            <li><a href="<%=raw logout_user_path %>">Sair <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+		            <li class="divider visible-xs"></li>
                 </ul>
             </li>
+            <% if controller.controller_name == 'home' %>
+			  	<% @categories.each do |category| %>
+	              <li class="visible-xs">
+	                <a href="#!" class="hide-nav filter-category <%=raw "#{category.tag}"%>"  data-tag="<%=raw "#{category.tag}"%>"> <%= category.title %></a>
+	              </li>
+	            <% end %>
+			<% end %>
 	      </ul>
 
 	    </div><!-- /.navbar-collapse -->

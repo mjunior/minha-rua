@@ -1,6 +1,6 @@
 class ComplaintsController < ApplicationController
 
-    before_action :set_complaint, only: [:show, :edit, :update, :destroy]
+    before_action :find_complaint, only: [:show, :edit, :update, :destroy]
 
     # GET /complaints
     # GET /complaints.json
@@ -88,7 +88,7 @@ class ComplaintsController < ApplicationController
             @complaint.user = current_user
             respond_to do |format|
                 if @complaint.save
-                    format.html { redirect_to action: "show", id: @complaint.id}
+                    format.html { redirect_to action: "show", id: @complaint.slug}
                     format.json { render :show, status: :created, location: @complaint }
                 else
                     format.html { render :new }
@@ -98,11 +98,11 @@ class ComplaintsController < ApplicationController
         end
     end
 
-    #POST /complaint/like
+    #POST /complaint/:id/like
     def like
         if user_signed_in?
-            complaint = Complaint.find(params[:complaint])
-            type = InteractionType.find(params[:interaction_type])
+            complaint = Complaint.find(params[:complaint_id])
+            type = InteractionType.find(1)
 
             if complaint && type
                 interaction = Interaction.new
@@ -157,12 +157,12 @@ class ComplaintsController < ApplicationController
     private
 
         # Use callbacks to share common setup or constraints between actions.
-        def set_complaint
-          @complaint = Complaint.find(params[:id])
+        def find_complaint
+          @complaint = Complaint.friendly.find(params[:id])
         end
 
         # Never trust parameters from the scary internet, only allow the white list through.
         def complaint_params
-          params.require(:complaint).permit(:latitude, :longitude, :body, :address, :title, :category_id, :user_id, :city)
+          params.require(:complaint).permit(:latitude, :longitude, :body, :address, :title, :category_id, :user_id, :city,:slug)
         end
 end

@@ -145,8 +145,8 @@
       $(this).attr('disabled','disabled');
       $.ajax({
         type: "POST",
-        url: '/complaint/like',
-        data: {complaint:c_id,interaction_type:1},
+        url: '/complaints/'+c_id+'/like',
+        data: {},
         success: function(data){
           console.log(data);
           if(data.status == 'success')

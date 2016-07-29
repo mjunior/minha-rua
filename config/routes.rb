@@ -14,15 +14,10 @@ Rails.application.routes.draw do
   match 'home' => 'home#index', via: 'get'
   match 'inicio' => 'home#index', via: 'get'
 
-  resources :complaints do
+  resources :complaints , path_names: { new: 'criar' } do
      get 'liked' => 'complaints#liked' , on: :collection
+     post 'like' => 'complaints#like'
   end
-  
-  get 'reclamacao/nova' => 'complaints#new'
-  get 'reclamacao/:id' => 'complaints#show'
-
-  #add like 
-  post '/complaint/like' => 'complaints#like'
 
   #cria nova reclamação de abuso
   post 'complaints/abuse' => 'complaints#abuse'

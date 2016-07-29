@@ -49,7 +49,7 @@
         <a id="search-mobile">BUSCAR</a>
       </div>
       <div class="col-xs-6 new">
-        <a href="#!"><%= link_to('RECLAMAR', reclamacao_nova_path)  %></a>
+        <a href="#!"><%= link_to('RECLAMAR', new_complaint_path)  %></a>
       </div>
     </div>
   </div>
@@ -106,7 +106,7 @@
           if (complaint.title.length > 30){
             complaint.title = complaint.title.substr(0,30)+"..."
           }
-          var url = '/reclamacao/'+FormatForUrl(complaint.id+'-'+complaint.title)
+          var url = '/complaints/'+complaint.slug
           var contentString = '<div id="infobox">' +
                     '<div class="title"><a href="'+url+'"> '+complaint.title+' </a></div>' +
                     '<div class="content">' +

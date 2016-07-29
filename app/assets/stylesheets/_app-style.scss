@@ -80,6 +80,9 @@ a{
 	min-height:70px;
 	padding-top:10px;
 }
+
+
+
 .navbar-default{
 	background-color:$secondary-featured;
 	margin:0;
@@ -96,6 +99,17 @@ a{
 				}
 			}
 			margin-left:15px;
+		}
+		.open{
+			.dropdown-menu{
+				>li{
+					>a{
+						@media screen and (max-width: 768px) {
+						    color:#FFF;
+					  	}
+					}
+				}
+			}
 		}
 	}
 
@@ -329,6 +343,10 @@ a{
     padding: 10px;
     padding-bottom: 0px;
     color:$text-featured;
+    @media screen and (max-width: 768px) {
+	    color:#FFF;;
+  	}
+
 }
 
 .navbar-login-session

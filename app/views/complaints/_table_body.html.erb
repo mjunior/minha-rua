@@ -1,6 +1,6 @@
 <table class="table table-striped custab">
 	<thead>
-	<a href="<%=raw reclamacao_nova_path%>" class="btn btn-primary btn-xs pull-right"><b>+</b> Criar reclamação </a>
+	<a href="<%=raw new_complaint_path %>" class="btn btn-primary btn-xs pull-right"><b>+</b> Criar reclamação </a>
 	    <tr>
 	        <th>Título</th>
 	        <th>Endereço</th>
@@ -14,7 +14,8 @@
       <td><%= complaint.address %></td>
       <td><%= complaint.category.title %></td>
       <td class="text-center">
-        <a class='btn btn-info btn-xs' href="<%=raw complaint_path(complaint.id) %>"><span class="glyphicon glyphicon-edit"></span>Acessar</a> 
+        <a href="#"><%= link_to "Acessar", complaint%></a>
+        <!-- <a class='btn btn-info btn-xs' href="<%=raw complaint_path(complaint.id) %>"><span class="glyphicon glyphicon-edit"></span>Acessar</a>  -->
         <!-- <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a> --></td>
   </tr>
   <% end %>

@@ -1,7 +1,6 @@
 class Complaint < ActiveRecord::Base
-	def to_param
-	    [id, title.parameterize].join("-")
-	end
+	extend FriendlyId
+  	friendly_id :title, use: :slugged
 
 	validates_presence_of :latitude,:longitude,:address, :message => "#!Não encontrado(a) forneça um novo endereço." 
 	validates_presence_of :body, :message => "#!Forneça uma descrição para sua reclamação." 
@@ -11,6 +10,9 @@ class Complaint < ActiveRecord::Base
 	belongs_to :category
 	belongs_to :user
 	has_many :interaction
+
+	
+
 
 	def addInteraction(interaction)
 		if interaction.interaction_type.tag == 'LIKE'
