@@ -32,13 +32,16 @@ var accentMap = {'ẚ':'a','Á':'a','á':'a','À':'a','à':'a','Ă':'a','ă':'a'
 
   function checkMap(){
       if(!localStorage.latitude && !localStorage.longitude){
-          $('#question-city').css('top','0%')
+          $('#question-city').css('top','0%');
+          $('#city-input').focus();
+          $('#city-input').click();
       }else{
           var latitude = localStorage.latitude
           var longitude = localStorage.longitude
           var location = new google.maps.LatLng(latitude, longitude);
           map.setCenter(location);
-          map.setZoom(14)
+          map.setZoom(14);
+          
       }
   }
 

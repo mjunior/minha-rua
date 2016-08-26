@@ -10,13 +10,21 @@
 <div id="home">
   <div id="question-city">
     <div class="box">
-      <div class="field">
-        <input type="text" id="city-input" placeholder="Digita sua cidade...">
+      <div class="container-fluid">
+        <div class="row">
+        <div class="field">
+          <input type="text" id="city-input" placeholder="Digite uma cidade...">
+        </div>
+        </div>
+        <div class="row">
+          <div class="go">
+            <div class="divider">ou</div>
+          </div>
+        </div>
+        <div class="row go">
+          <button id="my-place">Compartilhe sua localização</button>
+        </div>
       </div>
-<!--       <div class="go">
-        <button id="my-place">Minha localização</button>
-      </div> -->
-      
       <div class="clearfix"></div>
     </div>
   </div>
@@ -24,17 +32,17 @@
   <div id="map"></div>
 
   <section class="categories hidden-xs">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <div class="button-icons">
             <ul>
                 <li>
-                  <a href="#!" class="filter-category" title="Limpar filtros" data-tag="all"><img src="/assets/images/categories/clear.png" alt=""></a>
+                  <a href="#!" class="filter-category"  data-tag="all"><img src="/assets/images/categories/clear.png" alt=""><br>Limpar filtros</a>
                 </li>
               <% @categories.each do |category| %>
                 <li>
-                  <a href="#!" class="filter-category <%=raw "#{category.tag}"%>" title="<%=raw "#{category.title}" %>" data-tag="<%=raw "#{category.tag}"%>"><img src="/assets/images/categories/<%=raw "#{category.tag}"%>.png" alt=""></a>
+                  <a href="#!" class="filter-category <%=raw "#{category.tag}"%>"  data-tag="<%=raw "#{category.tag}"%>"><img src="/assets/images/categories/<%=raw "#{category.tag}"%>.png" alt=""><br><%=raw "#{category.title}" %></a>
                 </li>
               <% end %>
             </ul>
@@ -208,6 +216,11 @@
             };
             map.setCenter(pos);
             map.setZoom(14);
+
+            var latitude = pos.lat;
+            var longitude = pos.lng;
+            localStorage.setItem("latitude", latitude);
+            localStorage.setItem("longitude", longitude);
 
           setTimeout(function(){$('#question-city').css('top','100%');},200)
           }, function() {

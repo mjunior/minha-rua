@@ -15,3 +15,11 @@
 (37, 'Terreno baldio', now(), now(), 'terreno_baldio'),
 (38, 'Acessibilidade', now(), now(), 'acessibilidade'),
 (39, 'Saneamento Básico', now(), now(), 'saneamento_basico');
+
+
+////////////
+update complaints set category_id = 30 where category_id = 25 OR category_id = 28 OR category_id = 31 OR category_id = 39 OR category_id = 37;
+DELETE from categories where id = 25 OR id = 28 OR id = 31 OR id = 39 OR id= 37;
+
+
+
