@@ -23,3 +23,13 @@ DELETE from categories where id = 25 OR id = 28 OR id = 31 OR id = 39 OR id= 37;
 
 
 
+reating OAuth Authorization... done
+Client:      <none>
+ID:          662453e1-c3a8-4cff-be72-337241fed5dc
+Description: letsencrypt-heroku
+Scope:       global
+Token:       f2a1761f-648e-4d29-b51e-bc79c60c12f7
+
+
+
+
