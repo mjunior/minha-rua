@@ -12,17 +12,28 @@
     <div class="box">
       <div class="container-fluid">
         <div class="row">
-        <div class="field">
-          <input type="text" id="city-input" placeholder="Digite uma cidade...">
-        </div>
+          <div class="col-xs-12">
+            <div class="field">
+              <input type="text" id="city-input" placeholder="Digite uma cidade...">
+            </div>
+          </div>
         </div>
         <div class="row">
-          <div class="go">
-            <div class="divider">ou</div>
+          <div class="col-xs-12">
+            <div class="go">
+              <div class="divider">ou</div>
+            </div>
           </div>
         </div>
         <div class="row go">
-          <button id="my-place">Compartilhe sua localização</button>
+          <div class="col-xs-12">
+            <button id="my-place">Compartilhe sua localização</button>
+          </div>
+        </div>
+         <div class="row ">
+            <div class="col-xs-12">
+              <div id="error"></div>
+            </div>
         </div>
       </div>
       <div class="clearfix"></div>
@@ -224,8 +235,28 @@
 
             setTimeout(function(){$('#question-city').css('top','100%');},200)
           }, function(erro) {
-            // handleLocationError(true, infoWindow, map.getCenter());
-            console.log(erro)
+            console.log("Erro geolocation: "+error.code);
+
+            if(error.code == 0){
+                $('.box #error').text('Erro desconhecico. Tente novamente mais tarde!');
+            }else if(error.code == 1){
+              $('.box #error').text('Você não compartilhou sua localização com nossa aplicação!');
+            }else if(error.code == 2){
+              $('.box #error').text('Nao foi possível obter sua localização. Certifique-se que seu GPS esteja ligado e tente novamente.');
+            }else if(error.code == 3){
+              $('.box #error').text('A resposta demorou demais. Tente novamente.');
+            }else{
+              $('.box #error').text('Você não compartilhou sua localização com nossa aplicação!');
+            }
+
+            $('.box #error').css('opacity','1');
+            setTimeout(function(){ $('.box #error').css('opacity','0');},2000)
+
+            // error.code can be:
+            //   0: unknown error
+            //   1: permission denied
+            //   2: position unavailable (error response from locaton provider)
+            //   3: timed out
           });
         } else {
           // Browser doesn't support Geolocation

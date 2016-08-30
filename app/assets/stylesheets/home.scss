@@ -30,7 +30,6 @@
 			    left: 50%;
 			    color: #444;
 			    width: calc(100% - 30px);
-			    height: 230px;
 			    border-radius: 15px;
 			    padding: 15px;
 			    max-width: 570px;
@@ -71,7 +70,7 @@
 				.go{	
 					border-left:1px solid #fff;
 					padding-left:10px;
-					height:20px;
+	
 					font-size:28px;
 					text-align:center;
 					button{
@@ -123,6 +122,14 @@
 						}
 
 					}
+				}
+				#error{
+				    text-align: center;
+				    padding-top: 20px;
+				    color: red;
+				    font-weight: 600;
+				    font-size: 18px;
+				    opacity:0;
 				}
 
 			}
