@@ -6,6 +6,13 @@
   <meta property="og:url" content="http://www.minharuatemproblema.com.br/<%=raw url_for(:only_path => true) %>" />
   <meta property="og:image" content="http://www.minharuatemproblema.com.br/assets/images/denuncia.jpg" />
 <% end %>
+
+<div class="overlay">
+  <div class="loading">
+    <img src="/images/loading.gif" alt="">
+    <h1 id="text">Setando coordenadas...</h1>
+  </div>
+</div>
 <div class="container max-960">
   <div class="row">
     <div class="col-xs-12">
@@ -191,7 +198,7 @@
     function obterCidade(arrAddress){
     	var cidade = ""
       try{
-        
+
           cidade = 	$.grep(arrAddress, function(x){
                  return $.inArray('locality', x.types) != -1;
           })[0].short_name;
@@ -205,6 +212,29 @@
 		  return cidade;
     }
 
+    $('#new_complaint').submit(function(event){
+     
+      $('.overlay').css('display','block');
+    
+      if($('#complaint_image').val() != ""){
+        setTimeout(function(){
+
+          $('#text').text('Enviando imagem...');
+
+          setTimeout(function(){
+              $('#text').text('Recortando imagem e finalizando...');
+          },7000)
+
+        },3000)
+      }else{
+         setTimeout(function(){
+
+          $('#text').text('Finalizando...');
+
+        },3000)
+      }
+     
+    })
 
     $('#buscar').click(function(){
     	var end = $('#complaint_address').val();
