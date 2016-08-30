@@ -24,11 +24,11 @@
       <% end %>
   </div>
   
-  <%= form_for(@complaint) do |f| %>
+  <%= form_for @complaint ,html: { multipart: true } do |f| %>
   <div class="row">
       <div class="col-xs-12">
         <div class="field">
-            <%= f.label :address, "Endereço da reclamação"%><br>
+            <%= f.label :address, "Endereço completo da reclamação"%><br>
             <%= f.text_field :address %>
         </div>
       </div>
@@ -42,6 +42,10 @@
       <div class="col-sm-4 col-sm-pull-8">
           <div class="field">
             <%= f.hidden_field :latitude %>
+          </div>
+
+          <div class="field">
+             <%= f.file_field :image %>
           </div>
 
           <div class="field">

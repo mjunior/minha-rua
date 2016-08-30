@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729013422) do
+ActiveRecord::Schema.define(version: 20160830122202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "categories", force: :cascade do |t|
     t.string   "title",      null: false
@@ -30,12 +31,16 @@ ActiveRecord::Schema.define(version: 20160729013422) do
     t.string   "address"
     t.string   "title"
     t.string   "city"
-    t.integer  "likes",       default: 0
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "likes",              default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "user_id"
     t.integer  "category_id"
     t.string   "slug"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "complaints", ["category_id"], name: "index_complaints_on_category_id", using: :btree
@@ -82,6 +87,13 @@ ActiveRecord::Schema.define(version: 20160729013422) do
   end
 
   add_index "simple_captcha_data", ["key"], name: "idx_key", using: :btree
+
+  create_table "spatial_ref_sys", primary_key: "srid", force: :cascade do |t|
+    t.string  "auth_name", limit: 256
+    t.integer "auth_srid"
+    t.string  "srtext",    limit: 2048
+    t.string  "proj4text", limit: 2048
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                               null: false

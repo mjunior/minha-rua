@@ -27,6 +27,9 @@
             
             <p class="body"><i class="fa fa-quote-left" aria-hidden="true"></i> <%= @complaint.body %></p>
             <p class="date"><%= @complaint.created_at.strftime("Reclamação cadastrada em %d/%m/%Y"); %></a></p>
+            
+            <%= image_tag @complaint.image.url(:medium) %>
+
             <div class="like-box">
               <% if @allow_like %>
                 <button class="btn btn-primary" id="like" data-complaint="<%=raw @complaint.id %>"> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <span>Apoiar reclamação</span></button>
