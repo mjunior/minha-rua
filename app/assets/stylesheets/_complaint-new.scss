@@ -9,6 +9,9 @@
 		  	}
 		}
 		.upload-preview{
+			width:100%;
+			max-hei: 300px;
+			overflow:hidden;
 			img{
 				max-width: 100%;
 			}
