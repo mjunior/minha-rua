@@ -234,9 +234,9 @@
             localStorage.setItem("longitude", longitude);
 
             setTimeout(function(){$('#question-city').css('top','100%');},200)
-          }, function(erro) {
+          }, function(error) {
             console.log("Erro geolocation: "+error.code);
-
+            console.log(error)
             if(error.code == 0){
                 $('.box #error').text('Erro desconhecico. Tente novamente mais tarde!');
             }else if(error.code == 1){
