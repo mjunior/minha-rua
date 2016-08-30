@@ -51,5 +51,14 @@
 		.ads{
 			margin-top:20px;
 		}
+
+		.images{
+			img{
+				margin-bottom:15px;
+				@media screen and (max-width: 600px) {
+				    width:100%;
+			  	}
+			}
+		}
 	}
 }

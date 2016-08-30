@@ -19,16 +19,20 @@
             <% end %>
         </div>
         <div class="col-md-8">
-            <h1>  <%= @complaint.title %> </h1>
-            <p class="info">
-               <a data-toggle="modal" data-target="#modalAbuse"> Denunciar Abuso</a> | 
-               <a class=" btn-flat" data-toggle="modal" data-target="#modalReply">Sobre o direito de resposta</a>
-            </p>
+          <h1>  <%= @complaint.title %> </h1>
+          <p class="info">
+            <a data-toggle="modal" data-target="#modalAbuse"> Denunciar Abuso</a> | 
+            <a class=" btn-flat" data-toggle="modal" data-target="#modalReply">Sobre o direito de resposta</a>
+          </p>
             
-            <p class="body"><i class="fa fa-quote-left" aria-hidden="true"></i> <%= @complaint.body %></p>
+          <p class="body"><i class="fa fa-quote-left" aria-hidden="true"></i> <%= @complaint.body %></p>  
+            <% if !@complaint.image.url.include? "missing" %>
+              <div class="images">
+                <%= image_tag @complaint.image.url(:medium) %>       
+              </div>
+            <% end %>
+
             <p class="date"><%= @complaint.created_at.strftime("Reclamação cadastrada em %d/%m/%Y"); %></a></p>
-            
-            <%= image_tag @complaint.image.url(:medium) %>
 
             <div class="like-box">
               <% if @allow_like %>
@@ -43,8 +47,6 @@
             <div class="divider"><i class="fa fa-share-square"></i> Ajude! Compartilhe em suas redes sociais</div>
             <p> <%= social_share_button_tag(@complaint.title, :url => url_for(:only_path => false), :image => "/assets/images/denuncia.jpg", desc: @complaint.body, via: "Minha Rua Tem Problema") %></p>
             <p> 
-                       
-          
             <div class="divider"><i class="fa fa-comment"></i> Comente sobre esta reclamação!</div>
             <div class="facebook-comments">
             <div class="fb-comments" data-href="<%=raw url_for(:only_path => false) %>" data-numposts="20"></div>
@@ -161,7 +163,10 @@
           }
         }
       });
-      $()
     })
+
+
+
+
 </script>
 

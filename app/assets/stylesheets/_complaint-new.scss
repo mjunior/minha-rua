@@ -8,6 +8,29 @@
 			    font-size:26px;
 		  	}
 		}
+		.upload-preview{
+			img{
+				max-width: 100%;
+			}
+			#add-photo{
+				width: 100%;
+		    background: #0C66B3;
+		    color: #fff;
+		    font-size: 22px;
+		    text-align: center;
+		    padding: 10px;
+		    font-weight: 400;
+		    margin:15px 0;
+		    &:hover{
+		    	cursor:pointer;
+		    }
+			}
+			&:hover{
+				cursor:pointer;
+				opacity: .8;
+			}
+		}
+
 		.field{
 			input{
 				border:1px solid #ddd;

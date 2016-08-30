@@ -39,3 +39,8 @@ bower.json
 
 # Ignore Byebug command history file.
 .byebug_history
+
+#fotos das reclamacoes
+public/images/complaints
+
+

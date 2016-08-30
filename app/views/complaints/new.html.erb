@@ -45,11 +45,14 @@
           </div>
 
           <div class="field">
-             <%= f.file_field :image %>
-          </div>
-
-          <div class="field">
             <%= f.hidden_field :longitude %>
+          </div>
+          <div class="upload-preview">
+            <img />
+            <div id="add-photo">Escolher foto</div>
+          </div>
+          <div class="field" style="display:none;">
+             <%= f.file_field :image %>
           </div>
 
           <div class="field">
@@ -119,11 +122,12 @@
 	  	google.maps.event.addListener(marker, 'drag', function () {
 	        geocoder.geocode({ 'latLng': marker.getPosition() }, function (results, status) {
 	            if (status == google.maps.GeocoderStatus.OK) {
-	                    if (results[0]) {                 	
-	                    $('#complaint_address').val(results[0].formatted_address);
-	                    $('#complaint_latitude').val(marker.getPosition().lat());
-	                    $('#complaint_longitude').val(marker.getPosition().lng());
-	                }
+                if (results[0]) {    	
+                  $('#complaint_address').val(results[0].formatted_address);
+                  $('#complaint_latitude').val(marker.getPosition().lat());
+                  $('#complaint_longitude').val(marker.getPosition().lng());
+                  obterCidade(results[0].address_components)
+                }
 	            }
 	        });
 	    });
@@ -185,9 +189,17 @@
     }
 
     function obterCidade(arrAddress){
-    	var cidade = 	$.grep(arrAddress, function(x){
+    	var cidade = ""
+      try{
+        
+          cidade = 	$.grep(arrAddress, function(x){
                  return $.inArray('locality', x.types) != -1;
-              })[0].short_name;
+          })[0].short_name;
+
+      }catch(err){
+        console.log(err)
+      }
+
       $('#complaint_city').val(cidade);
       console.log('Cidade obtida: '+cidade);
 		  return cidade;
@@ -204,5 +216,24 @@
         if($(this).val() != "")
             loadOnMap($(this).val());
     })
+
+    $('#add-photo, .upload-preview ').click(function(){
+      $('#complaint_image').click();
+      $('#add-photo').text('Alterar imagem');
+      return false;
+    })
+
+    var preview = $(".upload-preview img");
+
+    $("#complaint_image").change(function(event){
+       var input = $(event.currentTarget);
+       var file = input[0].files[0];
+       var reader = new FileReader();
+       reader.onload = function(e){
+           image_base64 = e.target.result;
+           preview.attr("src", image_base64);
+       };
+       reader.readAsDataURL(file);
+    });
 
 </script>
