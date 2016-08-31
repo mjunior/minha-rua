@@ -87,8 +87,6 @@ class ComplaintsController < ApplicationController
           @complaint.user = current_user
           respond_to do |format|
             if @complaint.save
-                 ComplaintMailer.new_complaint(@complaint.slug,@complaint.user.email).deliver_later
-          
                 format.html { redirect_to action: "show", id: @complaint.slug}
                 format.json { render :show, status: :created, location: @complaint }
             else
