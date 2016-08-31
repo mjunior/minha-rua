@@ -1,20 +1,19 @@
-
-<!DOCTYPE html lang="pt-BR">
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
- <!-- Chrome, Firefox OS and Opera -->
-<meta name="theme-color" content="#121F25">
-<!-- Windows Phone -->
-<meta name="msapplication-navbutton-color" content="#121F25">
-<!-- iOS Safari -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<%= yield :opg %>
-<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-<%= csrf_meta_tags %>
-<%= analytics_init if GoogleAnalytics.valid_tracker? %>
+	 <!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#121F25">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#121F25">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<%= yield :opg %>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+	<%= analytics_init if GoogleAnalytics.valid_tracker? %>
 </head>
 <body>
 	<nav class="navbar navbar-default">
