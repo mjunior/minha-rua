@@ -39,6 +39,27 @@
       <div class="clearfix"></div>
     </div>
   </div>
+  <div class="tool-bar">
+    <div class="helpus">
+      <i class="fa fa-exclamation" aria-hidden="true"></i>
+    </div>
+  </div>
+  <div class="tool-content">
+    <div class="helpus">
+      <div class="close">
+        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+      </div>
+      <h3>Precisamos da sua ajuda!</h3>
+      <h5>COMPARTILHE, e COMPARTILHE...</h5>
+      <p>Ola amigo(a), nosso projeto ainda é pequeno e por isso as prefeituras não estão olhando para nós, mas não deixe de postar sua reclamação por isso, nosso objetivo neste momento é fazer PRESSÃO! </p>
+      <p>Para conseguirmos a atenção dos responsáveis precisamos reunir o maior número de reclamações nos diversos pontos da cidade, assim eles verão que NÓS TEMOS VOZ! Portanto, <b>COMPARTILHE</b> Envie o link de nosso site para todos os seus amigos e incentive-os a reclamar!  </p>
+      <p>Se você é de alguma prefeitura ou orgão responsavel envie um e-mail com seu contato para minharuatemproblema@gmail.com</p>
+      
+      <h3>Curta nossa página no facebook!</h3>
+
+      <div class="fb-page" data-href="https://www.facebook.com/minharuatemproblema" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/minharuatemproblema" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/minharuatemproblema">Minha rua tem problema</a></blockquote></div>
+    </div>
+  </div> 
 
   <div id="map"></div>
 
@@ -282,6 +303,13 @@
       setMapOnAll(map,arrMarkers,filter);
     })
 
+    $('.tool-bar').click(function(){
+      $('.tool-content').css('left','0%');
+    })
+
+        $('.close').click(function(){
+      $('.tool-content').css('left','100%');
+    })
 
 
 

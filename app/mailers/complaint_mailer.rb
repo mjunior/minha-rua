@@ -14,4 +14,10 @@ class ComplaintMailer < ApplicationMailer
 		@text = text
 		mail(to: ENV['MINHA_RUA_GMAIL_ADMIN'], subject: '[MINHA RUA] - DIREITO DE RESPOSTA - '+url)
 	end
+
+	def new_complaint(url,email)
+		@email = email
+		@url = url
+		mail(to: ENV['MINHA_RUA_GMAIL_ADMIN'], subject: '[MINHA RUA] - NOVA RECLAMACAO - '+url)
+	end
 end
