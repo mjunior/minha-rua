@@ -3,10 +3,13 @@
   <meta property="og:title" content="<%=raw @complaint.title%>" />
   <meta property="og:description" content="<%=raw @complaint.body%>" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="http://www.minharuatemproblema.com.br<%=raw url_for(:only_path => true) %>" />
-  <meta property="og:image" content="http://www.minharuatemproblema.com.br/assets/images/denuncia.jpg" />
+  <meta property="og:url" content="https://www.minharuatemproblema.com.br<%=raw url_for(:only_path => true) %>" />
+  <% if @complaint.image.url.include? "missing" %>
+    <meta property="og:image" content="https://www.minharuatemproblema.com.br/assets/images/denuncia.jpg" />
+  <% else %>
+    <meta property="og:image" content="https://www.minharuatemproblema.com.br<%=raw  @complaint.image.url(:medium) %>" />
+  <% end %>
 <% end %>
-
 <div id="map"></div>
 <div class="container max-960">
     <div class="row">
