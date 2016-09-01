@@ -1,6 +1,8 @@
 # Minha Rua Tem Problema
 Projeto baseado em geolocalização para registrar a insatisfação da população com as ruas de seu bairro/cidade.
 
+[http://www.minharuatemproblema.com.br](http://www.minharuatemproblema.com.br)
+
 ![Imagem 01](/demo/demo1.png)
 ![Imagem 02](/demo/demo2.png)
 ![Imagem 03](/demo/demo3.png)
@@ -21,7 +23,7 @@ MINHA_RUA_GMAIL_PASSWORD
 MINHA_RUA_GMAIL_ADMIN
 
 ----------
-[Documentação](http://ruby-doc.org)
+[Documentação rails](http://ruby-doc.org)
 
 [Try Ruby](http://tryruby.org)
 
