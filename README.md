@@ -1,10 +1,10 @@
 # Minha Rua Tem Problema
 Projeto baseado em geolocalização para registrar a insatisfação da população com as ruas de seu bairro/cidade.
 
-![Imagem 01](/demo/demo1.png)
-![Imagem 02](/demo/demo2.png)
-![Imagem 03](/demo/demo3.png)
-![Imagem 04](/demo/demo4.png)
+![Imagem 01](/demo/demo1.png =300x)
+![Imagem 02](/demo/demo2.png =300x)
+![Imagem 03](/demo/demo3.png =300x)
+![Imagem 04](/demo/demo4.png =300x)
 
 ----------
 #Instalando Ruby
