@@ -32,7 +32,7 @@ module MinhaRua
       port:                 587,
       domain:               'mail.google.com',
       user_name:            ENV["MINHA_RUA_GMAIL_EMAIL"],
-      password:             ENV["MINHA_RUA_GMAIL_PASSWORD"],
+      password:             '123',
       authentication:       'plain',
       enable_starttls_auto: true  
     }

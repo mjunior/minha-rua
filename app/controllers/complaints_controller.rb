@@ -87,6 +87,17 @@ class ComplaintsController < ApplicationController
           @complaint.user = current_user
           respond_to do |format|
             if @complaint.save
+                begin
+                  ComplaintMailer.new_complaint(@complaint.slug,@complaint.user.email).deliver_later
+                  logger.debug "EMAIL ENVIADO"
+                  logger.debug "EMAIL ENVIADO"
+                  logger.debug "EMAIL ENVIADO"
+                rescue  => ex
+                  logger.debug "ERRO ENVIAR EMAIL"
+                  logger.debug "ERRO ENVIAR EMAIL"
+                  logger.debug ex.message 
+                end
+
                 format.html { redirect_to action: "show", id: @complaint.slug}
                 format.json { render :show, status: :created, location: @complaint }
             else
