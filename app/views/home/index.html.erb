@@ -106,7 +106,7 @@
     var complaintList = <%=raw @complaintList.to_json(:include => [:category])%>
     var map;
     var arrMarkers = []
-    //var markerCluster
+    var markerCluster
     var geocoder;
      var openedInfoWindow = null
       $( function() {
@@ -197,7 +197,7 @@
           })(marker))
           arrMarkers.push(marker);
       });
-     // markerCluster = new MarkerClusterer(map, arrMarkers);
+     markerCluster = new MarkerClusterer(map, arrMarkers);
       setMapOnAll(map,arrMarkers,'all');
     }
 
@@ -294,13 +294,13 @@
       $('.filter-category').removeClass('active');
       $(this).addClass('active');
       var filter = $(this).attr('data-tag');
-      // if(filter == 'all'){
-      //   markerCluster.setMap(map);
-      // }else{
-      //   markerCluster.setMap(null);
-      //   setMapOnAll(map,arrMarkers,filter);
-      // }
-      setMapOnAll(map,arrMarkers,filter);
+      if(filter == 'all'){
+        markerCluster.setMap(map);
+      }else{
+        markerCluster.setMap(null);
+        setMapOnAll(map,arrMarkers,filter);
+      }
+      //setMapOnAll(map,arrMarkers,filter);
     })
 
     $('.tool-bar').click(function(){

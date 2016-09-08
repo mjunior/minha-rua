@@ -43,9 +43,23 @@
               <% else %>
                 <button class="btn btn-primary" disabled> <i class="fa fa-thumbs-up" aria-hidden="true"></i> <span>Você apoia essa reclamação!</span></button>
               <% end %>
-            </p>
+              
+              <p> <span id="like-count"><%=raw @complaint.likes %></span> pessoas já apoiaram.</p>
 
-            <p> <span id="like-count"><%=raw @complaint.likes %></span> pessoas já apoiaram.</p>
+              <ul class="likeHistory">
+                <% @likeList.each do |interaction| %>
+                  <li> <%= interaction.user.first_name%> apoia esta reclamação</li>
+                <% end %>
+                
+                <% if @countLike > 1 %>
+                  <li> E outras <%= @countLike %> já apoiaram</li>
+                <% end %>
+              </ul>
+
+              
+
+              
+            
             </div>
             <div class="divider"><i class="fa fa-share-square"></i> Ajude! Compartilhe em suas redes sociais</div>
             <p> <%= social_share_button_tag(@complaint.title, :url => url_for(:only_path => false), :image => "/assets/images/denuncia.jpg", desc: @complaint.body, via: "Minha Rua Tem Problema") %></p>

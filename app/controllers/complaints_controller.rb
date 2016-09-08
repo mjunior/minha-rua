@@ -18,7 +18,9 @@ class ComplaintsController < ApplicationController
     def show
         @categories = Category.all  
         @allow_like = true
-
+        @likeList = Interaction.where(complaint:@complaint).limit(5);
+        @countLike = Interaction.where(complaint:@complaint).size - 5;
+        
         if user_signed_in?
           isLiked = !Interaction.where(["interaction_type_id = ? and complaint_id = ? and user_id = ?", 1,@complaint.id, current_user.id]).blank?
           if isLiked
