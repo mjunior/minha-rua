@@ -1,5 +1,11 @@
 .complaints{
 	&.index,&.liked{
+		.empty{
+			text-align:center;
+			.btn{
+				font-size:22px;
+			}
+		}
 		.complaint-item{
 			padding:10px;
 			border:1px solid #ddd;

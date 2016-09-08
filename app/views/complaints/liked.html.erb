@@ -1,11 +1,24 @@
-<p id="notice"><%= notice %></p>
+<% content_for :opg do%>
+  <title>Reclamações que você apoia | Minha Rua Tem Problema</title>
+  <meta property="og:title" content="Reclamações que você apoia | Minha Rua Tem Problema." />
+  <meta property="og:description" content="Reclamações que vocẽ apoia!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.minharuatemproblema.com.br<%=raw url_for(:only_path => true) %>" />
+  <meta property="og:image" content="https://www.minharuatemproblema.com.br/assets/images/denuncia.jpg" />
+<% end %>
 <div class="container max-960">
   <div class="row ">
     <div class="col-xs-12">
       <h1 class="page-title center margin-bottom">Reclamações que você apoia!</h1>
     </div>
-    <div class="col-xs-12 custyle">
+    <% if @complaints.size <= 0 %>
+      <div class="col-xs-12">
+        <div class="empty">
+          <h2>Você ainda não apoia nenhuma reclamação</h2>
+        </div>
+      </div>
+    <% else %>
       <%= render 'table_body' %>
-    </div>
+    <% end %>
   </div>
 </div>

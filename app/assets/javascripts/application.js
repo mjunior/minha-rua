@@ -93,13 +93,12 @@ ready = function() {
   /*Carrega todas as cidades Brasileiras */
   var cities = []
   $.get('/json/brazil-cities-states.json').success(function(data){
-    console.log('cities')
-      $.each(data.estados,function(i,value){
-        var sigla = value.sigla;
-        $.each(value.cidades,function(k,val){
-          cities.push(val+" - "+sigla)
-        })
-      });
+    $.each(data.estados,function(i,value){
+      var sigla = value.sigla;
+      $.each(value.cidades,function(k,val){
+        cities.push(val+" - "+sigla)
+      })
+    });
 
 
       $( "#city-input" ).autocomplete({
