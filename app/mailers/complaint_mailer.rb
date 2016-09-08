@@ -20,4 +20,10 @@ class ComplaintMailer < ApplicationMailer
 		@url = url
 		mail(to: ENV['MINHA_RUA_GMAIL_ADMIN'], subject: '[MINHA RUA] - NOVA RECLAMACAO - '+url)
 	end
+
+	def like_complaint(name,url,to)
+		@name = name
+		@url = 'http://minharuatemproblema.com.br/complaints/'+url
+		mail(to: to, subject: name+' apoiou sua reclamação');
+	end
 end

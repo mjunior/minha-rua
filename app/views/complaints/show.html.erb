@@ -54,12 +54,7 @@
                 <% if @countLike > 1 %>
                   <li> E outras <%= @countLike %> já apoiaram</li>
                 <% end %>
-              </ul>
-
-              
-
-              
-            
+              </ul>            
             </div>
             <div class="divider"><i class="fa fa-share-square"></i> Ajude! Compartilhe em suas redes sociais</div>
             <p> <%= social_share_button_tag(@complaint.title, :url => url_for(:only_path => false), :image => "/assets/images/denuncia.jpg", desc: @complaint.body, via: "Minha Rua Tem Problema") %></p>

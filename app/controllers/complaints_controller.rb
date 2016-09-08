@@ -122,6 +122,15 @@ class ComplaintsController < ApplicationController
             interaction.user = current_user
             interaction.complaint = complaint
             complaint.addInteraction(interaction);
+
+            begin
+              ComplaintMailer.like_complaint(current_user.first_name,complaint.slug,complaint.user.email).deliver_later
+              logger.debug "EMAIL ENVIADO"
+            rescue  => ex
+              logger.debug "ERRO ENVIAR EMAIL"
+              logger.debug ex.message 
+            end
+
             render json: {status:'success',message:"Like efetuado com sucesso!"}
           end
       else
