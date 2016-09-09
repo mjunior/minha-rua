@@ -47,11 +47,11 @@
               <p> <span id="like-count"><%=raw @complaint.likes %></span> pessoas já apoiaram.</p>
 
               <ul class="likeHistory">
-                <% @likeList.each do |interaction| %>
+                <% @like_list.each do |interaction| %>
                   <li> <%= interaction.user.first_name%> apoia esta reclamação</li>
                 <% end %>
                 
-                <% if @countLike > 1 %>
+                <% if @count_like > 1 %>
                   <li> E outras <%= @countLike %> já apoiaram</li>
                 <% end %>
               </ul>            

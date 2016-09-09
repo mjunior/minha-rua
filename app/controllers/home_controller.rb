@@ -1,15 +1,9 @@
+# Controller da pagina inicial
 class HomeController < ApplicationController
   def index
-
-  	@complaintList = Complaint.all
-  	@lastest = Complaint.last(10).reverse
-  	@topList = Complaint.order(likes: :desc)
+    @complaint_list = Complaint.all
+    @lastest = Complaint.last(10).reverse
     @categories = Category.all
-  	if user_signed_in?
-  		@logado = true
-  	else
-  		@logado = false
-  	end
-
+    @logado = user_signed_in?
   end
 end
