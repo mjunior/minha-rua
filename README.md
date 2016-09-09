@@ -1,4 +1,6 @@
 # Minha Rua Tem Problema
+[![Code Climate](https://codeclimate.com/github/mjunior/minha-rua/badges/gpa.svg)](https://codeclimate.com/github/mjunior/minha-rua)
+
 Projeto baseado em geolocalização para registrar a insatisfação da população com as ruas de seu bairro/cidade.
 
 [http://www.minharuatemproblema.com.br](http://www.minharuatemproblema.com.br)
