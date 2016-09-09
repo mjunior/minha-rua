@@ -103,7 +103,7 @@
 
 <script type="text/javascript">
     var cities = []
-    var complaintList = <%=raw @complaintList.to_json(:include => [:category])%>
+    var complaintList = <%=raw @complaint_list.to_json(:include => [:category])%>
     var map;
     var arrMarkers = []
     var markerCluster
