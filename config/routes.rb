@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   match 'home' => 'home#index', via: 'get'
   match 'inicio' => 'home#index', via: 'get'
+  match 'cidade/search' => 'cidade#search', via: 'get'
+  get '/:cidade', to: 'cidade#show', as: 'cidades'
+
 
   resources :complaints , path_names: { new: 'criar' } do
      get 'liked' => 'complaints#liked' , on: :collection

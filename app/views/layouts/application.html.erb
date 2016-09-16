@@ -12,6 +12,7 @@
 	<%= yield :opg %>
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
 	<%= csrf_meta_tags %>
 	<%= analytics_init if GoogleAnalytics.valid_tracker? %>
 </head>
@@ -27,13 +28,16 @@
 	        <span class="icon-bar"></span>
 	      </button>
 	      <a class="navbar-brand" href="/#!" style="padding-top:7px;"><img src="/assets/images/minha-rua-logo.png" alt=""></a>
+	      <div class="actual-city" id="search-mobile">
+	      	<h2><%= @city ? @city.nome : 'Escolher cidade' %></h2>
+	      	<a href="#!">Trocar cidade</a>
+	      </div>
 	    </div>
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><input type="text" id="city-input-nav" class="hidden-xs" placeholder="Digite sua cidade..."></li>
+	        <li><input type="text" id="city-input-nav" class="city-input hidden-xs" placeholder="Digite sua cidade..."></li>
 			<li class="menu-add hidden-xs"> <%= link_to('Criar Reclamação', new_complaint_path)  %>  </li>
-			
             <li class="dropdown">
                 <a <%= current_user ? 'href=# class=dropdown-toggle data-toggle=dropdown' : 'href=/users/sign_in' %> >
                     <span class="glyphicon glyphicon-user"></span>
@@ -70,13 +74,6 @@
 		            <li class="divider visible-xs"></li>
                 </ul>
             </li>
-            <% if controller.controller_name == 'home' %>
-			  	<% @categories.each do |category| %>
-	              <li class="visible-xs">
-	                <a href="#!" class="hide-nav filter-category <%=raw "#{category.tag}"%>"  data-tag="<%=raw "#{category.tag}"%>"> <%= category.title %></a>
-	              </li>
-	            <% end %>
-			<% end %>
 	      </ul>
 
 	    </div><!-- /.navbar-collapse -->

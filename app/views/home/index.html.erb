@@ -13,7 +13,7 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="field">
-              <input type="text" id="city-input" placeholder="Digite uma cidade...">
+              <input type="text" class="city-input" placeholder="Digite uma cidade...">
             </div>
           </div>
         </div>
@@ -96,17 +96,14 @@
 
   <div class="input-search-mobile visible-xs">
     <form id="form-searc-mobile">
-      <input type="text" id="city-input-mobile"  placeholder="Digite sua cidade...">
+      <input type="text" id="city-input-mobile" class="city-input"  placeholder="Digite sua cidade...">
     </form>
   </div>
 <div id="home-big"></div>
 
 <script type="text/javascript">
     var cities = []
-    var complaintList = <%=raw @complaint_list.to_json(:include => [:category])%>
     var map;
-    var arrMarkers = []
-    var markerCluster
     var geocoder;
      var openedInfoWindow = null
       $( function() {
@@ -129,116 +126,9 @@
           streetViewControl: false,
           
         });
-
-        loadingComplaints();
-        checkMap();
+        
     }
-      
-    function loadingComplaints() {
-      $.each(complaintList, function(i, complaint) {
-          var marker = new google.maps.Marker({
-              position: new google.maps.LatLng(complaint.latitude, complaint.longitude),
-              icon: '/assets/images/pins/pin-'+complaint.category.tag+'.png',
-              animation: google.maps.Animation.DROP,
-              map: null
-          });
-          marker.category = complaint.category.tag;
-          if (complaint.title.length > 30){
-            complaint.title = complaint.title.substr(0,30)+"..."
-          }
-          var url = '/complaints/'+complaint.slug
-          var contentString = '<div id="infobox">' +
-                    '<div class="title"><a href="'+url+'"> '+complaint.title+' </a></div>' +
-                    '<div class="content">' +
-                      '<p>'+complaint.body.substr(0,120)+'...</p>' +
-                      '<p><a href="'+url+'" class="more">+ detalhes</p>' +
-                    '</div>' +
-                  '</div>';
-
-          var infowindow = new google.maps.InfoWindow({
-              content: contentString,
-               maxWidth: 265
-          });
-
-          // INICIO DA PERSONALIZAÇÃO DA INFOWINDOW.
-          // O evento google.maps.event.addListener() espera pela
-          // criação da estrutura HTML da infowindow 'domready'
-          // e antes da abertura da infowindow serão aplicados
-          // os estilos definidos
-          // *
-          google.maps.event.addListener(infowindow, 'domready', function() {
-            // Referência ao DIV que agrupa o fundo da infowindow
-            var iwOuter = $('.gm-style-iw');
-
-            var iwBackground = iwOuter.prev();
-            // Remover o div da sombra do fundo
-            iwBackground.children(':nth-child(2)').css({'background' : 'rgba(78, 3, 10, 0.9)','border-radius':'15px','position':'relative'});
-
-            // Remover o div de fundo branco
-            iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-            // Altera a cor desejada para a sombra da cauda
-            iwBackground.children(':nth-child(3)').find('div').children().css({'background': 'rgba(78, 3, 10, 0.9)','top':'4px', 'z-index' : '1'});
-          });
-         
-          google.maps.event.addListener(marker, 'click', (function(marker, i) {
-
-              return function() {
-                  if (openedInfoWindow != null){
-                  console.log('fechei a outra')
-                  openedInfoWindow.close();
-              }else{
-                console.log('nao fechei nada')
-              }
-                  infowindow.close();
-                  infowindow.setContent(contentString);
-                  infowindow.open(map, marker);
-                  openedInfoWindow = infowindow;
-              }
-          })(marker))
-          arrMarkers.push(marker);
-      });
-     markerCluster = new MarkerClusterer(map, arrMarkers);
-      setMapOnAll(map,arrMarkers,'all');
-    }
-
-
-    function setMapOnAll(map,markers,filter) {
-      if(filter == 'all'){
-        console.log("Limpando filtros")
-        for (var i = 0; i < markers.length; i++) {
-          markers[i].setMap(map);
-        }
-      }else{
-        for (var i = 0; i < markers.length; i++) {
-          if(markers[i].category == filter){
-            markers[i].setMap(map);
-          }else{
-            markers[i].setMap(null);
-          }
-        }
-      }
-    }
-
-    function loadOnMap(address) {
-      console.log('Bus: '+address);
-      geocoder.geocode({ 'address': address + ', Brasil', 'region': 'BR' }, function (results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-              if (results[0]) {
-                console.log(results[0]);
-                  var latitude = results[0].geometry.location.lat();
-                  var longitude = results[0].geometry.location.lng();
-                  localStorage.setItem("latitude", results[0].geometry.location.lat());
-                  localStorage.setItem("longitude", results[0].geometry.location.lng());
-                  var location = new google.maps.LatLng(latitude, longitude);
-                  map.setCenter(location);
-                  map.setZoom(14);
-
-                  setTimeout(function(){$('#question-city').css('top','100%');},500)
-              }
-          }
-      });
-    }
-
+    checkMap();
     $('#my-place').click(function(){
       if (navigator.geolocation) {
         //coloca mapa na localização da pessoa
@@ -287,30 +177,7 @@
                       console.log(erro)
           // handleLocationError(false, infoWindow, map.getCenter());
         }
-    })
-
-
-    $('.filter-category').click(function(){
-      $('.filter-category').removeClass('active');
-      $(this).addClass('active');
-      var filter = $(this).attr('data-tag');
-      if(filter == 'all'){
-        markerCluster.setMap(map);
-      }else{
-        markerCluster.setMap(null);
-        setMapOnAll(map,arrMarkers,filter);
-      }
-      //setMapOnAll(map,arrMarkers,filter);
-    })
-
-    $('.tool-bar').click(function(){
-      $('.tool-content').css('left','0%');
-    })
-
-        $('.close').click(function(){
-      $('.tool-content').css('left','100%');
-    })
-
+    });
 
 
 </script>

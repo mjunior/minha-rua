@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916020804) do
+ActiveRecord::Schema.define(version: 20160916152746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+  enable_extension "unaccent"
 
   create_table "categories", force: :cascade do |t|
     t.string   "title",      null: false
@@ -34,9 +35,11 @@ ActiveRecord::Schema.define(version: 20160916020804) do
     t.float    "area"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "slug"
   end
 
   add_index "cidades", ["estado_id"], name: "index_cidades_on_estado_id", using: :btree
+  add_index "cidades", ["slug"], name: "index_cidades_on_slug", unique: true, using: :btree
 
   create_table "complaints", force: :cascade do |t|
     t.float    "latitude"
@@ -55,9 +58,11 @@ ActiveRecord::Schema.define(version: 20160916020804) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "cidade_id"
   end
 
   add_index "complaints", ["category_id"], name: "index_complaints_on_category_id", using: :btree
+  add_index "complaints", ["cidade_id"], name: "index_complaints_on_cidade_id", using: :btree
   add_index "complaints", ["slug"], name: "index_complaints_on_slug", unique: true, using: :btree
   add_index "complaints", ["user_id"], name: "index_complaints_on_user_id", using: :btree
 
@@ -144,6 +149,7 @@ ActiveRecord::Schema.define(version: 20160916020804) do
 
   add_foreign_key "cidades", "estados"
   add_foreign_key "complaints", "categories"
+  add_foreign_key "complaints", "cidades"
   add_foreign_key "complaints", "users"
   add_foreign_key "interactions", "complaints"
   add_foreign_key "interactions", "interaction_types"
