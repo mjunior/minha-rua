@@ -1,0 +1,28 @@
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Acre', 'AC',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Alagoas', 'AL',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Amazonas', 'AM',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Amapá', 'AP',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Bahia', 'BA',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Ceará', 'CE',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Distrito Federal', 'DF',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Espirito Santo', 'ES',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Goiás', 'GO',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Maranhão', 'MA',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Minas Gerais', 'MG',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Mato Grosso do Sul', 'MS',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Mato Grosso', 'MT',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Pará', 'PA',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Paraíba', 'PB',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Pernambuco', 'PE',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Piauí', 'PI',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Paraná', 'PR',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Rio de Janeiro', 'RJ',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Rio Grande do Norte', 'RN',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Rondônia', 'RO',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Roraima', 'RR',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Rio Grande do Sul', 'RS',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Santa Catarina', 'SC',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Sergipe', 'SE',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('São Paulo', 'SP',now(),now());
+INSERT INTO estados (nome, sigla, created_at, updated_at) VALUES ('Tocantins', 'TO',now(),now());
+

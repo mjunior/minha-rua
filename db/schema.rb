@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830122202) do
+ActiveRecord::Schema.define(version: 20160916020804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,20 @@ ActiveRecord::Schema.define(version: 20160830122202) do
     t.datetime "updated_at", null: false
     t.string   "tag"
   end
+
+  create_table "cidades", force: :cascade do |t|
+    t.string   "nome"
+    t.integer  "codigo_ibge"
+    t.integer  "estado_id"
+    t.integer  "populacao_2010"
+    t.float    "densidade_demo"
+    t.string   "gentilico"
+    t.float    "area"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "cidades", ["estado_id"], name: "index_cidades_on_estado_id", using: :btree
 
   create_table "complaints", force: :cascade do |t|
     t.float    "latitude"
@@ -46,6 +60,13 @@ ActiveRecord::Schema.define(version: 20160830122202) do
   add_index "complaints", ["category_id"], name: "index_complaints_on_category_id", using: :btree
   add_index "complaints", ["slug"], name: "index_complaints_on_slug", unique: true, using: :btree
   add_index "complaints", ["user_id"], name: "index_complaints_on_user_id", using: :btree
+
+  create_table "estados", force: :cascade do |t|
+    t.string   "nome"
+    t.string   "sigla"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -121,6 +142,7 @@ ActiveRecord::Schema.define(version: 20160830122202) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "cidades", "estados"
   add_foreign_key "complaints", "categories"
   add_foreign_key "complaints", "users"
   add_foreign_key "interactions", "complaints"
