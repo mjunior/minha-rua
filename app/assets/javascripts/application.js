@@ -56,7 +56,7 @@ function FormatForUrl(str) {
 var ready;
 ready = function() {
 
-  $('#search-mobile').click(function(){
+  $('.actual-city').click(function(){
     $('#city-input-mobile').val('');
     $('#city-input-mobile').focus();
     $('.input-search-mobile').css({'top':'00px'});

@@ -28,7 +28,7 @@
 	        <span class="icon-bar"></span>
 	      </button>
 	      <a class="navbar-brand" href="/#!" style="padding-top:7px;"><img src="/assets/images/minha-rua-logo.png" alt=""></a>
-	      <div class="actual-city" id="search-mobile">
+	      <div class="actual-city visible-xs" id="search-mobile">
 	      	<h2><%= @city ? @city.nome : 'Escolher cidade' %></h2>
 	      	<a href="#!">Trocar cidade</a>
 	      </div>
@@ -36,7 +36,10 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><input type="text" id="city-input-nav" class="city-input hidden-xs" placeholder="Digite sua cidade..."></li>
+	        <li><div class="actual-city hidden-xs">
+	      	<h2><%= @city ? @city.nome : 'Escolher cidade' %></h2>
+	      	<a href="#!">Trocar cidade</a>
+	      </div></li>
 			<li class="menu-add hidden-xs"> <%= link_to('Criar Reclamação', new_complaint_path)  %>  </li>
             <li class="dropdown">
                 <a <%= current_user ? 'href=# class=dropdown-toggle data-toggle=dropdown' : 'href=/users/sign_in' %> >
@@ -82,6 +85,12 @@
 	<main class="<%= controller.controller_name %> <%= controller.action_name %>">
 		<%= yield %>
 	</main>
+
+	<div class="input-search-mobile">
+    	<form id="form-searc-mobile">
+     		<input type="text" id="city-input-mobile" class="city-input"  placeholder="Digite sua cidade...">
+    	</form>
+  	</div>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCORWu-uTguiEdLaTvsFu74TPvmYE2fNrA&callback=initMap">
     </script>

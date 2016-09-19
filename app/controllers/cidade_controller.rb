@@ -5,11 +5,15 @@ class CidadeController < ApplicationController
   end
 
   def show
-    @city = Cidade.friendly.find(params[:cidade])
-    @complaint_list = Complaint.where(cidade_id: @city)
-    @lastest = Complaint.last(10).reverse
-    @categories = Category.all
-    @logado = user_signed_in?
+    begin
+      @city = Cidade.friendly.find(params[:cidade])
+      @complaint_list = Complaint.where(cidade_id: @city)
+      @lastest = Complaint.last(10).reverse
+      @categories = Category.all
+      @logado = user_signed_in?
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path
+    end
   end
 
 

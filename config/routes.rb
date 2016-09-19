@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   match 'home' => 'home#index', via: 'get'
   match 'inicio' => 'home#index', via: 'get'
   match 'cidade/search' => 'cidade#search', via: 'get'
+  get 'complaints/' => 'complaints#index'
   get '/:cidade', to: 'cidade#show', as: 'cidades'
 
 
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
   end
 
   #cria nova reclamação de abuso
+
   post 'complaints/abuse' => 'complaints#abuse'
   post 'complaints/reply' => 'complaints#reply'
 
