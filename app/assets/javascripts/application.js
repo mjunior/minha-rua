@@ -19,7 +19,7 @@
 //= require social-share-button
 //= require_tree .
 function checkMap(){
-      $('#question-city').css('top','0%');
+      $('#question-city').css('top','70px');
       $('#city-input').focus();
       $('#city-input').click();
 }

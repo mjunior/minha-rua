@@ -63,12 +63,12 @@
           </div>
 
           <div class="field">
-          <%= f.label :city, "Cidade" %><br>
-            <%= f.text_field :city %>
+            <%= f.label :cidade_id, "Cidade" %><br>
+            <%= f.text_field :cidade_id %>
           </div>
 
-           <div class="field">
-             <%= f.label :category_id, "Categoria" %><br>
+          <div class="field">
+            <%= f.label :category_id, "Categoria" %><br>
             <%= f.collection_select(:category_id, Category.all, :id, :title, prompt: true) %>
           </div>
 

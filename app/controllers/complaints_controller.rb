@@ -17,6 +17,7 @@ class ComplaintsController < ApplicationController
   # GET /complaints/1.json
   def show
     @categories = Category.all
+
     @allow_like = true
     @like_list = Interaction.where(complaint: @complaint).limit(5)
     @count_like = Interaction.where(complaint: @complaint).size - 5
@@ -32,6 +33,7 @@ class ComplaintsController < ApplicationController
     if user_signed_in?
       @complaint = Complaint.new
       @categories = Category.all
+      @cidade = Cidade.find(123);
     else
       flash[:danger] = 'Para criar uma reclamação você deve efetuar login ou criar uma conta'
       redirect_to new_user_session_path
@@ -195,7 +197,7 @@ class ComplaintsController < ApplicationController
                                         :title,
                                         :category_id,
                                         :user_id,
-                                        :city,
+                                        :cidade_id,
                                         :slug)
     end
 end

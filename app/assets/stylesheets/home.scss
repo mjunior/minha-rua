@@ -31,14 +31,13 @@
 			    color: #444;
 			    width: calc(100% - 30px);
 			    border-radius: 15px;
-			    padding: 15px;
 			    max-width: 570px;
-			    padding-top:30px;
 			    transform: translate(-50%);
-				h1{
-					font-size: 18px;
-    				text-align: center;	
-					
+				h2{
+				    font-size: 26px;
+				    text-align: center;
+				    width: 90%;
+				    margin: 26px auto;
 				}
 
 				@media screen and (max-width: 600px) {
@@ -56,7 +55,7 @@
 						font-size:28px;
 						padding:10px 15px;
 						outline:none;
-						background:rgba(238, 238, 238, 0.53);
+						background:rgba(238, 238, 238, 0.9);
 						border-radius:5px;
 						@media screen and (max-width: 600px) {
 						    font-size:26px;
@@ -223,20 +222,24 @@
 		}
 	}
 }
-.ui-autocomplete {
-    border: none;
-    font-size: 28px;
-    line-height: 55px;
-    color: #666;
-    height: 185px;
-    width: 100% !important;
-    max-width: 540px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    @media screen and (max-width: 600px) {
-	    font-size:18px;
-  	}
+
+.home,#form-searc-mobile{
+	.ui-autocomplete {
+	    border: none;
+	    font-size: 28px;
+	    line-height: 55px;
+	    color: #666;
+	    height: 185px;
+	    width: 100% !important;
+	    max-width: 540px;
+	    overflow-x: hidden;
+	    overflow-y: auto;
+	    @media screen and (max-width: 600px) {
+		    font-size:18px;
+	  	}
+	}
 }
+
 
 
 
