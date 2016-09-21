@@ -230,6 +230,7 @@ a{
 	height:60px;
 	width:100%;
 	text-align:center;
+	transition: all 0.5s;
 	a{
 		color:#fff;
 		display:block;
@@ -246,7 +247,7 @@ a{
 		background:$accent-color;
 	}
 }
-.input-search-mobile{
+.input-search{
 	position: fixed;
     top: -100%;
     background: #121F25;
@@ -254,9 +255,21 @@ a{
     transition:all 0.5s;
     border-bottom: 2px solid #255F71;
     width: 100%;
+    .close-search{
+    	position: absolute;
+	    right: 15px;
+	    top: 16%;
+	    color: #56666D;
+	    font-size: 31px;
+	    font-weight: 100;
+	    &:hover{
+	    	color:#C1C4C5;
+	    	cursor:pointer;
+	    }
+    }
 }
 
-#city-input-mobile{
+#city-input{
     background: transparent;
     border: none;
     width: 100%;

@@ -98,8 +98,6 @@
     var geocoder;
     var marker;
 
-
-
     function initMap() {
       var myLatlng = new google.maps.LatLng(-14.235004,-51.92528);
       map = new google.maps.Map(document.getElementById('map'), {
@@ -115,7 +113,8 @@
       });
       
       loadOnMap('<%= @city.nome %> - <%= @city.estado.sigla %>');
-
+      $('#complaint_address').focus();
+      $('#complaint_address').click();
 	  	google.maps.event.addListener(marker, 'drag', function () {
 	        geocoder.geocode({ 'latLng': marker.getPosition() }, function (results, status) {
 	            if (status == google.maps.GeocoderStatus.OK) {

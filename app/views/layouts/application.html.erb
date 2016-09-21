@@ -40,7 +40,13 @@
 	      	<h2><%= @city ? @city.nome : 'Escolher cidade' %></h2>
 	      	<a href="#!">Trocar cidade</a>
 	      </div></li>
-			<li class="menu-add hidden-xs"> <%= link_to('Criar Reclamação', new_complaint_path)  %>  </li>
+				<% if @city %>
+					<li class="menu-add hidden-xs"> <a href="/<%= @city.slug%>/reclamar">Criar Reclamação</a> </li>
+				<% else %>
+					<li class="menu-add hidden-xs"> <a href="/">Criar Reclamação</a> </li>
+				<% end %>
+			
+          
             <li class="dropdown">
                 <a <%= current_user ? 'href=# class=dropdown-toggle data-toggle=dropdown' : 'href=/users/sign_in' %> >
                     <span class="glyphicon glyphicon-user"></span>
@@ -86,10 +92,13 @@
 		<%= yield %>
 	</main>
 
-	<div class="input-search-mobile">
-    	<form id="form-searc-mobile">
-     		<input type="text" id="city-input-mobile" class="city-input"  placeholder="Digite sua cidade...">
+	<div class="input-search">
+    	<form id="form-search">
+     		<input type="text" id="city-input" class="city-input"  placeholder="Digite uma cidade...">
     	</form>
+    	<div class="close-search">
+    		<i class="fa fa-times" aria-hidden="true"></i>
+    	</div>
   	</div>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCORWu-uTguiEdLaTvsFu74TPvmYE2fNrA&callback=initMap">

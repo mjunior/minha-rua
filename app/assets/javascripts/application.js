@@ -57,15 +57,22 @@ var ready;
 ready = function() {
 
   $('.actual-city').click(function(){
-    $('#city-input-mobile').val('');
-    $('#city-input-mobile').focus();
-    $('.input-search-mobile').css({'top':'00px'});
+    $('#city-input').val('');
+    $('#city-input').focus();
+    $('.mobile-tools').css({'bottom':'-70px'});
+    $('.input-search').css({'top':'0px'});
   });
 
-  $('#form-searc-mobile').submit(function(){
-    loadOnMap($('#city-input-mobile').val());
-    $('.input-search-mobile').css({'top':'-100%'});
-    $('#city-input-mobile').blur();
+  $('.close-search').click(function(){
+    $('.input-search').css({'top':'-70px'});
+    $('.mobile-tools').css({'bottom':'0%'});
+    
+  });
+
+  $('#form-search').submit(function(){
+    loadOnMap($('#city-input').val());
+    $('.input-search').css({'top':'-100%'});
+    $('#city-input').blur();
     if(window.location.pathname.length > 1) {
        window.location="/#";
     }
