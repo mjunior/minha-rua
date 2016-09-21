@@ -79,7 +79,7 @@ ready = function() {
     return false;
   });
 
-  $(".city-input").autocomplete({
+  $(".city-input,.city-input-home").autocomplete({
     source : function(request, response) {
       $.ajax({
         url : "/cidade/search.json?nome="+request.term+"&limit=5",
@@ -114,70 +114,6 @@ ready = function() {
   $('.nav a.hide-nav').on('click',function(){
     $('.navbar-toggle').click() //bootstrap 3.x by Richard
   });
-
-  /*Carrega todas as cidades Brasileiras */
-  // var cities = []
-  // $.get('/json/brazil-cities-states.json').success(function(data){
-  //   $.each(data.estados,function(i,value){
-  //     var sigla = value.sigla;
-  //     $.each(value.cidades,function(k,val){
-  //       cities.push(val+" - "+sigla)
-  //     })
-  //   });
-
-
-      // $( "#city-input" ).autocomplete({
-      //   source: function( request, response ) {
-      //             var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
-      //             response( $.grep( cities, function( value ) {
-      //               value = value.label || value.value || value;
-      //               return matcher.test( value ) || matcher.test( normalize( value ) );
-      //             }) );
-      //           },
-      //   appendTo: "#home-big",
-      //   select:function(event,ui){
-      //     $('#city-input').blur();
-      //     loadOnMap(ui.item.value);
-      //   }
-      // });
-
-      // $( "#city-input-nav" ).autocomplete({
-      //   source: function( request, response ) {
-      //             var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
-      //             response( $.grep( cities, function( value ) {
-      //               value = value.label || value.value || value;
-      //               return matcher.test( value ) || matcher.test( normalize( value ) );
-      //             }) );
-      //           },
-      //   appendTo: "#home",
-      //   select:function(event,ui){
-      //     loadOnMap(ui.item.value);
-      //     console.log(window.location.pathname);
-      //     if(window.location.pathname.length > 1) {
-      //        window.location="/#";
-      //     }
-      //   }
-      // });
-
-      // $( "#city-input-mobile" ).autocomplete({
-      //   source: function( request, response ) {
-      //             var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
-      //             response( $.grep( cities, function( value ) {
-      //               value = value.label || value.value || value;
-      //               return matcher.test( value ) || matcher.test( normalize( value ) );
-      //             }) );
-      //           },
-      //   appendTo: "#home",
-      //   select:function(event,ui){
-      //     loadOnMap(ui.item.value);
-      //     $('.input-search-mobile').css({'bottom':'100%'});
-      //     $('#city-input-mobile').blur();
-      //     if(window.location.pathname.length > 1) {
-      //        window.location="/#";
-      //     }
-      //   }
-      // });
-  // })
 };
 
 $(document).ready(ready);

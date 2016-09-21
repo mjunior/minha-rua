@@ -1,0 +1,172 @@
+<% content_for :opg do%>
+  <title>Minha Rua Tem Problema</title>
+  <meta property="og:title" content="Minha rua tem problema - Deixe sua reclamação" />
+  <meta property="og:description" content="Está insatisfeito com as condições de sua rua ? Acesse e deixe sua reclamação!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.minharuatemproblema.com.br" />
+  <meta property="og:image" content="https://www.minharuatemproblema.com.br/assets/images/denuncia.jpg" />
+<% end %>
+<div id="home">
+  <div id="question-city">
+    <div class="box">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12">
+            <h2>Acompanhe os problemas que acontece em sua cidade.</h2>
+            <div class="field">
+              <input type="text" class="city-input" placeholder="Digite uma cidade...">
+            </div>
+          </div>
+        </div>
+         <div class="row ">
+            <div class="col-xs-12">
+              <div id="error"></div>
+            </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="tool-bar">
+    <div class="helpus">
+      <i class="fa fa-exclamation" aria-hidden="true"></i>
+    </div>
+  </div>
+  <div class="tool-content">
+    <div class="helpus">
+      <div class="close">
+        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+      </div>
+      <h3>Precisamos da sua ajuda!</h3>
+      <h5>COMPARTILHE, e COMPARTILHE...</h5>
+      <p>Ola amigo(a), nosso projeto ainda é pequeno e por isso as prefeituras não estão olhando para nós, mas não deixe de postar sua reclamação, nosso objetivo neste momento é fazer PRESSÃO! </p>
+      <p>Para conseguirmos a atenção dos responsáveis precisamos reunir o maior número de reclamações nos diversos pontos da cidade, assim eles verão que NÓS TEMOS VOZ! Portanto, <b>COMPARTILHE!</b></p>
+      <p>Envie o link de nosso site para todos os seus amigos e incentive-os a reclamar!  </p>
+      <p>Se você é de alguma prefeitura ou orgão responsavel envie um e-mail com seu contato para minharuatemproblema@gmail.com</p>
+      
+      <h3>Curta nossa página no facebook!</h3>
+
+      <div class="fb-page" data-href="https://www.facebook.com/minharuatemproblema" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/minharuatemproblema" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/minharuatemproblema">Minha rua tem problema</a></blockquote></div>
+    </div>
+  </div> 
+
+  <div id="map"></div>
+
+  <section class="categories hidden-xs">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="button-icons">
+            <ul>
+                <li>
+                  <a href="#!" class="filter-category"  data-tag="all"><img src="/assets/images/categories/clear.png" alt=""><br>Limpar filtros</a>
+                </li>
+              <% @categories.each do |category| %>
+                <li>
+                  <a href="#!" class="filter-category <%=raw "#{category.tag}"%>"  data-tag="<%=raw "#{category.tag}"%>"><img src="/assets/images/categories/<%=raw "#{category.tag}"%>.png" alt=""><br><%=raw "#{category.title}" %></a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="mobile-tools visible-xs">
+    <div class="row">
+      <div class="col-xs-6 search">
+        <a id="search-mobile">BUSCAR</a>
+      </div>
+      <div class="col-xs-6 new">
+        <a href="#!"><%= link_to('RECLAMAR', new_complaint_path)  %></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-search-mobile visible-xs">
+    <form id="form-searc-mobile">
+      <input type="text" id="city-input-mobile" class="city-input"  placeholder="Digite sua cidade...">
+    </form>
+  </div>
+<div id="home-big"></div>
+
+<script type="text/javascript">
+    var cities = []
+    var map;
+    var geocoder;
+     var openedInfoWindow = null
+      $( function() {
+         $( document ).tooltip();
+      });
+
+    function initMap() {
+        var myLatlng = new google.maps.LatLng(-14.235004,-51.92528);
+        geocoder = new google.maps.Geocoder();
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: myLatlng,
+          zoom: 4,
+          mapTypeControl: false,
+          zoomControl: true,
+          zoomControlOptions: {
+              position: google.maps.ControlPosition.RIGHT_CENTER
+          },
+
+          scaleControl: false,
+          streetViewControl: false,
+          
+        });
+        
+    }
+    checkMap();
+    $('#my-place').click(function(){
+      if (navigator.geolocation) {
+        //coloca mapa na localização da pessoa
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            map.setCenter(pos);
+            map.setZoom(14);
+
+            var latitude = pos.lat;
+            var longitude = pos.lng;
+            localStorage.setItem("latitude", latitude);
+            localStorage.setItem("longitude", longitude);
+
+            setTimeout(function(){$('#question-city').css('top','100%');},200)
+          }, function(error) {
+            console.log("Erro geolocation: "+error.code);
+            console.log(error)
+            if(error.code == 0){
+                $('.box #error').text('Erro desconhecico. Tente novamente mais tarde!');
+            }else if(error.code == 1){
+              $('.box #error').text('Você não compartilhou sua localização com nossa aplicação. Certifique que seu GPS esteja ligado e tente novamente!');
+            }else if(error.code == 2){
+              $('.box #error').text('Nao foi possível obter sua localização. Certifique-se que seu GPS esteja ligado e tente novamente.');
+            }else if(error.code == 3){
+              $('.box #error').text('A resposta demorou demais. Tente novamente.');
+            }else{
+              $('.box #error').text('Você não compartilhou sua localização com nossa aplicação!');
+            }
+
+
+            setTimeout(function(){
+              $('.box #error').text('');
+            },2000)
+
+            // error.code can be:
+            //   0: unknown error
+            //   1: permission denied
+            //   2: position unavailable (error response from locaton provider)
+            //   3: timed out
+          });
+        } else {
+          // Browser doesn't support Geolocation
+                      console.log(erro)
+          // handleLocationError(false, infoWindow, map.getCenter());
+        }
+    });
+
+
+</script>
