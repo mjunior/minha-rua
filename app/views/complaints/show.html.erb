@@ -1,6 +1,6 @@
 <% content_for :opg do%>
-  <title><%= @complaint.title%> | Minha Rua Tem Problema</title>
-  <meta property="og:title" content="<%= @complaint.title %>" />
+  <title><%= @complaint.title %> - <%= @complaint.cidade.nome %></title>
+  <meta property="og:title" content="<%= @complaint.title %> - <%= @complaint.cidade.nome %>" />
   <meta property="og:description" content="<%= @complaint.body %>" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.minharuatemproblema.com.br<%= url_for(:only_path => true) %>" />

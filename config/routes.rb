@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   match 'cidade/search' => 'cidade#search', via: 'get'
   get 'complaints/' => 'complaints#index'
   get '/:cidade', to: 'cidade#show', as: 'cidades'
+  get '/:cidade/reclamar', to: 'complaints#new', as: 'reclamar'
 
 
   resources :complaints , path_names: { new: 'criar' } do
