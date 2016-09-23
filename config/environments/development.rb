@@ -40,8 +40,6 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
 
-  ENV["GMAPS_API_KEY"] = "AIzaSyCORWu-uTguiEdLaTvsFu74TPvmYE2fNrA"
-
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

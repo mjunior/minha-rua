@@ -28,13 +28,13 @@ module MinhaRua
     config.active_record.raise_in_transactional_callbacks = true
 
     ActionMailer::Base.smtp_settings = {
-      address:              'smtp.gmail.com',
+      address:              'smtp.zoho.com',
       port:                 587,
-      domain:               'mail.google.com',
-      user_name:            ENV["MINHA_RUA_GMAIL_EMAIL"],
-      password:             ENV["MINHA_RUA_GMAIL_PASSWORD"],
+      domain:               'smtp.zoho.com',
+      user_name:            ENV['MINHA_RUA_EMAIL'],
+      password:             ENV['MINHA_RUA_PASSWORD'],
       authentication:       'plain',
-      enable_starttls_auto: true  
+      enable_starttls_auto: true 
     }
   end
 end

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # resources :complaints
   get 'home/index'
+
   #resources :complaints
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
 
   post 'complaints/abuse' => 'complaints#abuse'
   post 'complaints/reply' => 'complaints#reply'
+  post 'email/contato' => 'home#contato' , :defaults => { :format => 'json' }
 
   devise_for :users, controllers: {registrations:"registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
   devise_scope :user do

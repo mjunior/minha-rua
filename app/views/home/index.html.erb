@@ -1,7 +1,121 @@
-<section>
+<section class="featured">
+	<!-- <video autoplay loop poster="images/video.png"><source src="/assets/videos/video1.mp4"></video> -->
 	<div class="box">
-		<h2>Selecione uma cidade e veja as reclamações cadastradas!</h2>
-		<input type="text" id="city-input-home" class="city-input-home" placeholder="Digite uma cidade...">
+		<h2>Selecione uma cidade e acompanhe os problemas cadastrados!</h2>
+		<input type="text" id="city-input-home" class="city-input-home" placeholder="Sua cidade">
 		<a href="#!">Sou do governo</a>
 	</div>
 </section>
+<!-- <section class="walkthrough">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 col-xs-4 new-size-offset col-sm-offset-2">
+				<div class="step">
+					<div class="icon">
+						<i class="fa fa-map-marker" aria-hidden="true"></i>
+					</div>
+					<h3>Crie sua conta.</h3>
+				</div>
+			</div>
+			<div class="col-sm-3 col-xs-4">
+				<div class="step">
+					<div class="icon">
+						<i class="fa fa-map-marker" aria-hidden="true"></i>
+					</div>
+					<h3>Selecione o endereço e preencha a reclamação</h3>
+				</div>
+			</div>
+			<div class="col-sm-3 col-xs-12">
+				<div class="step">
+					<div class="icon">
+						<i class="fa fa-map-marker" aria-hidden="true"></i>
+					</div>
+					<h3>Tudo pronto. Agora compartilhe a reclamação em suas redes sociais </h3>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section> -->
+<section class="video container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h2>Sobre nosso projeto</h2>
+			<h3>Cadastre-se, reclame e compartilhe, pois com o esforço coletivo esta será a nossa ferramenta para fiscalizar e melhorar nossas cidades.</h3>
+		</div>
+		<div class="col-xs-12">
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/7KF9D_mzRIc" frameborder="0" allowfullscreen></iframe>
+		</div>
+		<div class="col-xs-12">
+			<div class="need-you">
+
+				<h2>Porque precisamos da sua ajuda ?</h2>
+				<p class="light">Atualmente estamos em uma fase crítica da projeto. Como estamos iniciando e sem nenhum recurso financeiro para divulgação as prefeituras ainda não nós recebem e não sabem do projeto, <strong>por isso precisamos do apoio de todos para criarem o maior número de reclamações nos diversos locais e cidades</strong>, assim conseguiremos provar através da pressão popular que nosso sistema funciona.</p>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="help">
+	<div class="container">
+		<div class="text">
+			<h2>Como podemos melhorar as cidades ?</h2>
+			<p  class="">Fiscalizando. Como qualquer pessoa tem acesso ao site todos podem acompanhar e relatar problemas, gerando um histórico de quanto tempo aquele problema ficou sem ser resolvido.  </p>
+		</div>
+	</div>
+</section>
+<section class="setor-publico">
+	<div class="container">
+		<div class="text">
+			<h2>Setor Público</h2>
+			<p>Caso queira utilizar nossa ferramenta para gerenciar os problemas de sua cidade, preencha o formulário abaixo e entraremos em contato com você em breve.</p>
+			
+			<form id="contato">
+				<div class="row">
+					<div class="col-sm-offset-3 col-sm-6">
+						<input type="text" name="nome" placeholder="Nome">
+					</div>
+					<div class="col-sm-offset-3 col-sm-6">
+						<input type="text" name="telefone" placeholder="Telefone">
+					</div>
+					<div class="col-sm-offset-3 col-sm-6">
+						<input type="email" name="email" placeholder="E-mail">
+					</div>
+					<div class="col-sm-offset-3 col-sm-6">
+						<input type="text" name="entidade" placeholder="Entidade pública">
+					</div>
+					<div class="col-sm-offset-3 col-sm-6">
+						<input type="submit" value="Enviar"/>
+					</div>
+
+				</div>
+			</form>
+			
+
+
+
+		</div>
+	</div>
+</section>
+<footer></footer>
+
+
+
+<script>
+	$('#contato').submit(function(){
+		var datastring = $(this).serialize();
+		$.ajax({
+		    type: "POST",
+		    url: "/email/contato",
+		    data: datastring,
+		    dataType: "json",
+		    success: function(data) {
+		        console.log(data);
+		    },
+		    error: function() {
+		        alert('error handing here');
+		    }
+		});
+
+		return false;
+	})
+</script>

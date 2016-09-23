@@ -225,14 +225,18 @@
 
 .ui-autocomplete {
     border: none;
-    font-size: 28px;
-    line-height: 55px;
+    font-size: 18px;
+    line-height: 28px;
     color: #666;
     height: 185px;
-    width: 100% !important;
     max-width: 540px;
     overflow-x: hidden;
     overflow-y: auto;
+    border:1px solid #ccc;
+    margin-top:10px;
+    li{
+    	padding-left:10px;
+    }
     @media screen and (max-width: 600px) {
 	    font-size:18px;
   	}
