@@ -1,9 +1,17 @@
+<% content_for :opg do%>
+  <title>Minha rua tem problema - Os problemas de sua cidade</title>
+  <meta property="og:title" content="Minha rua tem problema | Acompanhe sua cidade" />
+  <meta property="og:description" content="Está insatisfeito com as condições de sua rua ? Acesse e deixe sua reclamação!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.minharuatemproblema.com.br" />
+  <meta property="og:image" content="https://www.minharuatemproblema.com.br/assets/images/denuncia.jpg" />
+<% end %>
 <section class="featured">
 	<!-- <video autoplay loop poster="images/video.png"><source src="/assets/videos/video1.mp4"></video> -->
 	<div class="box">
 		<h2>Selecione uma cidade e acompanhe os problemas cadastrados!</h2>
 		<input type="text" id="city-input-home" class="city-input-home" placeholder="Sua cidade">
-		<a href="#!">Sou do governo</a>
+		<a href="#contato">Setor público</a>
 	</div>
 </section>
 <!-- <section class="walkthrough">
@@ -72,48 +80,63 @@
 			<form id="contato">
 				<div class="row">
 					<div class="col-sm-offset-3 col-sm-6">
-						<input type="text" name="nome" placeholder="Nome">
+						<input type="text" name="nome" placeholder="Nome" id="nome">
 					</div>
 					<div class="col-sm-offset-3 col-sm-6">
-						<input type="text" name="telefone" placeholder="Telefone">
+						<input type="text" name="telefone" placeholder="Telefone" id="telefone">
 					</div>
 					<div class="col-sm-offset-3 col-sm-6">
-						<input type="email" name="email" placeholder="E-mail">
+						<input type="email" name="email" placeholder="E-mail" id="emails">
 					</div>
 					<div class="col-sm-offset-3 col-sm-6">
-						<input type="text" name="entidade" placeholder="Entidade pública">
+						<input type="text" name="entidade" placeholder="Entidade pública" id="entidade">
 					</div>
 					<div class="col-sm-offset-3 col-sm-6">
-						<input type="submit" value="Enviar"/>
+						<input type="submit" value="Enviar" id="enviar"/>
+						<div id="loading" style="display:none">
+							<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+							<span class="sr-only">Loading...</span>
+						</div>
+						<div id="success" style="display:none">Mensagem enviada com sucesso!</div>
 					</div>
 
 				</div>
 			</form>
-			
-
-
-
 		</div>
 	</div>
 </section>
 <footer></footer>
 
-
-
 <script>
-	$('#contato').submit(function(){
-		var datastring = $(this).serialize();
+	$('#enviar').click(function(){
+		var datastring = $('#contato').serialize();
+
 		$.ajax({
-		    type: "POST",
+		    type: "post",
 		    url: "/email/contato",
 		    data: datastring,
 		    dataType: "json",
 		    success: function(data) {
+		    	console.log('success');
 		        console.log(data);
+		        if(data.status == 'success'){
+		        	console.log('success');
+		        	$('#contato').html('<h2>Mensagem enviada</h2>').fadeIn();
+		        }
 		    },
-		    error: function() {
-		        alert('error handing here');
-		    }
+		    error: function(data){
+		    	console.log('erro');
+		    	console.log(data);
+		    },
+          beforeSend: function(){
+          	$('#enviar').hide();
+            $('#loading').show();
+          },
+          complete: function(){
+          	$('#enviar').show();
+            $('#loading').hide();
+            $('#contato input[type=text],input[type=email]').val('');
+          }
 		});
 
 		return false;

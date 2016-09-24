@@ -202,6 +202,10 @@
 			    border-radius:3px;
 			}
 		}
-		background:url('/assets/images/bg-footer.png') #121F25;
+		background:url('/assets/images/bg-footer.png') $secondary-featured;
+	}
+	footer{
+		height:60px;
+		background: $secondary-featured;
 	}
 }

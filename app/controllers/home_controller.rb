@@ -8,23 +8,17 @@ class HomeController < ApplicationController
   end
 
   def contato
-  	logger.debug "enviando email de contato"
-  	logger.debug "enviando email de contato"
-  	logger.debug "enviando email de contato"
-  	begin
-  		IndexMailer.contato(params[:nome],
-                                params[:email],
-                                params[:entidade],
-                                params[:telefone]).deliver_later
-  	rescue => ex
-        logger.debug 'ERRO ENVIAR EMAIL'
-    	logger.debug ex.message
- 	end
-
-  	response = "Enviado com sucesso".to_json
-  	respond_to do |format|
+    response = { status: 'success' }
+    begin
+      IndexMailer.contato(params[:nome], params[:email], params[:entidade],
+                          params[:telefone]).deliver_later
+    rescue => ex
+      logger.debug ex
+      response.status = 'error'
+    end
+    respond_to do |format|
       format.html { render nothing: true, status: 200 }
-      format.json { render json: response }
+      format.json { render json: response, status: 200 }
     end
   end
 end

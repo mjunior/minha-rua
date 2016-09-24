@@ -1,5 +1,5 @@
-class CidadeController < ApplicationController 
-
+# Controller cidade
+class CidadeController < ApplicationController
   def index
     redirect_to controller: 'home', action: 'index'
   end
@@ -8,21 +8,20 @@ class CidadeController < ApplicationController
     begin
       @city = Cidade.friendly.find(params[:cidade])
       @complaint_list = Complaint.where(cidade_id: @city)
-      @lastest = Complaint.last(10).reverse
-      @categories = Category.all
-      @logado = user_signed_in?
     rescue ActiveRecord::RecordNotFound
       redirect_to root_path
     end
+    @lastest = Complaint.last(10).reverse
+    @categories = Category.all
+    @logado = user_signed_in?
   end
 
-
   def search
-    logger.debug params
     nome = params[:nome].strip
     response = []
-    if params[:nome].length > 2
-      cidades = Cidade.where(["unaccent(nome) ILIKE unaccent(?)", "#{nome}%"]).order(:codigo_ibge).limit(params[:limit])
+    if nome.length > 2
+      cidades = Cidade.where(['unaccent(nome) ILIKE unaccent(?)', "#{nome}%"])
+                      .order(:nome).limit(params[:limit])
       cidades.each do |cidade|
         obj = {}
         obj['label'] = cidade.nome + ' - ' + cidade.estado.sigla
