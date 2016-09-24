@@ -12,12 +12,13 @@
 	<%= yield :opg %>
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
 	<%= csrf_meta_tags %>
 	<%= analytics_init if GoogleAnalytics.valid_tracker? %>
 </head>
 <body>
 	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
+	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
 	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -26,18 +27,28 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <a class="navbar-brand" href="/#!" style="padding-top:7px;"><img src="/assets/images/minha-rua-logo.png" alt=""></a>
+	      <a class="navbar-brand" href="/#!" style="padding-top:3px;"><img src="/assets/images/minha-rua-logo.png" alt=""></a>
+	      <div class="actual-city visible-xs" id="search-mobile">
+	      	<h2><%= @city ? @city.nome : 'Escolher cidade' %></h2>
+	      	<a href="#!">Trocar cidade</a>
+	      </div>
 	    </div>
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><input type="text" id="city-input-nav" class="hidden-xs" placeholder="Digite sua cidade..."></li>
-			<li class="menu-add hidden-xs"> <%= link_to('Criar Reclamação', new_complaint_path)  %>  </li>
-			
+	        <li><div class="actual-city hidden-xs">
+	      	<h2><%= @city ? @city.nome : 'Escolher cidade' %></h2>
+	      	<a href="#!">Trocar cidade</a>
+	      </div></li>
+				<% if @city %>
+					<li class="menu-add hidden-xs"> <a href="/<%= @city.slug%>/reclamar">Reclamar</a> </li>
+				<% else %>
+					<li class="menu-add hidden-xs"> <a href="#!" data-toggle="modal" data-target="#modalCidadeReclamar" id="reclamarSemCidade">Reclamar</a> </li>
+				<% end %>
             <li class="dropdown">
                 <a <%= current_user ? 'href=# class=dropdown-toggle data-toggle=dropdown' : 'href=/users/sign_in' %> >
                     <span class="glyphicon glyphicon-user"></span>
-                    <strong> <%= current_user ? current_user.first_name : "Login" %></strong>
+                    <strong> &nbsp;<%= current_user ? current_user.first_name : "Login" %></strong>
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </a>
                 <ul class="dropdown-menu user-menu">
@@ -70,13 +81,6 @@
 		            <li class="divider visible-xs"></li>
                 </ul>
             </li>
-            <% if controller.controller_name == 'home' %>
-			  	<% @categories.each do |category| %>
-	              <li class="visible-xs">
-	                <a href="#!" class="hide-nav filter-category <%=raw "#{category.tag}"%>"  data-tag="<%=raw "#{category.tag}"%>"> <%= category.title %></a>
-	              </li>
-	            <% end %>
-			<% end %>
 	      </ul>
 
 	    </div><!-- /.navbar-collapse -->
@@ -85,6 +89,17 @@
 	<main class="<%= controller.controller_name %> <%= controller.action_name %>">
 		<%= yield %>
 	</main>
+
+	<div class="input-search">
+    	<form id="form-search">
+     		<input type="text" id="city-input" class="city-input"  placeholder="Digite uma cidade...">
+    	</form>
+    	<div class="close-search">
+    		<i class="fa fa-times" aria-hidden="true"></i>
+    	</div>
+  	</div>
+
+  	<%= render '/layouts/modal_cidade' %>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCORWu-uTguiEdLaTvsFu74TPvmYE2fNrA&callback=initMap">
     </script>

@@ -43,8 +43,8 @@
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800);
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900);
-*,body,p{
+@import url(https://fonts.googleapis.com/css?family=Lato:100,200,300,400,700,900);
+*,body,p,input,textarea{
 	font-family: 'Lato', sans-serif;
 }
 
@@ -81,11 +81,12 @@ a{
 }
 
 .navbar{
-	min-height:70px;
+	min-height:60px;
 	padding-top:10px;
+	@media screen and (max-width: 420px) {
+	   min-height:60px;
+  	}
 }
-
-
 
 .navbar-default{
 	background-color:$secondary-featured;
@@ -119,10 +120,41 @@ a{
 
 	.navbar-brand{
 		color:#fff;
+		img{
+		    @media screen and (max-width: 420px) {
+			    max-width:168px;
+		  	}
+		  	@media screen and (max-width: 380px) {
+			    max-width:138px;
+		  	}
+		  	@media screen and (max-width: 360px) {
+			    max-width:115px;
+		  	}
+		}
 	} 
 }
 
-
+.actual-city{
+	float:right;
+	border-right:1px solid #666;
+	margin-right:10px;
+	padding-right:10px;
+	text-align:right;
+	&:hover{
+		cursor:pointer;
+		opacity:0.8;
+	}
+	h2{
+		margin:0;
+		padding:0;
+		font-size:18px;
+	}
+	a{
+		color:#fff;
+		text-decoration:underline;
+		font-size:12px;
+	}
+}
 .page-title{
 	font-size:24px;
 	border-bottom:1px dashed #aaa;
@@ -198,6 +230,7 @@ a{
 	height:60px;
 	width:100%;
 	text-align:center;
+	transition: all 0.5s;
 	a{
 		color:#fff;
 		display:block;
@@ -214,21 +247,33 @@ a{
 		background:$accent-color;
 	}
 }
-.input-search-mobile{
+.input-search{
 	position: fixed;
-    bottom: -100%;
+    top: -100%;
     background: #121F25;
     height: 60px;
     transition:all 0.5s;
     border-bottom: 2px solid #255F71;
     width: 100%;
+    .close-search{
+    	position: absolute;
+	    right: 15px;
+	    top: 16%;
+	    color: #56666D;
+	    font-size: 31px;
+	    font-weight: 100;
+	    &:hover{
+	    	color:#C1C4C5;
+	    	cursor:pointer;
+	    }
+    }
 }
 
-#city-input-mobile{
+#city-input{
     background: transparent;
     border: none;
     width: 100%;
-    margin:0px 11px;
+    padding:0px 11px;
     color: #B9CED8;
     font-size: 19px;
     outline:none;
@@ -364,5 +409,44 @@ a{
 .icon-size
 {
     font-size: 87px;
+}
+#modalCidadeReclamar{
+	.modal-content{
+		padding:20px;
+		padding-bottom:50px;
+		h2{
+			font-size:22px;
+			margin-bottom:20px;
+			text-align:center;
+		}
+		input{
+			background:#eee;
+			color:#333;
+		}
+	}
+}
+.ui-autocomplete {
+    border: none;
+    font-size: 18px;
+    line-height: 28px;
+    color: #666;
+    height: 185px;
+    max-width: 540px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index:9999;
+    border:1px solid #ccc;
+    margin-top:10px;
+    li{
+    	padding-left:10px;
+    	&:hover{
+    		background:#ddd;
+    		border-bottom:1px solid #ddd;
+    		border-top:1px solid #ddd;
+    	}
+    }
+    @media screen and (max-width: 600px) {
+	    font-size:18px;
+  	}
 }
 

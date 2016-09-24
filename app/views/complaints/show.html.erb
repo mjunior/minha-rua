@@ -1,13 +1,13 @@
 <% content_for :opg do%>
-  <title><%=raw @complaint.title%> | Minha Rua Tem Problema</title>
-  <meta property="og:title" content="<%=raw @complaint.title%>" />
-  <meta property="og:description" content="<%=raw @complaint.body%>" />
+  <title><%= @complaint.title %> - <%= @complaint.cidade.nome %></title>
+  <meta property="og:title" content="<%= @complaint.title %> - <%= @complaint.cidade.nome %>" />
+  <meta property="og:description" content="<%= @complaint.body %>" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.minharuatemproblema.com.br<%=raw url_for(:only_path => true) %>" />
+  <meta property="og:url" content="https://www.minharuatemproblema.com.br<%= url_for(:only_path => true) %>" />
   <% if @complaint.image.url.include? "missing" %>
     <meta property="og:image" content="https://www.minharuatemproblema.com.br/assets/images/denuncia.jpg" />
   <% else %>
-    <meta property="og:image" content="https://www.minharuatemproblema.com.br<%=raw  @complaint.image.url(:medium) %>" />
+    <meta property="og:image" content="https://www.minharuatemproblema.com.br<%=  @complaint.image.url(:medium) %>" />
   <% end %>
 <% end %>
 <div id="map"></div>
@@ -39,12 +39,12 @@
 
             <div class="like-box">
               <% if @allow_like %>
-                <button class="btn btn-primary" id="like" data-complaint="<%=raw @complaint.id %>"> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <span>Apoiar reclamação</span></button>
+                <button class="btn btn-primary" id="like" data-complaint="<%= @complaint.id %>"> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <span>Apoiar reclamação</span></button>
               <% else %>
                 <button class="btn btn-primary" disabled> <i class="fa fa-thumbs-up" aria-hidden="true"></i> <span>Você apoia essa reclamação!</span></button>
               <% end %>
               
-              <p> <span id="like-count"><%=raw @complaint.likes %></span> pessoas já apoiaram.</p>
+              <p> <span id="like-count"><%= @complaint.likes %></span> pessoas já apoiaram.</p>
 
               <ul class="likeHistory">
                 <% @like_list.each do |interaction| %>
@@ -61,7 +61,7 @@
             <p> 
             <div class="divider"><i class="fa fa-comment"></i> Comente sobre esta reclamação!</div>
             <div class="facebook-comments">
-            <div class="fb-comments" data-href="<%=raw url_for(:only_path => false) %>" data-numposts="20"></div>
+            <div class="fb-comments" data-href="<%= url_for(:only_path => false) %>" data-numposts="20"></div>
           </div>
         </div>
         <div class="col-md-4">
@@ -88,11 +88,10 @@
 <%= render 'reply_form'%>
 
 <script type="text/javascript">
-    var complaint = <%=raw @complaint.to_json(:include => [:category])%>
     var map;
 
     function initMap() {
-      var myLatlng = new google.maps.LatLng(complaint.latitude,complaint.longitude);
+      var myLatlng = new google.maps.LatLng('<%= @complaint.latitude %>', '<%= @complaint.longitude %>');
      
       map = new google.maps.Map(document.getElementById('map'), {
         center: myLatlng,
@@ -106,18 +105,18 @@
       });
 
       var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(complaint.latitude, complaint.longitude),
-        icon: '/assets/images/pins/pin-'+complaint.category.tag+'.png',
+        position: new google.maps.LatLng('<%= @complaint.latitude %>', '<%= @complaint.longitude %>'),
+        icon: '/assets/images/pins/pin-<%= @complaint.category.tag %>.png',
         animation: google.maps.Animation.DROP,
         map: null
       });
-      marker.category = complaint.category.tag;
+      marker.category = '<%= @complaint.category.tag %>';
 
       var contentString = '<div id="infobox">' +
-                            '<div class="title"><a href="/reclamacao/'+complaint.id+'"> '+complaint.title+' </a></div>' +
+                            '<div class="title"><a href="/complaints/<%= @complaint.slug %>"> <%= @complaint.title %> </a></div>' +
                             '<div class="content">' +
-                              '<p><i class="fa fa-quote-left" aria-hidden="true"></i> '+complaint.body+'</p>' +
-                              '<p class="address"><i class="fa fa-map-marker" aria-hidden="true"></i> '+complaint.address+'</p>' +
+                              '<p><i class="fa fa-quote-left" aria-hidden="true"></i> <%= @complaint.body %> </p>' +
+                              '<p class="address"><i class="fa fa-map-marker" aria-hidden="true"></i> <%= @complaint.address %></p>' +
                             '</div>' +
                           '</div>';
 

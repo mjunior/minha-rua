@@ -1,0 +1,227 @@
+<% content_for :opg do%>
+  <title><%= @city.nome%> - Minha rua tem problema</title>
+  <meta property="og:title" content="<%= @city.nome%> - Minha rua tem problema" />
+  <meta property="og:description" content="Mora em <%= @city.nome%>  ? Está insatisfeito com as condições de sua rua ? Acesse e deixe sua reclamação!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.minharuatemproblema.com.br" />
+  <meta property="og:image" content="https://www.minharuatemproblema.com.br/assets/images/denuncia.jpg" />
+<% end %>
+<div id="home">
+  <div class="tool-bar">
+    <div class="helpus">
+      <i class="fa fa-exclamation" aria-hidden="true"></i>
+    </div>
+  </div>
+  <div class="tool-content">
+    <div class="helpus">
+      <div class="close">
+        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+      </div>
+      <h3>Precisamos da sua ajuda!</h3>
+      <h5>COMPARTILHE, e COMPARTILHE...</h5>
+      <p>Ola amigo(a), nosso projeto ainda é pequeno e por isso as prefeituras não estão olhando para nós, mas não deixe de postar sua reclamação, nosso objetivo neste momento é fazer PRESSÃO! </p>
+      <p>Para conseguirmos a atenção dos responsáveis precisamos reunir o maior número de reclamações nos diversos pontos da cidade, assim eles verão que NÓS TEMOS VOZ! Portanto, <b>COMPARTILHE!</b></p>
+      <p>Envie o link de nosso site para todos os seus amigos e incentive-os a reclamar!  </p>
+      <p>Se você é de alguma prefeitura ou orgão responsavel envie um e-mail com seu contato para minharuatemproblema@gmail.com</p>
+      
+      <h3>Curta nossa página no facebook!</h3>
+
+      <div class="fb-page" data-href="https://www.facebook.com/minharuatemproblema" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/minharuatemproblema" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/minharuatemproblema">Minha rua tem problema</a></blockquote></div>
+    </div>
+  </div> 
+
+  <div id="map"></div>
+
+  <section class="categories hidden-xs">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="button-icons">
+            <ul>
+                <li>
+                  <a href="#!" class="filter-category"  data-tag="all"><img src="/assets/images/categories/clear.png" alt=""><br>Limpar filtros</a>
+                </li>
+              <% @categories.each do |category| %>
+                <li>
+                  <a href="#!" class="filter-category <%=raw "#{category.tag}"%>"  data-tag="<%=raw "#{category.tag}"%>"><img src="/assets/images/categories/<%=raw "#{category.tag}"%>.png" alt=""><br><%=raw "#{category.title}" %></a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="mobile-tools visible-xs">
+    <div class="row">
+      <div class="col-xs-12 new">
+        <a href="/<%= @city.slug%>/reclamar">RECLAMAR</a>
+      </div>
+    </div>
+  </div>
+  <div id="home-big"></div>
+
+<script type="text/javascript">
+    var cities = [];
+    var complaintList = <%=raw @complaint_list.to_json(:include => [:category])%>
+    var city = <%=raw @city.to_json(:include => [:estado])%>
+
+    localStorage.setItem("path", city.slug);
+    localStorage.setItem("cidade", city.nome);
+
+    var map;
+    var arrMarkers = [];
+    var markerCluster;
+    var geocoder;
+    var openedInfoWindow = null;
+
+    function initMap() {
+        var myLatlng = new google.maps.LatLng(-14.235004,-51.92528);
+        geocoder = new google.maps.Geocoder();
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: myLatlng,
+          zoom: 4,
+          mapTypeControl: false,
+          zoomControl: true,
+          zoomControlOptions: {
+              position: google.maps.ControlPosition.RIGHT_CENTER
+          },
+
+          scaleControl: false,
+          
+        });
+
+        loadingComplaints();
+        loadOnMap(city.nome + ' - '+city.estado.sigla);
+    }
+      
+    function loadingComplaints() {
+      $.each(complaintList, function(i, complaint) {
+          var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(complaint.latitude, complaint.longitude),
+              icon: '/assets/images/pins/pin-'+complaint.category.tag+'.png',
+              animation: google.maps.Animation.DROP,
+              map: null
+          });
+          marker.category = complaint.category.tag;
+          if (complaint.title.length > 30){
+            complaint.title = complaint.title.substr(0,30)+"...";
+          }
+          var url = '/complaints/'+complaint.slug;
+          var contentString = '<div id="infobox">' +
+                    '<div class="title"><a href="'+url+'"> '+complaint.title+' </a></div>' +
+                    '<div class="content">' +
+                      '<p>'+complaint.body.substr(0,120)+'...</p>' +
+                      '<p><a href="'+url+'" class="more">+ detalhes</p>' +
+                    '</div>' +
+                  '</div>';
+
+          var infowindow = new google.maps.InfoWindow({
+              content: contentString,
+               maxWidth: 265
+          });
+
+          // INICIO DA PERSONALIZAÇÃO DA INFOWINDOW.
+          // O evento google.maps.event.addListener() espera pela
+          // criação da estrutura HTML da infowindow 'domready'
+          // e antes da abertura da infowindow serão aplicados
+          // os estilos definidos
+          // *
+          google.maps.event.addListener(infowindow, 'domready', function() {
+            // Referência ao DIV que agrupa o fundo da infowindow
+            var iwOuter = $('.gm-style-iw');
+
+            var iwBackground = iwOuter.prev();
+            // Remover o div da sombra do fundo
+            iwBackground.children(':nth-child(2)').css({'background' : 'rgba(78, 3, 10, 0.9)','border-radius':'15px','position':'relative'});
+
+            // Remover o div de fundo branco
+            iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+            // Altera a cor desejada para a sombra da cauda
+            iwBackground.children(':nth-child(3)').find('div').children().css({'background': 'rgba(78, 3, 10, 0.9)','top':'4px', 'z-index' : '1'});
+          });
+         
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                if (openedInfoWindow !== null){
+                console.log('fechei a outra')
+                openedInfoWindow.close();
+            }else{
+              console.log('nao fechei nada')
+            }
+                infowindow.close();
+                infowindow.setContent(contentString);
+                infowindow.open(map, marker);
+                openedInfoWindow = infowindow;
+            };
+          })(marker));
+          arrMarkers.push(marker);
+      });
+     markerCluster = new MarkerClusterer(map, arrMarkers);
+      setMapOnAll(map,arrMarkers,'all');
+    }
+
+
+    function setMapOnAll(map,markers,filter) {
+      if(filter == 'all'){
+        console.log("Limpando filtros");
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+        }
+      }else{
+        for(var i = 0; i < markers.length; i++) {
+          if(markers[i].category == filter){
+            markers[i].setMap(map);
+          }else{
+            markers[i].setMap(null);
+          }
+        }
+      }
+    }
+
+    function loadOnMap(address) {
+      geocoder.geocode({ 'address': address + ', Brasil', 'region': 'BR' }, function (results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+              if (results[0]) {
+                console.log(results[0]);
+                  var latitude = results[0].geometry.location.lat();
+                  var longitude = results[0].geometry.location.lng();
+                  localStorage.setItem("latitude", results[0].geometry.location.lat());
+                  localStorage.setItem("longitude", results[0].geometry.location.lng());
+                  var location = new google.maps.LatLng(latitude, longitude);
+                  var fenway = {lat:latitude,lng:longitude}
+                  map.setCenter(location);
+                  map.setZoom(13);
+
+
+
+                  setTimeout(function(){$('#question-city').css('top','100%');},500);
+              }
+          }
+      });
+    }
+
+    $('.filter-category').click(function(){
+      $('.filter-category').removeClass('active');
+      $(this).addClass('active');
+      var filter = $(this).attr('data-tag');
+      if(filter == 'all'){
+        markerCluster.setMap(map);
+      }else{
+        markerCluster.setMap(null);
+        setMapOnAll(map,arrMarkers,filter);
+      }
+      //setMapOnAll(map,arrMarkers,filter);
+    })
+
+    $('.tool-bar').click(function(){
+      $('.tool-content').css('left','0%');
+    })
+
+        $('.close').click(function(){
+      $('.tool-content').css('left','100%');
+    })
+
+
+
+</script>

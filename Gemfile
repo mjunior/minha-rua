@@ -45,6 +45,8 @@ gem 'omniauth-facebook'
 
 gem 'simple_captcha2', require: 'simple_captcha'
 
+gem 'rails4-autocomplete'
+
 #bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
 

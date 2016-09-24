@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  codigo_ibge: 1
+  estado_id: 
+  populacao_2010: 1
+  densidade_demo: 1.5
+  gentilico: MyString
+  area: 1.5
+
+two:
+  nome: MyString
+  codigo_ibge: 1
+  estado_id: 
+  populacao_2010: 1
+  densidade_demo: 1.5
+  gentilico: MyString
+  area: 1.5

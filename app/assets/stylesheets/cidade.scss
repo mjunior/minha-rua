@@ -1,0 +1,238 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables-style";
+.cidade{
+	&.index,&.show{
+		height: calc(100vh - 70px);
+    	overflow: hidden;
+		#map{
+			width:100%;
+			height: 100vh;
+			overflow: hidden;
+		}
+		#question-city{
+			height: 100vh;
+			width:100%;
+			position:fixed;
+			left:0;
+			top:100%;
+			z-index:1;
+			background:rgba(0,00,0,0.8);
+			transition:all 0.5s;
+
+			.box{
+			    margin: 15px;
+			    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+			    background: #fff;
+			    position: relative;
+			    top: 21%;
+			    left: 50%;
+			    color: #444;
+			    width: calc(100% - 30px);
+			    border-radius: 15px;
+			    max-width: 570px;
+			    transform: translate(-50%);
+				h2{
+				    font-size: 26px;
+				    text-align: center;
+				    width: 90%;
+				    margin: 26px auto;
+				}
+
+				@media screen and (max-width: 600px) {
+				    left: 0%;
+				    transform: translate(0%);
+			  	}
+
+				.field{
+					width:100%;
+					float:left;
+					input{
+						background:transparent;
+						border:none;
+						width:100%;
+						font-size:28px;
+						padding:10px 15px;
+						outline:none;
+						background:rgba(238, 238, 238, 0.9);
+						border-radius:5px;
+						@media screen and (max-width: 600px) {
+						    font-size:26px;
+					  	}
+
+
+						
+					}
+				}
+
+				.go{	
+					border-left:1px solid #fff;
+					padding-left:10px;
+	
+					font-size:28px;
+					text-align:center;
+					button{
+						color:#fff;
+					    background: #0C66B3;
+					    padding:10px 20px;
+					    border-radius:10px;
+					    border: none;
+					    font-weight: 600;
+					    text-transform: uppercase;
+					    font-size: 24px;
+					    margin-top: 35px;
+					    outline:none;
+					    @media screen and (max-width: 600px) {
+						    font-size:18px;
+						    margin-top:30;
+					  	}
+					  	
+					  	@media screen and (max-width: 400px) {
+					  		margin-top:30;
+						    font-size:16px;
+					  	}
+					}
+
+					.divider{
+						position: absolute;
+					  
+					    width: 92%;
+					    font-size: 15px;
+						&:after {
+						    content: ' ';
+						    width: calc(50% - 25px);
+						    height: 1px;
+						    right: 0;
+						    position: absolute;
+						    background: #eee;
+						    top: 50%;
+						    margin-left: 5px;
+						}
+						&:before {
+						    content: ' ';
+						    width: calc(50% - 25px);
+						    height: 1px;
+						    left: 0;
+						    position: absolute;
+						    background: #eee;
+						    top: 50%;
+						    margin-right: 5px;
+						}
+
+					}
+				}
+				#error{
+				    text-align: center;
+				    padding-top: 20px;
+				    color: red;
+				    font-weight: 600;
+				    font-size: 18px;
+				}
+			}
+		}
+		.tool-bar{
+	    position: fixed;
+	    top: 23%;
+	    right: 0;
+	    width: 30px;
+	    height: 30px;
+	    border-top-left-radius: 8px;
+	    border-bottom-left-radius: 8px;
+	    background: #E5F30E;
+	    box-shadow: 0px 0px 16px #aaa;
+	    z-index: 99;
+	    &:hover{
+	    	cursor:pointer;
+	    }
+	    .helpus {
+		    font-size: 18px;
+		    left: 50%;
+		    position: absolute;
+		    top: 20%;
+	     	transform: translateX(-50%);
+     	 	animation-name: alert;
+			 	animation-duration: 2.6s;
+		 		animation-iteration-count: infinite;
+		 		animation-direction: alternate;
+			 	animation-timing-function: ease-out;
+			}
+		}
+		.tool-content {
+	    position: fixed;
+	    z-index: 9999;
+	    background: rgba(255,255,255,.9);
+	    height: 100%;
+	    width: 100%;
+	    overflow-y:scroll;
+
+	    transition: 0.5s;
+	    left: 100%;
+	    padding: 15px;
+	    text-align: center;
+			padding:0 30%;
+			@media screen and (max-width: 600px) {
+		    padding:0;
+	  	}
+	  	@media screen and (max-width: 1000px) {
+		    padding:0 5%;
+	  	}
+	    p{
+  	    font-size: 16px;
+		    font-weight: normal;
+		    line-height: 21px;
+		    text-align: center;
+			}
+		}
+		.categories{
+			position: fixed;
+			bottom:0;
+			min-height:70px;
+			background:rgba(0,0,0,0.5);
+			width:100%;
+
+			ul{
+				margin:0;
+				padding:0;
+			    width: 100%;
+			    margin: 0 auto;
+			    max-width: 964px;
+				li{
+					display:inline-block;
+   					margin: 5px 10px;
+					a{
+						display:block;
+						text-align:center;
+						opacity:.5;
+						color:#fff;
+						img{
+							width:35px;
+							height: 35px;
+							
+						}
+						&:hover{
+							opacity:1;
+						}
+						&.active{
+							opacity:1;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@keyframes alert {
+  0%   {  transform:translateX(-50%) rotate(0deg) scale(1);  }
+  38%   { transform:translateX(-50%) rotate(00deg); }
+  40%   { transform:translateX(-50%) rotate(45deg); }
+  45%   { transform:translateX(-50%) rotate(-15deg); }
+  50%   { transform:translateX(-50%) rotate(45deg); }
+  55%   { transform:translateX(-50%) rotate(-15deg) scale(1.5); }
+  60%   { transform:translateX(-50%) rotate(45deg); }
+  65%   { transform:translateX(-50%) rotate(-15deg); }
+  70%   { transform:translateX(-50%) rotate(45deg); }
+  75%   { transform:translateX(-50%) rotate(0deg); }
+  100% { font-size: 18px;transform:translateX(-50%) rotate(0deg) scale(1);  }
+}

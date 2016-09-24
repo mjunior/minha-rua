@@ -30,10 +30,11 @@ class ComplaintsController < ApplicationController
   # GET /complaints/new
   def new
     if user_signed_in?
+      @city = Cidade.friendly.find(params[:cidade])
       @complaint = Complaint.new
-      @categories = Category.all
     else
-      flash[:danger] = 'Para criar uma reclamação você deve efetuar login ou criar uma conta'
+      flash[:danger] = 'Para criar uma reclamação você deve
+                        efetuar login ou criar uma conta'
       redirect_to new_user_session_path
     end
   end
@@ -195,7 +196,7 @@ class ComplaintsController < ApplicationController
                                         :title,
                                         :category_id,
                                         :user_id,
-                                        :city,
+                                        :cidade_id,
                                         :slug)
     end
 end

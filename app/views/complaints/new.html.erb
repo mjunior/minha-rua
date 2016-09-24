@@ -41,7 +41,6 @@
       </div>
   </div>
   <div class="row">
-
       <div class="col-sm-8 col-sm-push-4">
         <div id="map" style="height:400px;width:100%;"></div>
       </div>
@@ -54,21 +53,22 @@
           <div class="field">
             <%= f.hidden_field :longitude %>
           </div>
+
+          <div class="field">
+            <%= f.hidden_field :cidade_id, value: @city.id%>
+          </div>
+
           <div class="upload-preview">
             <img />
             <div id="add-photo">Escolher foto</div>
           </div>
+
           <div class="field" style="display:none;">
              <%= f.file_field :image %>
           </div>
 
           <div class="field">
-          <%= f.label :city, "Cidade" %><br>
-            <%= f.text_field :city %>
-          </div>
-
-           <div class="field">
-             <%= f.label :category_id, "Categoria" %><br>
+            <%= f.label :category_id, "Categoria" %><br>
             <%= f.collection_select(:category_id, Category.all, :id, :title, prompt: true) %>
           </div>
 
@@ -93,39 +93,27 @@
 
 
 <script type="text/javascript">
-
-	 var map
- 
-    var geocoder 
- 
-    var marker 
+	  var map;
+    var geocoder;
+    var marker;
 
     function initMap() {
       var myLatlng = new google.maps.LatLng(-14.235004,-51.92528);
-
       map = new google.maps.Map(document.getElementById('map'), {
         center: myLatlng,
-        zoom: 4
+        zoom: 8
       });
       
       geocoder = new google.maps.Geocoder();
-      
-      checkMap();
-      
       marker = new google.maps.Marker({
           map: map,
           draggable: true,
           animation: google.maps.Animation.DROP
       });
-      var latitude = localStorage.latitude
-      var longitude = localStorage.longitude
-
-      $('#complaint_latitude').val(latitude);
-      $('#complaint_longitude').val(longitude);
-
-      var location = new google.maps.LatLng(latitude, longitude);
-      marker.setPosition(location);
-
+      
+      loadOnMap('<%= @city.nome %> - <%= @city.estado.sigla %>');
+      $('#complaint_address').focus();
+      $('#complaint_address').click();
 	  	google.maps.event.addListener(marker, 'drag', function () {
 	        geocoder.geocode({ 'latLng': marker.getPosition() }, function (results, status) {
 	            if (status == google.maps.GeocoderStatus.OK) {
@@ -133,26 +121,22 @@
                   $('#complaint_address').val(results[0].formatted_address);
                   $('#complaint_latitude').val(marker.getPosition().lat());
                   $('#complaint_longitude').val(marker.getPosition().lng());
-                  obterCidade(results[0].address_components)
                 }
 	            }
 	        });
 	    });
-
 	    $('#complaint_address').autocomplete({
         source: function (request, response) {
-            geocoder.geocode({ 'address': request.term + ', Brasil', 'region': 'BR' }, function (results, status) {
+            geocoder.geocode({ 'address': request.term +', <%= @city.nome %> - <%= @city.estado.sigla %> , Brasil', 'region': 'BR' }, function (results, status) {
                 response($.map(results, function (item) {
-                	city = obterCidade(item.address_components)
                     return {
                         label: item.formatted_address,
                         value: item.formatted_address,
-                        city:city,
                         latitude: item.geometry.location.lat(),
                         longitude: item.geometry.location.lng()
-                    }
+                    };
                 }));
-            })
+            });
         },
         select: function (event, ui) {
             $("#complaint_latitude").val(ui.item.latitude);
@@ -163,54 +147,30 @@
             map.setZoom(16);
         }
     });
-
-
-
     }
 
 
     function loadOnMap(address) {
+        console.log(address);
         geocoder.geocode({ 'address': address + ', Brasil', 'region': 'BR' }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 if (results[0]) {
                     var latitude = results[0].geometry.location.lat();
                     var longitude = results[0].geometry.location.lng();
- 
-                    $('#complaint_address').val(results[0].formatted_address);
-
-                    var city = $.grep(results[0].address_components, function(x){
-                       return $.inArray('locality', x.types) != -1;
-                    })[0].short_name;
-
-                    console.log("NOVA: "+city)
+                    
                     $('#complaint_latitude').val(latitude);
                     $('#complaint_longitude').val(longitude);
- 
                     var location = new google.maps.LatLng(latitude, longitude);
                     marker.setPosition(location);
                     map.setCenter(location);
-                    map.setZoom(16);
+                    map.setZoom(14);
+
+                    
                 }
             }
         });
     }
 
-    function obterCidade(arrAddress){
-    	var cidade = ""
-      try{
-
-          cidade = 	$.grep(arrAddress, function(x){
-                 return $.inArray('locality', x.types) != -1;
-          })[0].short_name;
-
-      }catch(err){
-        console.log(err)
-      }
-
-      $('#complaint_city').val(cidade);
-      console.log('Cidade obtida: '+cidade);
-		  return cidade;
-    }
 
     $('#new_complaint').submit(function(event){
      
@@ -235,12 +195,6 @@
       }
      
     })
-
-    $('#buscar').click(function(){
-    	var end = $('#complaint_address').val();
-    	loadOnMap(end);
-    	return false;
-    });
 
     $('#complaint_address').blur(function() {
         if($(this).val() != "")
