@@ -99,8 +99,12 @@ ready = function() {
     minLength : 2,
     select : function(event, ui) {
         console.log(ui.item ? "Selected: " + ui.item.label +" - "+ui.item.codigo_ibge : "Nothing selected, input was " + this.value);
-        console.log('Redireciona: '+ui.item.url);
-        window.location="/"+ui.item.url;
+        reclamar = $(this).attr('data-reclamar');
+        if(reclamar){
+          window.location="/"+ui.item.url+"/reclamar";
+        }else{
+          window.location="/"+ui.item.url;
+        }
     },
     open : function() {
         $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
@@ -113,6 +117,12 @@ ready = function() {
 
   $('.nav a.hide-nav').on('click',function(){
     $('.navbar-toggle').click() //bootstrap 3.x by Richard
+  });
+
+
+  $('#reclamarSemCidade').click(function(){
+    console.log($('.sem-cidade'))
+    $('.sem-cidade').focus();
   });
 };
 

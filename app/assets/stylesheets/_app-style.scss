@@ -410,4 +410,43 @@ a{
 {
     font-size: 87px;
 }
+#modalCidadeReclamar{
+	.modal-content{
+		padding:20px;
+		padding-bottom:50px;
+		h2{
+			font-size:22px;
+			margin-bottom:20px;
+			text-align:center;
+		}
+		input{
+			background:#eee;
+			color:#333;
+		}
+	}
+}
+.ui-autocomplete {
+    border: none;
+    font-size: 18px;
+    line-height: 28px;
+    color: #666;
+    height: 185px;
+    max-width: 540px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index:9999;
+    border:1px solid #ccc;
+    margin-top:10px;
+    li{
+    	padding-left:10px;
+    	&:hover{
+    		background:#ddd;
+    		border-bottom:1px solid #ddd;
+    		border-top:1px solid #ddd;
+    	}
+    }
+    @media screen and (max-width: 600px) {
+	    font-size:18px;
+  	}
+}
 

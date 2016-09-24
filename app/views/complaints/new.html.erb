@@ -93,7 +93,6 @@
 
 
 <script type="text/javascript">
-
 	  var map;
     var geocoder;
     var marker;
@@ -128,7 +127,7 @@
 	    });
 	    $('#complaint_address').autocomplete({
         source: function (request, response) {
-            geocoder.geocode({ 'address': request.term + ', Brasil', 'region': 'BR' }, function (results, status) {
+            geocoder.geocode({ 'address': request.term +', <%= @city.nome %> - <%= @city.estado.sigla %> , Brasil', 'region': 'BR' }, function (results, status) {
                 response($.map(results, function (item) {
                     return {
                         label: item.formatted_address,

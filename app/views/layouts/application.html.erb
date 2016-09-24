@@ -41,12 +41,10 @@
 	      	<a href="#!">Trocar cidade</a>
 	      </div></li>
 				<% if @city %>
-					<li class="menu-add hidden-xs"> <a href="/<%= @city.slug%>/reclamar">Criar Reclamação</a> </li>
+					<li class="menu-add hidden-xs"> <a href="/<%= @city.slug%>/reclamar">Reclamar</a> </li>
 				<% else %>
-					<li class="menu-add hidden-xs"> <a href="/">Criar Reclamação</a> </li>
+					<li class="menu-add hidden-xs"> <a href="#!" data-toggle="modal" data-target="#modalCidadeReclamar" id="reclamarSemCidade">Reclamar</a> </li>
 				<% end %>
-			
-          
             <li class="dropdown">
                 <a <%= current_user ? 'href=# class=dropdown-toggle data-toggle=dropdown' : 'href=/users/sign_in' %> >
                     <span class="glyphicon glyphicon-user"></span>
@@ -100,6 +98,8 @@
     		<i class="fa fa-times" aria-hidden="true"></i>
     	</div>
   	</div>
+
+  	<%= render '/layouts/modal_cidade' %>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCORWu-uTguiEdLaTvsFu74TPvmYE2fNrA&callback=initMap">
     </script>
