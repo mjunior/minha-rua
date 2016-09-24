@@ -172,6 +172,8 @@
 		}
 		#contato{
 			margin-top:50px;
+			background:url('/assets/images/bg-footer.png') $secondary-featured;
+			
 			input{
 				color:#000;
 				height:40px;
@@ -202,7 +204,7 @@
 			    border-radius:3px;
 			}
 		}
-		background:url('/assets/images/bg-footer.png') $secondary-featured;
+		
 	}
 	footer{
 		height:60px;
