@@ -1,6 +1,6 @@
 # Devise
 class RegistrationsController < Devise::RegistrationsController
-  def after_sign_up_path_for
+  def after_sign_up_path_for(response)
     '/complaints/' # Or :prefix_to_your_route
   end
 
