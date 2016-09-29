@@ -18,6 +18,16 @@
 //= require markerclusterer.min
 //= require social-share-button
 //= require_tree .
+
+function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+ }
+  
 function checkMap(){
       $('#question-city').css('top','70px');
       $('#city-input').focus();

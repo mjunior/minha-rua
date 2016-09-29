@@ -17,6 +17,12 @@
 	<%= analytics_init if GoogleAnalytics.valid_tracker? %>
 </head>
 <body>
+	 <% flash.each do |type, message| %>
+          <div class="alert alert-<%= type %> toast">
+              <button class="close" data-dismiss="alert">×</button>
+              <%= message %>
+          </div>
+      <% end %>
 	<nav class="navbar navbar-default">
 	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -49,7 +55,10 @@
                 <a <%= current_user ? 'href=# class=dropdown-toggle data-toggle=dropdown' : 'href=/users/sign_in' %> >
                     <span class="glyphicon glyphicon-user"></span>
                     <strong> &nbsp;<%= current_user ? current_user.first_name : "Login" %></strong>
-                    <span class="glyphicon glyphicon-chevron-down"></span>
+                    <% if current_user %>
+                    	<span class="glyphicon glyphicon-chevron-down"></span>
+                    <% end %>
+                    
                 </a>
                 <ul class="dropdown-menu user-menu">
                     <li>

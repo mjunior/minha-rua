@@ -10,15 +10,16 @@ Rails.application.routes.draw do
   root 'home#index'
 
   # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  # get 'products/:id' => 'catalog#view'
 
   match 'home' => 'home#index', via: 'get'
   match 'inicio' => 'home#index', via: 'get'
   match 'cidade/search' => 'cidade#search', via: 'get'
-  get 'complaints/' => 'complaints#index'
-  get '/:cidade', to: 'cidade#show', as: 'cidades'
-  get '/:cidade/reclamar', to: 'complaints#new', as: 'reclamar'
 
+  get 'complaints/' => 'complaints#index'
+  get 'sign_out;' => 'devise/sessions#destroy'
+  get '/:cidade/', to: 'cidade#show', as: 'cidades'
+  get '/:cidade/reclamar', to: 'complaints#new', as: 'reclamar'
 
   resources :complaints , path_names: { new: 'criar' } do
      get 'liked' => 'complaints#liked' , on: :collection
@@ -33,7 +34,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {registrations:"registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
   devise_scope :user do
-    get 'sign_out', :to => 'devise/sessions#destroy', :as => :logout_user
+    get 'users/logout', :to => 'devise/sessions#destroy', :as => :logout_user
   end
   # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 

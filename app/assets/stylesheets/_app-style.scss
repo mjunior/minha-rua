@@ -88,6 +88,30 @@ a{
   	}
 }
 
+.toast{
+    position: absolute;
+    z-index: 9999999;
+    background: rgba(255, 255, 255, 0.98);
+    margin: 15px;
+    left: 0%;
+    color: #000;
+    font-size: 16px;
+    max-width: 320px;
+    text-align: center;
+    /* padding: 15px; */
+    box-shadow: 2px 3px 11px #000;
+    line-height: 1.5;
+    animation-name: toast;
+ 	animation-duration: 0.5s;
+	animation-iteration-count: 1;
+ 	animation-timing-function: ease-out;
+}
+
+@keyframes toast {
+  0%   {  	left:-100%;  }
+  100% { left:0;  }
+}
+
 .navbar-default{
 	background-color:$secondary-featured;
 	margin:0;
