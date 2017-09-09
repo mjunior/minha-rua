@@ -4,7 +4,7 @@
 
 Projeto baseado em geolocalização para registrar a insatisfação da população com as ruas de seu bairro/cidade.
 
-[http://www.minharuatemproblema.com.br](http://www.minharuatemproblema.com.br)
+[Conheça mais sobre o projeto!](https://www.linkedin.com/pulse/minha-rua-tem-problema-mauricio-junior/)
 
 ![Imagem 01](/demo/demo1.png)
 ![Imagem 02](/demo/demo2.png)
